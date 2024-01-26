@@ -2,9 +2,6 @@ locals {
   # This local is used to define the organization name.
   tfc_organization_name = "ConseilsTI"
 
-  # This local is used to define Oauth_client name.
-  oauth_client_name = "GitHub"
-
   # This local is used to define GitHub organization name.
   git_organization_name = "ConseilsTI"
 
@@ -175,8 +172,8 @@ locals {
     #         }
     #       }
     #       vcs_repo = {
-    #         identifier     = "GitHub repository"
-    #         oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+    #         identifier                 = "GitHub repository"
+    #         github_app_installation_id = data.tfe_github_app_installation.this
     #       }
     #     }
     #   }
@@ -229,8 +226,8 @@ locals {
             }
           }
           vcs_repo = {
-            identifier     = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
-            oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+            identifier                 = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
+            github_app_installation_id = data.tfe_github_app_installation.this
           }
         }
         "TerraformCloud-Policies" = {
@@ -264,8 +261,8 @@ locals {
             }
           }
           vcs_repo = {
-            identifier     = "${local.git_organization_name}/TerraformCloud-Policies"
-            oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+            identifier                 = "${local.git_organization_name}/TerraformCloud-Policies"
+            github_app_installation_id = data.tfe_github_app_installation.this
           }
         }
       }
