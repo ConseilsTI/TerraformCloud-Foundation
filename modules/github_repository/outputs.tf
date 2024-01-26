@@ -1,4 +1,4 @@
-output "github_repository" {
+output "repository" {
   description = "Repositories within your GitHub organization."
   value       = github_repository.this
 }
@@ -82,32 +82,52 @@ output "updated_at" {
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret.updated_at }
 }
 
-output "github_actions_repository_permissions" {
+output "actions_repository_permissions" {
   description = "GitHub Actions permissions for your repository."
   value       = github_actions_repository_permissions.this
 }
 
-output "github_branch" {
+output "branches" {
   description = "Branches within your repository."
-  value       = { for github_branch in github_branch.this : github_branch.name => github_branch }
+  value       = { for github_branch in github_branch.this : github_branch.branch => github_branch }
 }
 
-output "source_sha" {
+output "branches_source_sha" {
   description = "A string storing the commit this branch was started from. Not populated when imported."
-  value       = { for github_branch in github_branch.this : github_branch.name => github_branch.source_sha }
+  value       = { for github_branch in github_branch.this : github_branch.branch => github_branch.source_sha }
 }
 
-output "etag" {
+output "branches_etag" {
   description = "An etag representing the Branch object."
-  value       = { for github_branch in github_branch.this : github_branch.name => github_branch.etag }
+  value       = { for github_branch in github_branch.this : github_branch.branch => github_branch.etag }
 }
 
-output "ref" {
+output "branches_ref" {
   description = "A string representing a branch reference, in the form of refs/heads/<branch>."
-  value       = { for github_branch in github_branch.this : github_branch.name => github_branch.ref }
+  value       = { for github_branch in github_branch.this : github_branch.branch => github_branch.ref }
 }
 
-output "sha" {
+output "branches_sha" {
   description = "A string storing the reference's HEAD commit's SHA1."
-  value       = { for github_branch in github_branch.this : github_branch.name => github_branch.sha }
+  value       = { for github_branch in github_branch.this : github_branch.branch => github_branch.sha }
+}
+
+output "files" {
+  description = "Files within your repository."
+  value       = { for file in github_repository_file.this : file.file => file }
+}
+
+output "files_commit_sha" {
+  description = "The SHA of the commit that modified the file."
+  value       = { for file in github_repository_file.this : file.file => file.commit_sha }
+}
+
+output "files_sha" {
+  description = "The SHA blob of the file."
+  value       = { for file in github_repository_file.this : file.file => file.sha }
+}
+
+output "files_ref" {
+  description = "The name of the commit/branch/tag."
+  value       = { for file in github_repository_file.this : file.file => file.ref }
 }
