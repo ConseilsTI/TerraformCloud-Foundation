@@ -116,6 +116,6 @@ module "repository" {
     }
   ]
 
-  files  = try(each.value.github_repository.files, [])
+  files = try(each.value.github_repository.files, [])
 
 }
