@@ -173,7 +173,7 @@ locals {
     #       }
     #       vcs_repo = {
     #         identifier                 = "GitHub repository"
-    #         github_app_installation_id = data.tfe_github_app_installation.this
+    #         github_app_installation_id = "GitHub app installation ID"
     #       }
     #     }
     #   }
