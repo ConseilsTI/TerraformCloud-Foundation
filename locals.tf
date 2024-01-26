@@ -3,7 +3,7 @@ locals {
   tfc_organization_name = "ConseilsTI"
 
   # This local is used to define Oauth_client name.
-  oauth_client_name = "GitHub.com"
+  oauth_client_name = "GitHub.com (ConseilsTI)"
 
   # This local is used to define GitHub organization name.
   git_organization_name = "ConseilsTI"
