@@ -405,4 +405,5 @@ variable "files" {
     commit_message      = optional(string, null)
     overwrite_on_create = optional(bool, false)
   }))
+  default = []
 }

@@ -115,4 +115,7 @@ module "repository" {
       source_branch = try(branch.source_branch, "main")
     }
   ]
+
+  files  = try(each.value.github_repository.files, [])
+
 }
