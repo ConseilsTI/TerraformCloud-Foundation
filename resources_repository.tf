@@ -118,10 +118,10 @@ module "repository" {
 
   files = [for file in try(each.value.github_repository.files, [
     {
-      file                = "README.md"
-      content             = "README.md"
+      file    = "README.md"
+      content = "README.md"
     }
-  ]) :
+    ]) :
     {
       file                = file.file
       content             = file.content
