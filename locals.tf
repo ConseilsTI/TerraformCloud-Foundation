@@ -2,6 +2,9 @@ locals {
   # This local is used to define the organization name.
   tfc_organization_name = "ConseilsTI"
 
+  # This local is used to define the GitHub App installation ID.
+  github_app_installation_id = "ws-E9Js5UE71KFm2JoX"
+
   # This local is used to define GitHub organization name.
   git_organization_name = "ConseilsTI"
 
@@ -173,7 +176,7 @@ locals {
     #       }
     #       vcs_repo = {
     #         identifier                 = "GitHub repository"
-    #         github_app_installation_id = "GitHub app installation ID"
+    #         github_app_installation_id = local.github_app_installation_id
     #       }
     #     }
     #   }
@@ -227,7 +230,7 @@ locals {
           }
           vcs_repo = {
             identifier                 = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
-            github_app_installation_id = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
+            github_app_installation_id = local.github_app_installation_id
           }
         }
         "TerraformCloud-Policies" = {
@@ -262,7 +265,7 @@ locals {
           }
           vcs_repo = {
             identifier                 = "${local.git_organization_name}/TerraformCloud-Policies"
-            github_app_installation_id = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
+            github_app_installation_id = local.github_app_installation_id
           }
         }
       }
