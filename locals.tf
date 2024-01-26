@@ -227,7 +227,7 @@ locals {
           }
           vcs_repo = {
             identifier                 = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
-            github_app_installation_id = data.tfe_github_app_installation.this
+            github_app_installation_id = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
           }
         }
         "TerraformCloud-Policies" = {
@@ -262,7 +262,7 @@ locals {
           }
           vcs_repo = {
             identifier                 = "${local.git_organization_name}/TerraformCloud-Policies"
-            github_app_installation_id = data.tfe_github_app_installation.this
+            github_app_installation_id = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
           }
         }
       }
