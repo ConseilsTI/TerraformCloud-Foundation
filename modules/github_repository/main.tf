@@ -186,4 +186,7 @@ resource "github_repository_file" "this" {
   commit_message      = each.value.commit_message
   overwrite_on_create = each.value.overwrite_on_create
   depends_on          = [github_branch.this]
+  lifecycle {
+    ignore_changes = [ content ]
+  }
 }
