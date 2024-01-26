@@ -25,7 +25,7 @@ module "workspaces" {
   structured_run_output_enabled = try(each.value.structured_run_output_enabled, null)
   ssh_key_id                    = try(each.value.ssh_key_id, null)
   tag_names                     = try(each.value.tag_names, null)
-  terraform_version             = try(each.value.terraform_version, null)
+  terraform_version             = try(each.value.terraform_version, "latest")
   trigger_prefixes              = try(each.value.trigger_prefixes, null)
   trigger_patterns              = try(each.value.trigger_patterns, null)
   vcs_repo                      = try(each.value.vcs_repo, null)
