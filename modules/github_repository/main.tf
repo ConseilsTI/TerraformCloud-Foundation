@@ -138,6 +138,7 @@ resource "github_branch_protection" "this" {
   allows_force_pushes  = each.value.allows_force_pushes
   blocks_creations     = each.value.blocks_creations
   lock_branch          = each.value.lock_branch
+  depends_on           = [github_repository_file.this]
 }
 
 resource "github_actions_secret" "this" {
@@ -184,4 +185,5 @@ resource "github_repository_file" "this" {
   commit_email        = each.value.commit_email
   commit_message      = each.value.commit_message
   overwrite_on_create = each.value.overwrite_on_create
+  depends_on          = [github_branch.this]
 }

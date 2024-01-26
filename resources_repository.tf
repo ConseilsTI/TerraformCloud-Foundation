@@ -116,6 +116,21 @@ module "repository" {
     }
   ]
 
-  files = try(each.value.github_repository.files, [])
+  files = [for file in try(each.value.github_repository.files, [
+    {
+      file    = "README.md"
+      content = "README.md"
+    }
+    ]) :
+    {
+      file                = file.file
+      content             = file.content
+      branch              = try(file.branch, null)
+      commit_author       = try(file.commit_author, null)
+      commit_email        = try(file.commit_email, null)
+      commit_message      = try(file.commit_message, null)
+      overwrite_on_create = try(file.overwrite_on_create, false)
+    }
+  ]
 
 }
