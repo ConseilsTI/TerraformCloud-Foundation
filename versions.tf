@@ -17,6 +17,6 @@ terraform {
     }
   }
 
-  required_version = "> 1.3.1"
+  required_version = "> 1.6.2"
 
 }
