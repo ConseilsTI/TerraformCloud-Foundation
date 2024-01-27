@@ -87,10 +87,12 @@ locals {
   # This local is used to define all resrouces required to deploy IaC in Terraform Cloud. 
   projects = {
     # `projects` is a map of object where the key is the name of the project.
-    # Each project can contain all required object like teams, variable sets, workspaces, variables...
-    # Refer to "./modules/workspace/README.md" for more details on the workspace properties.
-    # Refer to "./modules/team/README.md" for more details on the permissions type.
-    # Refer to "./modules/notification/README.md" for more details on the notification configuration.
+    # Each project can contain all required object like teams, variable sets, workspaces, variables, GitHub, GitHub Teams...
+    # Refer to "./modules/tfe_workspace/README.md" for more details on the workspace properties.
+    # Refer to "./modules/tfe_team/README.md" for more details on the permissions type.
+    # Refer to "./modules/tfe_notification/README.md" for more details on the notification configuration.
+    # Refer to "./modules/github_repository/README.md" for more details on the GitHub repository configuration.
+    # Refer to "./modules/github_team/README.md" for more details on the GitHub team configuration.
     # Here is an example of an object:
     # "project_name" = {
     #   agent_pools = [""]
@@ -185,6 +187,11 @@ locals {
       workspaces = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
+          github_teams = {
+            "contributor" = {
+              description = "This group grant write access to the ModulesRegistry repository."
+            }
+          }
           notifications = {
             "Microsoft Teams" = {
               destination_type = "microsoft-teams"

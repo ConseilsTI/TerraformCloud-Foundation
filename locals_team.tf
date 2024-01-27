@@ -39,11 +39,32 @@ locals {
     if try(project.workspaces, null) != null
   ])
 
-  # This is to concat organization teams with project teams.
+  # This is to concat organization teams with project teams and workspace teams.
   teams = concat(
     local.organization_level_teams,
     local.project_level_teams,
     local.workspace_level_teams
+  )
+
+  # The following locals use logic to determine the repository associate with each team.
+  repository_level_teams = flatten([for project_key, project in local.projects :
+    flatten([for workspace_key, workspace in project.workspaces :
+      flatten([for team_key, team in workspace.github_teams :
+        merge(
+          team,
+          { name       = lower("${workspace_key}-${team_key}")
+            repository = workspace_key
+          }
+        )
+      ])
+      if try(workspace.github_teams, null) != null
+    ])
+    if try(project.workspaces, null) != null
+  ])
+
+  # This is to concat GitHub organization teams with repository teams.
+  github_teams = concat(
+    local.repository_level_teams,
   )
 
 }
