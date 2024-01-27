@@ -36,3 +36,15 @@ variable "create_default_maintainer" {
   type        = bool
   default     = false
 }
+
+variable "repository" {
+  description = "(Optional) The name of the repository to add to the team."
+  type        = string
+  default     = null
+}
+
+variable "permission" {
+  description = "(Optional) The permissions of team members regarding the repository. Must be one of pull, triage, push, maintain, admin or the name of an existing custom repository role within the organisation."
+  type        = string
+  default     = "pull"
+}

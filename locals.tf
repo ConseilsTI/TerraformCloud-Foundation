@@ -190,6 +190,7 @@ locals {
           github_teams = {
             "contributor" = {
               description = "This group grant write access to the ModulesRegistry repository."
+              permission  = "push"
             }
           }
           notifications = {
