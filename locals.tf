@@ -142,6 +142,11 @@ locals {
     #           }
     #         ]
     #       }
+    #       github_teams = {
+    #         "team_name" = {
+    #           permission  = "pull", "triage", "push", "maintain", or "admin"
+    #         }
+    #       }
     #       notifications = {
     #         "notification_name" = {
     #           destination_type = "generic", "email", "email", or "microsoft-teams"
