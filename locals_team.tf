@@ -52,7 +52,7 @@ locals {
       flatten([for team_key, team in workspace.github_teams :
         merge(
           team,
-          { name      = lower("${workspace_key}-${team_key}")
+          { name       = lower("${workspace_key}-${team_key}")
             repository = workspace_key
           }
         )
