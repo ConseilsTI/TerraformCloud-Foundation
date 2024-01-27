@@ -34,8 +34,10 @@ module "github_teams" {
 
   name                      = each.value.name
   description               = try(each.value.description, null)
-  privacy                   = try(each.value.privacy, null)
+  privacy                   = try(each.value.privacy, "closed")
   parent_team_id            = try(each.value.parent_team_id, null)
   ldap_dn                   = try(each.value.ldap_dn, null)
   create_default_maintainer = try(each.value.create_default_maintainer, false)
+  repository                = try(each.value.repository, null)
+  permission                = try(each.value.permission, null)
 }

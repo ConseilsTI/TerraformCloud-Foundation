@@ -9,7 +9,7 @@ To manage the GitHub resources, provide a token from an account or a GitHub App 
 appropriate permissions. It should have:
 
 * Read access to `metadata`
-* Read and write access to `administration`, `code`, `members` and `secrets`
+* Read and write access to `administration`, and `members`
 
 ## Authentication
 
@@ -36,6 +36,7 @@ GITHUB_APP_INSTALLATION_ID and GITHUB_APP_PEM_FILE environment variables to auth
 ## Features
 
 - Create and manage team within your GitHub organization or personal account.
+- Create and manage team permissions on a particular repository.
 
 ## Usage example
 ```hcl
@@ -44,8 +45,122 @@ module "team" {
 
   name               = "Team Name"
   destination_type   = "This is a description for the GitHub team."
+  repository         = "Repository Name"
+  permission         = "push"
 }
 ```
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+The following requirements are needed by this module:
+
+- <a name="requirement_github"></a> [github](#requirement\_github) (5.44.0)
+
+## Providers
+
+The following providers are used by this module:
+
+- <a name="provider_github"></a> [github](#provider\_github) (5.44.0)
+
+## Modules
+
+No modules.
+
+## Resources
+
+The following resources are used by this module:
+
+- [github_team.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/team) (resource)
+- [github_team_repository.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/team_repository) (resource)
+
+## Required Inputs
+
+The following input variables are required:
+
+### <a name="input_name"></a> [name](#input\_name)
+
+Description: (Required) The name of the team.
+
+Type: `string`
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### <a name="input_create_default_maintainer"></a> [create\_default\_maintainer](#input\_create\_default\_maintainer)
+
+Description: (Optional) Adds a default maintainer to the team. Defaults to `false` and adds the creating user to the team when `true`.
+
+Type: `bool`
+
+Default: `false`
+
+### <a name="input_description"></a> [description](#input\_description)
+
+Description: (Optional) A description of the team.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_ldap_dn"></a> [ldap\_dn](#input\_ldap\_dn)
+
+Description: (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise Server.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_parent_team_id"></a> [parent\_team\_id](#input\_parent\_team\_id)
+
+Description: (Optional) The ID or slug of the parent team, if this is a nested team.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_permission"></a> [permission](#input\_permission)
+
+Description: (Optional) The permissions of team members regarding the repository. Must be one of pull, triage, push, maintain, admin or the name of an existing custom repository role within the organisation.
+
+Type: `string`
+
+Default: `"pull"`
+
+### <a name="input_privacy"></a> [privacy](#input\_privacy)
+
+Description: (Optional) The level of privacy for the team. Must be one of `secret` or `closed`.
+
+Type: `string`
+
+Default: `"secret"`
+
+### <a name="input_repository"></a> [repository](#input\_repository)
+
+Description: (Optional) The name of the repository to add to the team.
+
+Type: `string`
+
+Default: `null`
+
+## Outputs
+
+The following outputs are exported:
+
+### <a name="output_id"></a> [id](#output\_id)
+
+Description: The ID of the created team.
+
+### <a name="output_node_id"></a> [node\_id](#output\_node\_id)
+
+Description: The Node ID of the created team.
+
+### <a name="output_slug"></a> [slug](#output\_slug)
+
+Description: The slug of the created team, which may or may not differ from name, depending on whether name contains "URL-unsafe" characters. Useful when referencing the team in github\_branch\_protection.
+
+### <a name="output_team"></a> [team](#output\_team)
+
+Description: GitHub team resource.
 <!-- END_TF_DOCS -->
