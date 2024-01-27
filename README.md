@@ -25,7 +25,7 @@ To manage the GitHub resources, provide a token from an account or a GitHub App 
 appropriate permissions. It should have:
 
 * Read access to `metadata`
-* Read and write access to `administration`, `code`, and `secrets`
+* Read and write access to `administration`, `code`, `members`, and `secrets`
 
 ## Authentication
 
@@ -73,9 +73,10 @@ GITHUB\_APP\_PEM\_FILE, and GITHUB\_OWNER environment variables to authenticate.
   * variables
   * notifications
 * Manages configuration and life-cycle of GitHub resources:
-  * repository
+  * repositories
   * branches protection
-  * repository secrets
+  * repositories secrets
+  * teams
 * Read secrets from Hashicorp Vault Secrets
 
 ## Prerequisite
@@ -125,6 +126,12 @@ The following Modules are called:
 ### <a name="module_agent"></a> [agent](#module\_agent)
 
 Source: ./modules/tfe_agent
+
+Version:
+
+### <a name="module_github_teams"></a> [github\_teams](#module\_github\_teams)
+
+Source: ./modules/github_team
 
 Version:
 
