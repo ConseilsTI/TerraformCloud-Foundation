@@ -1,4 +1,4 @@
-# The following resource block is used to create team resources.
+# The following resource block is used to create Terraform Cloud team resources.
 
 module "teams" {
   source = "./modules/tfe_team"
@@ -23,4 +23,19 @@ module "teams" {
   token_force_regenerate  = try(each.value.token_force_regenerate, null)
   token_expired_at        = try(each.value.token_expired_at, null)
   members                 = try(each.value.members, null)
+}
+
+# The following resource block is used to create GitHub team resources.
+
+module "github_teams" {
+  source = "./modules/github_team"
+
+  for_each = nonsensitive({ for team in local.github_teams : team.name => team })
+
+  name                      = each.value.name
+  description               = try(each.value.description, null)
+  privacy                   = try(each.value.privacy, null)
+  parent_team_id            = try(each.value.parent_team_id, null)
+  ldap_dn                   = try(each.value.ldap_dn, null)
+  create_default_maintainer = try(each.value.create_default_maintainer, false)
 }
