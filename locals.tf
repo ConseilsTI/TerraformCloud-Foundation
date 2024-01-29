@@ -240,6 +240,11 @@ locals {
               category  = "env"
               sensitive = true
             }
+            "GITHUB_OWNER" = {
+              value     = "ConseilsTI"
+              category  = "env"
+              sensitive = true
+            }
           }
           vcs_repo = {
             identifier     = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
