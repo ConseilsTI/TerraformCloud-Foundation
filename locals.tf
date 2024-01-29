@@ -248,6 +248,12 @@ locals {
         }
         "TerraformCloud-Policies" = {
           description = "Repository to provision and manage Terraform Cloud policies using Terraform code (IaC)."
+          github_teams = {
+            "contributor" = {
+              description = "This group grant write access to the ModulesRegistry repository."
+              permission  = "push"
+            }
+          }
           notifications = {
             "Microsoft Teams" = {
               destination_type = "microsoft-teams"
