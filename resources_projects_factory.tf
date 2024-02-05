@@ -20,9 +20,9 @@ resource "github_repository" "projects_factory" {
     }
   }
 
-  topics                 = ["TerraformCloud"]
-  vulnerability_alerts   = true
-  allow_update_branch    = false
+  topics               = ["TerraformCloud"]
+  vulnerability_alerts = true
+  allow_update_branch  = false
 }
 
 resource "github_branch_protection" "projects_factory" {
