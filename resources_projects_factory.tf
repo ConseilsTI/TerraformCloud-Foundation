@@ -3,11 +3,11 @@
 module "projects_factory_repository" {
   source = "./modules/github_repository"
 
-  name                        = "TerraformCloud-ProjectOnboarding"
-  description                 = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
-  visibility                  = "public"
-  delete_branch_on_merge      = true
-  auto_init                   = true
+  name                   = "TerraformCloud-ProjectOnboarding"
+  description            = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
+  visibility             = "public"
+  delete_branch_on_merge = true
+  auto_init              = true
   security_and_analysis = {
     # advanced_security = {
     #   status = try(each.value.github_repository.security_and_analysis.advanced_security.status, null)
@@ -46,7 +46,7 @@ module "projects_factory_repository" {
       blocks_creations     = false
       lock_branch          = false
     }
-    ]
+  ]
 }
 
 # The following code block is used to create workspace resources in project.
