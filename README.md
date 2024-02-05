@@ -141,6 +141,12 @@ Source: ./modules/tfe_notification
 
 Version:
 
+### <a name="module_projects_factory_notifications"></a> [projects\_factory\_notifications](#module\_projects\_factory\_notifications)
+
+Source: ./modules/tfe_notification
+
+Version:
+
 ### <a name="module_repository"></a> [repository](#module\_repository)
 
 Source: ./modules/github_repository
@@ -171,6 +177,8 @@ No optional inputs.
 
 The following resources are used by this module:
 
+- [github_branch_protection.projects_factory](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_protection) (resource)
+- [github_repository.projects_factory](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) (resource)
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
 - [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) (resource)
 - [tfe_variable.variable_set](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
@@ -178,6 +186,7 @@ The following resources are used by this module:
 - [tfe_variable.workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
 - [tfe_variable.workspace_tfe_token](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
 - [tfe_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set) (resource)
+- [tfe_workspace.projects_factory](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) (resource)
 - [tfe_workspace_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set) (resource)
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/vault_secrets_secret) (data source)
 - [tfe_oauth_client.client](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/oauth_client) (data source)
@@ -186,7 +195,11 @@ The following resources are used by this module:
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_repositories"></a> [repositories](#output\_repositories)
+
+Description: n/a
 
 <!-- markdownlint-enable -->
 
