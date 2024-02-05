@@ -147,12 +147,6 @@ Source: ./modules/tfe_notification
 
 Version:
 
-### <a name="module_projects_factory_workspaces"></a> [projects\_factory\_workspaces](#module\_projects\_factory\_workspaces)
-
-Source: ./modules/tfe_workspace
-
-Version:
-
 ### <a name="module_repository"></a> [repository](#module\_repository)
 
 Source: ./modules/github_repository
@@ -192,6 +186,7 @@ The following resources are used by this module:
 - [tfe_variable.workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
 - [tfe_variable.workspace_tfe_token](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
 - [tfe_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set) (resource)
+- [tfe_workspace.projects_factory](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) (resource)
 - [tfe_workspace_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set) (resource)
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/vault_secrets_secret) (data source)
 - [tfe_oauth_client.client](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/oauth_client) (data source)
