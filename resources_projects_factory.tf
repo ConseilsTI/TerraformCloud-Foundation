@@ -7,8 +7,6 @@ resource "github_repository" "projects_factory" {
   visibility             = "public"
   delete_branch_on_merge = true
   auto_init              = true
-  vulnerability_alerts   = true
-  allow_update_branch    = false
 
   security_and_analysis {
     # advanced_security {
@@ -21,6 +19,10 @@ resource "github_repository" "projects_factory" {
       status = "enabled"
     }
   }
+
+  topics                 = ["TerraformCloud"]
+  vulnerability_alerts   = true
+  allow_update_branch    = false
 }
 
 resource "github_branch_protection" "projects_factory" {
@@ -38,13 +40,12 @@ resource "github_branch_protection" "projects_factory" {
 
 # The following code block is used to create workspace resources in project.
 
-module "projects_factory_workspaces" {
-  source = "./modules/tfe_workspace"
+resource "tfe_workspace" "projects_factory" {
 
   name              = github_repository.projects_factory.name
+  description       = github_repository.projects_factory.description
   organization      = data.tfe_organization.this.name
   project_id        = tfe_project.project["Terraform Cloud"].id
-  description       = github_repository.projects_factory.description
   tag_names         = ["managed_by_terraform"]
   terraform_version = "latest"
   trigger_patterns  = ["*.tf"]
@@ -52,6 +53,7 @@ module "projects_factory_workspaces" {
     identifier     = "${local.git_organization_name}/TerraformCloud-ProjectOnboarding"
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
+
 }
 
 # The following code block is used to create notification resources in project.
