@@ -147,12 +147,6 @@ Source: ./modules/tfe_notification
 
 Version:
 
-### <a name="module_projects_factory_repository"></a> [projects\_factory\_repository](#module\_projects\_factory\_repository)
-
-Source: ./modules/github_repository
-
-Version:
-
 ### <a name="module_projects_factory_workspaces"></a> [projects\_factory\_workspaces](#module\_projects\_factory\_workspaces)
 
 Source: ./modules/tfe_workspace
@@ -189,6 +183,8 @@ No optional inputs.
 
 The following resources are used by this module:
 
+- [github_branch_protection.projects_factory](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_protection) (resource)
+- [github_repository.projects_factory](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) (resource)
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
 - [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) (resource)
 - [tfe_variable.variable_set](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
