@@ -11,10 +11,13 @@ resource "github_repository" "projects_factory" {
   allow_update_branch    = false
 
   security_and_analysis {
-    secret_scanning = {
+    # advanced_security {
+    #   status = "enabled"
+    # }
+    secret_scanning {
       status = "enabled"
     }
-    secret_scanning_push_protection = {
+    secret_scanning_push_protection {
       status = "enabled"
     }
   }
@@ -38,10 +41,10 @@ resource "github_branch_protection" "projects_factory" {
 module "projects_factory_workspaces" {
   source = "./modules/tfe_workspace"
 
-  name              = "TerraformCloud-ProjectOnboarding"
+  name              = github_repository.projects_factory.name
   organization      = data.tfe_organization.this.name
   project_id        = tfe_project.project["Terraform Cloud"].id
-  description       = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
+  description       = github_repository.projects_factory.description
   tag_names         = ["managed_by_terraform"]
   terraform_version = "latest"
   trigger_patterns  = ["*.tf"]
@@ -49,7 +52,6 @@ module "projects_factory_workspaces" {
     identifier     = "${local.git_organization_name}/TerraformCloud-ProjectOnboarding"
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
-  depends_on = [module.projects_factory_repository]
 }
 
 # The following code block is used to create notification resources in project.
