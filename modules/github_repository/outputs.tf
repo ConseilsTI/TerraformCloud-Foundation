@@ -70,21 +70,17 @@ output "branch_protection" {
 output "actions_secret" {
   description = "GitHub Actions secrets within your GitHub repository."
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret }
+  sensitive   = true
 }
 
-output "created_at" {
+output "actions_secret_created_at" {
   description = "Date of actions_secret creation."
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret.created_at }
 }
 
-output "updated_at" {
+output "actions_secret_updated_at" {
   description = "Date of actions_secret update."
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret.updated_at }
-}
-
-output "actions_repository_permissions" {
-  description = "GitHub Actions permissions for your repository."
-  value       = github_actions_repository_permissions.this
 }
 
 output "branches" {
@@ -110,24 +106,4 @@ output "branches_ref" {
 output "branches_sha" {
   description = "A string storing the reference's HEAD commit's SHA1."
   value       = { for github_branch in github_branch.this : github_branch.branch => github_branch.sha }
-}
-
-output "files" {
-  description = "Files within your repository."
-  value       = { for file in github_repository_file.this : file.file => file }
-}
-
-output "files_commit_sha" {
-  description = "The SHA of the commit that modified the file."
-  value       = { for file in github_repository_file.this : file.file => file.commit_sha }
-}
-
-output "files_sha" {
-  description = "The SHA blob of the file."
-  value       = { for file in github_repository_file.this : file.file => file.sha }
-}
-
-output "files_ref" {
-  description = "The name of the commit/branch/tag."
-  value       = { for file in github_repository_file.this : file.file => file.ref }
 }

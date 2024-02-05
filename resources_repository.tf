@@ -16,10 +16,10 @@ module "repository" {
   allow_squash_merge          = try(each.value.github_repository.allow_squash_merge, true)
   allow_rebase_merge          = try(each.value.github_repository.allow_rebase_merge, true)
   allow_auto_merge            = try(each.value.github_repository.allow_auto_merge, false)
-  squash_merge_commit_title   = try(each.value.github_repository.squash_merge_commit_title, null)
-  squash_merge_commit_message = try(each.value.github_repository.squash_merge_commit_message, null)
-  merge_commit_title          = try(each.value.github_repository.merge_commit_title, null)
-  merge_commit_message        = try(each.value.github_repository.merge_commit_message, null)
+  squash_merge_commit_title   = try(each.value.github_repository.squash_merge_commit_title, "COMMIT_OR_PR_TITLE")
+  squash_merge_commit_message = try(each.value.github_repository.squash_merge_commit_message, "COMMIT_MESSAGES")
+  merge_commit_title          = try(each.value.github_repository.merge_commit_title, "MERGE_MESSAGE")
+  merge_commit_message        = try(each.value.github_repository.merge_commit_message, "PR_TITLE")
   delete_branch_on_merge      = try(each.value.github_repository.delete_branch_on_merge, true)
   auto_init                   = try(each.value.github_repository.auto_init, true)
   gitignore_template          = try(each.value.github_repository.gitignore_template, null)
@@ -101,30 +101,10 @@ module "repository" {
     }
   ]
 
-  allowed_actions = try(each.value.github_repository.allowed_actions, "selected")
-  enabled         = try(each.value.github_repository.enabled, true)
-  allowed_actions_config = {
-    github_owned_allowed = try(each.value.github_repository.allowed_actions_config.github_owned_allowed, true)
-    patterns_allowed     = try(each.value.github_repository.allowed_actions_config.patterns_allowed, ["terraform-docs/gh-actions@*", "super-linter/super-linter@*", "rymndhng/release-on-push-action@*", "hashicorp/*"])
-    verified_allowed     = try(each.value.github_repository.allowed_actions_config.verified_allowed, false)
-  }
-
   branches = [for branch in try(each.value.github_repository.branches, []) :
     {
       branch        = branch.branch
       source_branch = try(branch.source_branch, "main")
-    }
-  ]
-
-  files = [for file in try(each.value.github_repository.files, []) :
-    {
-      file                = file.file
-      content             = file.content
-      branch              = try(file.branch, null)
-      commit_author       = try(file.commit_author, null)
-      commit_email        = try(file.commit_email, null)
-      commit_message      = try(file.commit_message, null)
-      overwrite_on_create = try(file.overwrite_on_create, false)
     }
   ]
 

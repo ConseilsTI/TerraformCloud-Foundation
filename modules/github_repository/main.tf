@@ -78,26 +78,9 @@ resource "github_repository" "this" {
 
   lifecycle {
     precondition {
-      condition     = var.squash_merge_commit_title != null ? var.allow_squash_merge ? true : false : true
-      error_message = "`squash_merge_commit_title` is only applicable if `allow_squash_merge` is true."
+      condition     = var.security_and_analysis != null ? var.visibility == "public" ? var.security_and_analysis.advanced_security == null ? true : false : true : true
+      error_message = "`advanced_security` is always available for public repos."
     }
-    precondition {
-      condition     = var.squash_merge_commit_message != null ? var.allow_squash_merge ? true : false : true
-      error_message = "`squash_merge_commit_message` is only applicable if `allow_squash_merge` is true."
-    }
-    precondition {
-      condition     = var.merge_commit_title != null ? var.allow_merge_commit ? true : false : true
-      error_message = "`merge_commit_title` is only applicable if `allow_merge_commit` is true."
-    }
-    precondition {
-      condition     = var.merge_commit_message != null ? var.allow_merge_commit ? true : false : true
-      error_message = "`merge_commit_message` is only applicable if `allow_merge_commit` is true."
-    }
-    ignore_changes = [
-      # Ignore changes to somes properties because they are always updated.
-      allow_merge_commit, allow_rebase_merge, allow_squash_merge, delete_branch_on_merge,
-      merge_commit_message, merge_commit_title, squash_merge_commit_message, squash_merge_commit_title
-    ]
   }
 
 }
@@ -138,7 +121,6 @@ resource "github_branch_protection" "this" {
   allows_force_pushes  = each.value.allows_force_pushes
   blocks_creations     = each.value.blocks_creations
   lock_branch          = each.value.lock_branch
-  depends_on           = [github_repository_file.this]
 }
 
 resource "github_actions_secret" "this" {
@@ -148,45 +130,9 @@ resource "github_actions_secret" "this" {
   plaintext_value = each.value.plaintext_value
 }
 
-resource "github_actions_repository_permissions" "this" {
-  repository      = github_repository.this.name
-  allowed_actions = var.allowed_actions
-  enabled         = var.enabled
-  dynamic "allowed_actions_config" {
-    for_each = var.allowed_actions_config != null ? [true] : []
-    content {
-      github_owned_allowed = var.allowed_actions_config.github_owned_allowed
-      patterns_allowed     = var.allowed_actions_config.patterns_allowed
-      verified_allowed     = var.allowed_actions_config.verified_allowed
-    }
-  }
-  lifecycle {
-    precondition {
-      condition     = var.allowed_actions_config != null ? var.allowed_actions == "selected" ? true : false : true
-      error_message = "`allowed_actions_config` is only available  if `allowed_actions` is set to `selected`."
-    }
-  }
-}
-
 resource "github_branch" "this" {
   for_each      = { for branch in var.branches : branch.branch => branch }
   repository    = github_repository.this.name
   branch        = each.value.branch
   source_branch = each.value.source_branch
-}
-
-resource "github_repository_file" "this" {
-  for_each            = { for file in var.files : file.file => file }
-  repository          = github_repository.this.name
-  file                = each.value.file
-  content             = each.value.content
-  branch              = each.value.branch
-  commit_author       = each.value.commit_author
-  commit_email        = each.value.commit_email
-  commit_message      = each.value.commit_message
-  overwrite_on_create = each.value.overwrite_on_create
-  depends_on          = [github_branch.this]
-  lifecycle {
-    ignore_changes = [content]
-  }
 }

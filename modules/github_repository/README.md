@@ -96,12 +96,10 @@ No modules.
 
 The following resources are used by this module:
 
-- [github_actions_repository_permissions.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/actions_repository_permissions) (resource)
 - [github_actions_secret.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/actions_secret) (resource)
 - [github_branch.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/branch) (resource)
 - [github_branch_protection.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/branch_protection) (resource)
 - [github_repository.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/repository) (resource)
-- [github_repository_file.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/repository_file) (resource)
 
 ## Required Inputs
 
@@ -174,33 +172,6 @@ Type: `bool`
 
 Default: `true`
 
-### <a name="input_allowed_actions"></a> [allowed\_actions](#input\_allowed\_actions)
-
-Description: (Optional) The permissions policy that controls the actions that are allowed to run. Can be one of: all, local\_only, or selected.
-
-Type: `string`
-
-Default: `"all"`
-
-### <a name="input_allowed_actions_config"></a> [allowed\_actions\_config](#input\_allowed\_actions\_config)
-
-Description:   (Optional) The allowed\_actions\_config block supports the following:  
-    github\_owned\_allowed : (Required) Whether GitHub-owned actions are allowed in the repository.  
-    patterns\_allowed     : (Optional) Specifies a list of string-matching patterns to allow specific action(s). Wildcards, tags, and SHAs are allowed. For example, monalisa/octocat@, monalisa/octocat@v2, monalisa/."  
-    verified\_allowed     : (Optional) Whether actions in GitHub Marketplace from verified creators are allowed. Set to `true` to allow all GitHub Marketplace actions by verified creators.
-
-Type:
-
-```hcl
-object({
-    github_owned_allowed = bool
-    patterns_allowed     = optional(list(string), null)
-    verified_allowed     = optional(bool, false)
-  })
-```
-
-Default: `null`
-
 ### <a name="input_archive_on_destroy"></a> [archive\_on\_destroy](#input\_archive\_on\_destroy)
 
 Description: (Optional) Set to true to archive the repository instead of deleting on destroy.
@@ -211,7 +182,7 @@ Default: `false`
 
 ### <a name="input_archived"></a> [archived](#input\_archived)
 
-Description: (Optional) Specifies if the repository should be archived. Defaults to false. NOTE Currently, the API does not support unarchiving.
+Description: (Optional) Specifies if the repository should be archived. NOTE Currently, the API does not support unarchiving.
 
 Type: `bool`
 
@@ -228,8 +199,8 @@ Default: `false`
 ### <a name="input_branch_protections"></a> [branch\_protections](#input\_branch\_protections)
 
 Description:     pattern                           : (Required) Identifies the protection rule pattern.  
-    enforce\_admins                    : (Optional) Boolean, setting this to `true` enforces status checks for repository administrators.  
-    require\_signed\_commits            : (Optional) Boolean, setting this to `true` requires all commits to be signed with GPG.  
+    enforce\_admins                    : (Optional) Boolean, setting this to true enforces status checks for repository administrators.  
+    require\_signed\_commits            : (Optional) Boolean, setting this to true requires all commits to be signed with GPG.  
     required\_linear\_history           : (Optional) Boolean, setting this to true enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch.  
     require\_conversation\_resolution   : (Optional) Boolean, setting this to true requires all conversations on code must be resolved before a pull request can be merged.  
     required\_status\_checks            : (Optional) The required\_status\_checks block supports the following:  
@@ -245,10 +216,10 @@ Description:     pattern                           : (Required) Identifies the p
       require\_last\_push\_approval      : (Optional) Require that The most recent push must be approved by someone other than the last pusher.  
     push\_restrictions                 : (Optional) The list of actor Names/IDs that may push to the branch. Actor names must either begin with a \"/\" for users or the organization name followed by a \"/\" for teams.  
     force\_push\_bypassers              : (Optional) The list of actor Names/IDs that are allowed to bypass force push restrictions. Actor names must either begin with a \"/\" for users or the organization name followed by a \"/\" for teams.  
-    allows\_deletions                  : (Optional) Boolean, setting this to `true` to allow the branch to be deleted.  
-    allows\_force\_pushes               : (Optional) Boolean, setting this to `true` to allow force pushes on the branch.  
-    blocks\_creations                  : (Optional) Boolean, setting this to `true` to block creating the branch.  
-    lock\_branch                       : (Optional) Boolean, Setting this to `true` will make the branch read-only and preventing any pushes to it.
+    allows\_deletions                  : (Optional) Boolean, setting this to true to allow the branch to be deleted.  
+    allows\_force\_pushes               : (Optional) Boolean, setting this to true to allow force pushes on the branch.  
+    blocks\_creations                  : (Optional) Boolean, setting this to true to block creating the branch.  
+    lock\_branch                       : (Optional) Boolean, Setting this to true will make the branch read-only and preventing any pushes to it.
 
 Type:
 
@@ -302,7 +273,7 @@ Default: `[]`
 
 ### <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge)
 
-Description: (Optional) Automatically delete head branch after a pull request is merged. Defaults to false.
+Description: (Optional) Automatically delete head branch after a pull request is merged.
 
 Type: `bool`
 
@@ -316,41 +287,6 @@ Type: `string`
 
 Default: `null`
 
-### <a name="input_enabled"></a> [enabled](#input\_enabled)
-
-Description: (Optional) Should GitHub actions be enabled on this repository?
-
-Type: `bool`
-
-Default: `true`
-
-### <a name="input_files"></a> [files](#input\_files)
-
-Description:   (Optional) The files block supports the following:  
-    file                : (Required) The path of the file to manage.  
-    content             : (Required) The file content.  
-    branch              : (Optional) Git branch (defaults to the repository's default branch). The branch must already exist, it will not be created if it does not already exist.  
-    commit\_author       : (Optional) Committer author name to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This maybe useful when a branch protection rule requires signed commits.  
-    commit\_email        : (Optional) Committer email address to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This may be useful when a branch protection rule requires signed commits.  
-    commit\_message      : (Optional) Commit message when adding or updating the managed file.  
-    overwrite\_on\_create : (Optional) Enable overwriting existing files
-
-Type:
-
-```hcl
-list(object({
-    file                = string
-    content             = string
-    branch              = optional(string, null)
-    commit_author       = optional(string, null)
-    commit_email        = optional(string, null)
-    commit_message      = optional(string, null)
-    overwrite_on_create = optional(bool, false)
-  }))
-```
-
-Default: `[]`
-
 ### <a name="input_gitignore_template"></a> [gitignore\_template](#input\_gitignore\_template)
 
 Description: (Optional) Use the name of the template without the extension. For example, "Haskell".
@@ -361,7 +297,7 @@ Default: `null`
 
 ### <a name="input_has_discussions"></a> [has\_discussions](#input\_has\_discussions)
 
-Description: (Optional) Set to true to enable GitHub Discussions on the repository. Defaults to false.
+Description: (Optional) Set to true to enable GitHub Discussions on the repository.
 
 Type: `bool`
 
@@ -536,7 +472,7 @@ Default: `null`
 
 ### <a name="input_visibility"></a> [visibility](#input\_visibility)
 
-Description: (Optional) Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal. The visibility parameter overrides the private parameter.
+Description: (Optional) Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal.
 
 Type: `string`
 
@@ -554,13 +490,17 @@ Default: `false`
 
 The following outputs are exported:
 
-### <a name="output_actions_repository_permissions"></a> [actions\_repository\_permissions](#output\_actions\_repository\_permissions)
-
-Description: GitHub Actions permissions for your repository.
-
 ### <a name="output_actions_secret"></a> [actions\_secret](#output\_actions\_secret)
 
 Description: GitHub Actions secrets within your GitHub repository.
+
+### <a name="output_actions_secret_created_at"></a> [actions\_secret\_created\_at](#output\_actions\_secret\_created\_at)
+
+Description: Date of actions\_secret creation.
+
+### <a name="output_actions_secret_updated_at"></a> [actions\_secret\_updated\_at](#output\_actions\_secret\_updated\_at)
+
+Description: Date of actions\_secret update.
 
 ### <a name="output_branch_protection"></a> [branch\_protection](#output\_branch\_protection)
 
@@ -585,26 +525,6 @@ Description: A string storing the reference's HEAD commit's SHA1.
 ### <a name="output_branches_source_sha"></a> [branches\_source\_sha](#output\_branches\_source\_sha)
 
 Description: A string storing the commit this branch was started from. Not populated when imported.
-
-### <a name="output_created_at"></a> [created\_at](#output\_created\_at)
-
-Description: Date of actions\_secret creation.
-
-### <a name="output_files"></a> [files](#output\_files)
-
-Description: Files within your repository.
-
-### <a name="output_files_commit_sha"></a> [files\_commit\_sha](#output\_files\_commit\_sha)
-
-Description: The SHA of the commit that modified the file.
-
-### <a name="output_files_ref"></a> [files\_ref](#output\_files\_ref)
-
-Description: The name of the commit/branch/tag.
-
-### <a name="output_files_sha"></a> [files\_sha](#output\_files\_sha)
-
-Description: The SHA blob of the file.
 
 ### <a name="output_full_name"></a> [full\_name](#output\_full\_name)
 
@@ -652,8 +572,4 @@ Description: URL that can be provided to git clone to clone the repository via S
 ### <a name="output_svn_url"></a> [svn\_url](#output\_svn\_url)
 
 Description: URL that can be provided to svn checkout to check out the repository via GitHub's Subversion protocol emulation.
-
-### <a name="output_updated_at"></a> [updated\_at](#output\_updated\_at)
-
-Description: Date of actions\_secret update.
 <!-- END_TF_DOCS -->
