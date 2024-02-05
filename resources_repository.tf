@@ -21,7 +21,7 @@ module "repository" {
   merge_commit_title          = try(each.value.github_repository.merge_commit_title, null)
   merge_commit_message        = try(each.value.github_repository.merge_commit_message, null)
   delete_branch_on_merge      = try(each.value.github_repository.delete_branch_on_merge, true)
-  auto_init                   = try(each.value.github_repository.auto_init, false)
+  auto_init                   = try(each.value.github_repository.auto_init, true)
   gitignore_template          = try(each.value.github_repository.gitignore_template, null)
   license_template            = try(each.value.github_repository.license_template, null)
   archived                    = try(each.value.github_repository.archived, false)
@@ -116,12 +116,7 @@ module "repository" {
     }
   ]
 
-  files = [for file in try(each.value.github_repository.files, [
-    {
-      file    = "README.md"
-      content = "README.md"
-    }
-    ]) :
+  files = [for file in try(each.value.github_repository.files, []) :
     {
       file                = file.file
       content             = file.content
