@@ -208,14 +208,7 @@ variable "security_and_analysis" {
       status = string
     }), null)
   })
-  default = {
-    secret_scanning = {
-      status = enabled
-    }
-    secret_scanning_push_protection = {
-      status = enabled
-    }
-  }
+  default = null
 
   validation {
     condition     = var.security_and_analysis != null ? var.security_and_analysis.advanced_security != null ? var.security_and_analysis.advanced_security.status != null ? contains(["enabled", "disabled"], var.security_and_analysis.advanced_security.status) ? true : false : false : true : true
