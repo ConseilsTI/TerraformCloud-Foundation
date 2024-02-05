@@ -33,5 +33,5 @@ module "workspaces" {
     identifier     = module.repository[each.value.name].id
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   } : null
-  working_directory             = try(each.value.working_directory, null)
+  working_directory = try(each.value.working_directory, null)
 }
