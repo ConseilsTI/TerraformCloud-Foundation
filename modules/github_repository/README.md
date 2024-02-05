@@ -182,7 +182,7 @@ Default: `false`
 
 ### <a name="input_archived"></a> [archived](#input\_archived)
 
-Description: (Optional) Specifies if the repository should be archived. Defaults to false. NOTE Currently, the API does not support unarchiving.
+Description: (Optional) Specifies if the repository should be archived. NOTE Currently, the API does not support unarchiving.
 
 Type: `bool`
 
@@ -199,8 +199,8 @@ Default: `false`
 ### <a name="input_branch_protections"></a> [branch\_protections](#input\_branch\_protections)
 
 Description:     pattern                           : (Required) Identifies the protection rule pattern.  
-    enforce\_admins                    : (Optional) Boolean, setting this to `true` enforces status checks for repository administrators.  
-    require\_signed\_commits            : (Optional) Boolean, setting this to `true` requires all commits to be signed with GPG.  
+    enforce\_admins                    : (Optional) Boolean, setting this to true enforces status checks for repository administrators.  
+    require\_signed\_commits            : (Optional) Boolean, setting this to true requires all commits to be signed with GPG.  
     required\_linear\_history           : (Optional) Boolean, setting this to true enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch.  
     require\_conversation\_resolution   : (Optional) Boolean, setting this to true requires all conversations on code must be resolved before a pull request can be merged.  
     required\_status\_checks            : (Optional) The required\_status\_checks block supports the following:  
@@ -216,10 +216,10 @@ Description:     pattern                           : (Required) Identifies the p
       require\_last\_push\_approval      : (Optional) Require that The most recent push must be approved by someone other than the last pusher.  
     push\_restrictions                 : (Optional) The list of actor Names/IDs that may push to the branch. Actor names must either begin with a \"/\" for users or the organization name followed by a \"/\" for teams.  
     force\_push\_bypassers              : (Optional) The list of actor Names/IDs that are allowed to bypass force push restrictions. Actor names must either begin with a \"/\" for users or the organization name followed by a \"/\" for teams.  
-    allows\_deletions                  : (Optional) Boolean, setting this to `true` to allow the branch to be deleted.  
-    allows\_force\_pushes               : (Optional) Boolean, setting this to `true` to allow force pushes on the branch.  
-    blocks\_creations                  : (Optional) Boolean, setting this to `true` to block creating the branch.  
-    lock\_branch                       : (Optional) Boolean, Setting this to `true` will make the branch read-only and preventing any pushes to it.
+    allows\_deletions                  : (Optional) Boolean, setting this to true to allow the branch to be deleted.  
+    allows\_force\_pushes               : (Optional) Boolean, setting this to true to allow force pushes on the branch.  
+    blocks\_creations                  : (Optional) Boolean, setting this to true to block creating the branch.  
+    lock\_branch                       : (Optional) Boolean, Setting this to true will make the branch read-only and preventing any pushes to it.
 
 Type:
 
@@ -273,7 +273,7 @@ Default: `[]`
 
 ### <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge)
 
-Description: (Optional) Automatically delete head branch after a pull request is merged. Defaults to false.
+Description: (Optional) Automatically delete head branch after a pull request is merged.
 
 Type: `bool`
 
@@ -297,7 +297,7 @@ Default: `null`
 
 ### <a name="input_has_discussions"></a> [has\_discussions](#input\_has\_discussions)
 
-Description: (Optional) Set to true to enable GitHub Discussions on the repository. Defaults to false.
+Description: (Optional) Set to true to enable GitHub Discussions on the repository.
 
 Type: `bool`
 
@@ -472,7 +472,7 @@ Default: `null`
 
 ### <a name="input_visibility"></a> [visibility](#input\_visibility)
 
-Description: (Optional) Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal. The visibility parameter overrides the private parameter.
+Description: (Optional) Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal.
 
 Type: `string`
 
@@ -493,6 +493,14 @@ The following outputs are exported:
 ### <a name="output_actions_secret"></a> [actions\_secret](#output\_actions\_secret)
 
 Description: GitHub Actions secrets within your GitHub repository.
+
+### <a name="output_actions_secret_created_at"></a> [actions\_secret\_created\_at](#output\_actions\_secret\_created\_at)
+
+Description: Date of actions\_secret creation.
+
+### <a name="output_actions_secret_updated_at"></a> [actions\_secret\_updated\_at](#output\_actions\_secret\_updated\_at)
+
+Description: Date of actions\_secret update.
 
 ### <a name="output_branch_protection"></a> [branch\_protection](#output\_branch\_protection)
 
@@ -517,10 +525,6 @@ Description: A string storing the reference's HEAD commit's SHA1.
 ### <a name="output_branches_source_sha"></a> [branches\_source\_sha](#output\_branches\_source\_sha)
 
 Description: A string storing the commit this branch was started from. Not populated when imported.
-
-### <a name="output_created_at"></a> [created\_at](#output\_created\_at)
-
-Description: Date of actions\_secret creation.
 
 ### <a name="output_full_name"></a> [full\_name](#output\_full\_name)
 
@@ -568,8 +572,4 @@ Description: URL that can be provided to git clone to clone the repository via S
 ### <a name="output_svn_url"></a> [svn\_url](#output\_svn\_url)
 
 Description: URL that can be provided to svn checkout to check out the repository via GitHub's Subversion protocol emulation.
-
-### <a name="output_updated_at"></a> [updated\_at](#output\_updated\_at)
-
-Description: Date of actions\_secret update.
 <!-- END_TF_DOCS -->

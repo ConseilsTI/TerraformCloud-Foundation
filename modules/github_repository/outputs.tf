@@ -70,14 +70,15 @@ output "branch_protection" {
 output "actions_secret" {
   description = "GitHub Actions secrets within your GitHub repository."
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret }
+  sensitive   = true
 }
 
-output "created_at" {
+output "actions_secret_created_at" {
   description = "Date of actions_secret creation."
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret.created_at }
 }
 
-output "updated_at" {
+output "actions_secret_updated_at" {
   description = "Date of actions_secret update."
   value       = { for actions_secret in github_actions_secret.this : actions_secret.secret_name => actions_secret.updated_at }
 }

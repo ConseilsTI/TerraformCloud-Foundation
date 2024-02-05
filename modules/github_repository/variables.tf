@@ -1,4 +1,4 @@
-# The following variables are used to create and manage repository (`github_repository`).
+# The following variables are used to create and manage repository (github_repository).
 
 variable "name" {
   description = "(Required) The name of the repository."
@@ -18,13 +18,13 @@ variable "homepage_url" {
 }
 
 variable "visibility" {
-  description = "(Optional) Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal. The visibility parameter overrides the private parameter."
+  description = "(Optional) Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal."
   type        = string
   default     = "public"
 
   validation {
-    condition     = var.visibility != null ? contains(["public", "private", "internal"], var.visibility) ? true : false : true
-    error_message = "Valid values are `public`, `private` or `internal`."
+    condition     = var.visibility != null ? contains(["public", "private", "internal"], var.visibility) ? true : false : false
+    error_message = "Valid values are \"public\", \"private\" or \"internal\"."
   }
 }
 
@@ -35,7 +35,7 @@ variable "has_issues" {
 }
 
 variable "has_discussions" {
-  description = "(Optional) Set to true to enable GitHub Discussions on the repository. Defaults to false."
+  description = "(Optional) Set to true to enable GitHub Discussions on the repository."
   type        = bool
   default     = false
 }
@@ -88,8 +88,8 @@ variable "squash_merge_commit_title" {
   default     = "COMMIT_OR_PR_TITLE"
 
   validation {
-    condition     = var.squash_merge_commit_title != null ? contains(["PR_TITLE", "COMMIT_OR_PR_TITLE", ""], var.squash_merge_commit_title) ? true : false : true
-    error_message = "Valid values are `PR_TITLE` or `COMMIT_OR_PR_TITLE`."
+    condition     = var.squash_merge_commit_title != null ? contains(["PR_TITLE", "COMMIT_OR_PR_TITLE"], var.squash_merge_commit_title) ? true : false : false
+    error_message = "Valid values are \"PR_TITLE\" or \"COMMIT_OR_PR_TITLE\"."
   }
 }
 
@@ -99,8 +99,8 @@ variable "squash_merge_commit_message" {
   default     = "COMMIT_MESSAGES"
 
   validation {
-    condition     = var.squash_merge_commit_message != null ? contains(["PR_BODY", "COMMIT_MESSAGES", "BLANK", ""], var.squash_merge_commit_message) ? true : false : true
-    error_message = "Valid values are `PR_BODY`, `COMMIT_MESSAGES` or `BLANK`."
+    condition     = var.squash_merge_commit_message != null ? contains(["PR_BODY", "COMMIT_MESSAGES", "BLANK"], var.squash_merge_commit_message) ? true : false : false
+    error_message = "Valid values are \"PR_BODY\", \"COMMIT_MESSAGES\" or \"BLANK\"."
   }
 }
 
@@ -110,8 +110,8 @@ variable "merge_commit_title" {
   default     = "MERGE_MESSAGE"
 
   validation {
-    condition     = var.merge_commit_title != null ? contains(["PR_TITLE", "MERGE_MESSAGE", ""], var.merge_commit_title) ? true : false : true
-    error_message = "Valid values are `PR_TITLE` or `MERGE_MESSAGE`."
+    condition     = var.merge_commit_title != null ? contains(["PR_TITLE", "MERGE_MESSAGE"], var.merge_commit_title) ? true : false : false
+    error_message = "Valid values are \"PR_TITLE\" or \"MERGE_MESSAGE\"."
   }
 }
 
@@ -121,13 +121,13 @@ variable "merge_commit_message" {
   default     = "PR_TITLE"
 
   validation {
-    condition     = var.merge_commit_message != null ? contains(["PR_BODY", "PR_TITLE", "BLANK", ""], var.merge_commit_message) ? true : false : true
-    error_message = "Valid values are `PR_BODY`, `PR_TITLE` or `BLANK`."
+    condition     = var.merge_commit_message != null ? contains(["PR_BODY", "PR_TITLE", "BLANK"], var.merge_commit_message) ? true : false : false
+    error_message = "Valid values are \"PR_BODY\", \"PR_TITLE\" or \"BLANK\"."
   }
 }
 
 variable "delete_branch_on_merge" {
-  description = "(Optional) Automatically delete head branch after a pull request is merged. Defaults to false."
+  description = "(Optional) Automatically delete head branch after a pull request is merged."
   type        = bool
   default     = false
 }
@@ -151,7 +151,7 @@ variable "license_template" {
 }
 
 variable "archived" {
-  description = "(Optional) Specifies if the repository should be archived. Defaults to false. NOTE Currently, the API does not support unarchiving."
+  description = "(Optional) Specifies if the repository should be archived. NOTE Currently, the API does not support unarchiving."
   type        = bool
   default     = false
 }
@@ -182,8 +182,8 @@ variable "pages" {
   default = null
 
   validation {
-    condition     = var.pages != null ? contains(["legacy", "workflow"], var.pages.build_type) ? true : false : true
-    error_message = "Valid values are `legacy` or `workflow`."
+    condition     = var.pages != null ? var.pages.build_type != null ? contains(["legacy", "workflow"], var.pages.build_type) ? true : false : false : true
+    error_message = "Valid values are \"legacy\" or \"workflow\"."
   }
 }
 
@@ -211,16 +211,16 @@ variable "security_and_analysis" {
   default = null
 
   validation {
-    condition     = var.security_and_analysis != null ? var.security_and_analysis.advanced_security != null ? contains(["enabled", "disabled"], var.security_and_analysis.advanced_security.status) ? true : false : true : true
-    error_message = "Valid values are `enabled` or `disabled`."
+    condition     = var.security_and_analysis != null ? var.security_and_analysis.advanced_security != null ? var.security_and_analysis.advanced_security.status != null ? contains(["enabled", "disabled"], var.security_and_analysis.advanced_security.status) ? true : false : false : true : true
+    error_message = "Valid values are \"enabled\" or \"disabled\"."
   }
   validation {
-    condition     = var.security_and_analysis != null ? var.security_and_analysis.secret_scanning != null ? contains(["enabled", "disabled"], var.security_and_analysis.secret_scanning.status) ? true : false : true : true
-    error_message = "Valid values are `enabled` or `disabled`."
+    condition     = var.security_and_analysis != null ? var.security_and_analysis.secret_scanning != null ? var.security_and_analysis.secret_scanning.status != null ? contains(["enabled", "disabled"], var.security_and_analysis.secret_scanning.status) ? true : false : false : true : true
+    error_message = "Valid values are \"enabled\" or \"disabled\"."
   }
   validation {
-    condition     = var.security_and_analysis != null ? var.security_and_analysis.secret_scanning_push_protection != null ? contains(["enabled", "disabled"], var.security_and_analysis.secret_scanning_push_protection.status) ? true : false : true : true
-    error_message = "Valid values are `enabled` or `disabled`."
+    condition     = var.security_and_analysis != null ? var.security_and_analysis.secret_scanning_push_protection != null ? var.security_and_analysis.secret_scanning_push_protection.status != null ? contains(["enabled", "disabled"], var.security_and_analysis.secret_scanning_push_protection.status) ? true : false : false : true : true
+    error_message = "Valid values are \"enabled\" or \"disabled\"."
   }
 }
 
@@ -263,13 +263,13 @@ variable "allow_update_branch" {
   default     = true
 }
 
-# The following variable is used to configure branch protection for repository. (`github_branch_protection`).
+# The following variable is used to configure branch protection for repository. (github_branch_protection).
 
 variable "branch_protections" {
   description = <<EOT
     pattern                           : (Required) Identifies the protection rule pattern.
-    enforce_admins                    : (Optional) Boolean, setting this to `true` enforces status checks for repository administrators.
-    require_signed_commits            : (Optional) Boolean, setting this to `true` requires all commits to be signed with GPG.
+    enforce_admins                    : (Optional) Boolean, setting this to true enforces status checks for repository administrators.
+    require_signed_commits            : (Optional) Boolean, setting this to true requires all commits to be signed with GPG.
     required_linear_history           : (Optional) Boolean, setting this to true enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch.
     require_conversation_resolution   : (Optional) Boolean, setting this to true requires all conversations on code must be resolved before a pull request can be merged.
     required_status_checks            : (Optional) The required_status_checks block supports the following:
@@ -285,10 +285,10 @@ variable "branch_protections" {
       require_last_push_approval      : (Optional) Require that The most recent push must be approved by someone other than the last pusher.
     push_restrictions                 : (Optional) The list of actor Names/IDs that may push to the branch. Actor names must either begin with a \"/\" for users or the organization name followed by a \"/\" for teams.
     force_push_bypassers              : (Optional) The list of actor Names/IDs that are allowed to bypass force push restrictions. Actor names must either begin with a \"/\" for users or the organization name followed by a \"/\" for teams.
-    allows_deletions                  : (Optional) Boolean, setting this to `true` to allow the branch to be deleted.
-    allows_force_pushes               : (Optional) Boolean, setting this to `true` to allow force pushes on the branch.
-    blocks_creations                  : (Optional) Boolean, setting this to `true` to block creating the branch.
-    lock_branch                       : (Optional) Boolean, Setting this to `true` will make the branch read-only and preventing any pushes to it.
+    allows_deletions                  : (Optional) Boolean, setting this to true to allow the branch to be deleted.
+    allows_force_pushes               : (Optional) Boolean, setting this to true to allow force pushes on the branch.
+    blocks_creations                  : (Optional) Boolean, setting this to true to block creating the branch.
+    lock_branch                       : (Optional) Boolean, Setting this to true will make the branch read-only and preventing any pushes to it.
   EOT
   type = list(object({
     pattern                         = string
@@ -319,7 +319,7 @@ variable "branch_protections" {
   default = []
 }
 
-# The following variables are used to create actions secret resources (`github_actions_secret`).
+# The following variables are used to create actions secret resources (github_actions_secret).
 
 variable "actions_secrets" {
   description = <<EOT
@@ -334,7 +334,7 @@ variable "actions_secrets" {
   default = []
 }
 
-# The following variables are used to create and manage branches within your repository (`github_branch`).
+# The following variables are used to create and manage branches within your repository (github_branch).
 
 variable "branches" {
   description = <<EOT
