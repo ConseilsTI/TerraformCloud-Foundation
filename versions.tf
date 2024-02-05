@@ -5,18 +5,18 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.48.0"
+      version = "~>0.51"
     }
     hcp = {
       source  = "hashicorp/hcp"
-      version = "0.76.0"
+      version = "~>0.76"
     }
     github = {
       source  = "integrations/github"
-      version = "5.44.0"
+      version = "~>5.44"
     }
   }
 
-  required_version = "> 1.6.2"
+  required_version = "> 1.6.0"
 
 }
