@@ -20,7 +20,7 @@ resource "github_repository" "projects_factory" {
     }
   }
 
-  topics               = ["terraformcloud"]
+  topics               = ["terraform-workspace", "terraform", "terraform-managed", "foundation", "factory"]
   vulnerability_alerts = true
   allow_update_branch  = false
 }
