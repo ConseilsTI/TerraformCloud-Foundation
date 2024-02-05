@@ -246,11 +246,10 @@ locals {
               sensitive = true
             }
           }
-          vcs_repo = true
-          # vcs_repo = {
-          #   identifier     = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
-          #   oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-          # }
+          vcs_repo = {
+            identifier     = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
+            oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+          }
         }
         "TerraformCloud-Policies" = {
           description = "Repository to provision and manage Terraform Cloud policies using Terraform code (IaC)."
@@ -288,11 +287,10 @@ locals {
               sensitive = true
             }
           }
-          vcs_repo = true
-          # vcs_repo = {
-          #   identifier     = "${local.git_organization_name}/TerraformCloud-Policies"
-          #   oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-          # }
+          vcs_repo = {
+            identifier     = "${local.git_organization_name}/TerraformCloud-Policies"
+            oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+          }
         }
       }
     }

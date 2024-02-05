@@ -28,10 +28,6 @@ module "workspaces" {
   terraform_version             = try(each.value.terraform_version, "latest")
   trigger_prefixes              = try(each.value.trigger_prefixes, null)
   trigger_patterns              = try(each.value.trigger_patterns, null)
-  # vcs_repo                      = try(each.value.vcs_repo, null)
-  vcs_repo = each.value.vcs_repo ? {
-    identifier     = module.repository[each.value.name].id
-    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  } : null
+  vcs_repo                      = try(each.value.vcs_repo, null)
   working_directory             = try(each.value.working_directory, null)
 }
