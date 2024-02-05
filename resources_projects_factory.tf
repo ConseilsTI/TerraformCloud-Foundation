@@ -63,7 +63,7 @@ module "projects_factory_notifications" {
 
   name             = "Microsoft Teams"
   destination_type = "microsoft-teams"
-  workspace_id     = module.projects_factory_workspaces.id
+  workspace_id     = tfe_workspace.projects_factory.id
   enabled          = true
   triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
   url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
