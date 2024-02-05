@@ -301,7 +301,7 @@ locals {
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
           }
-          tag_names = ["managed_by_terraform"]
+          tag_names        = ["managed_by_terraform"]
           trigger_patterns = ["*.tf"]
           vcs_repo = {
             identifier     = "${local.git_organization_name}/TerraformCloud-ProjectOnboarding"
