@@ -1,17 +1,16 @@
 # The following code block is used to create GitHub repository resources.
 
-module "projects_factory_repository" {
-  source = "./modules/github_repository"
+resource "github_repository" "projects_factory" {
 
   name                   = "TerraformCloud-ProjectOnboarding"
   description            = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
   visibility             = "public"
   delete_branch_on_merge = true
   auto_init              = true
-  security_and_analysis = {
-    # advanced_security = {
-    #   status = try(each.value.github_repository.security_and_analysis.advanced_security.status, null)
-    # }
+  vulnerability_alerts   = true
+  allow_update_branch    = false
+
+  security_and_analysis {
     secret_scanning = {
       status = "enabled"
     }
@@ -19,34 +18,19 @@ module "projects_factory_repository" {
       status = "enabled"
     }
   }
-  vulnerability_alerts = true
-  allow_update_branch  = false
+}
 
-  branch_protections = [
-    {
-      pattern                         = "main"
-      enforce_admins                  = true
-      require_signed_commits          = false
-      required_linear_history         = false
-      require_conversation_resolution = true
-      required_status_checks          = null
-      required_pull_request_reviews = {
-        dismiss_stale_reviews           = true
-        restrict_dismissals             = null
-        dismissal_restrictions          = null
-        pull_request_bypassers          = null
-        require_code_owner_reviews      = true
-        required_approving_review_count = "0"
-        require_last_push_approval      = false
-      }
-      push_restrictions    = null
-      force_push_bypassers = null
-      allows_deletions     = false
-      allows_force_pushes  = false
-      blocks_creations     = false
-      lock_branch          = false
-    }
-  ]
+resource "github_branch_protection" "projects_factory" {
+  repository_id                   = github_repository.projects_factory.name
+  pattern                         = "main"
+  enforce_admins                  = true
+  require_conversation_resolution = true
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = "0"
+  }
 }
 
 # The following code block is used to create workspace resources in project.
