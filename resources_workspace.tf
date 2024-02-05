@@ -31,5 +31,5 @@ module "workspaces" {
   vcs_repo                      = try(each.value.vcs_repo, null)
   working_directory             = try(each.value.working_directory, null)
 
-  depends_on = [ module.repository ]
+  # depends_on = [ module.repository ]
 }
