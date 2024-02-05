@@ -141,6 +141,24 @@ Source: ./modules/tfe_notification
 
 Version:
 
+### <a name="module_projects_factory_notifications"></a> [projects\_factory\_notifications](#module\_projects\_factory\_notifications)
+
+Source: ./modules/tfe_notification
+
+Version:
+
+### <a name="module_projects_factory_repository"></a> [projects\_factory\_repository](#module\_projects\_factory\_repository)
+
+Source: ./modules/github_repository
+
+Version:
+
+### <a name="module_projects_factory_workspaces"></a> [projects\_factory\_workspaces](#module\_projects\_factory\_workspaces)
+
+Source: ./modules/tfe_workspace
+
+Version:
+
 ### <a name="module_repository"></a> [repository](#module\_repository)
 
 Source: ./modules/github_repository
