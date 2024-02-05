@@ -1,7 +1,7 @@
 # The following code block is used to create GitHub repository resources.
 
 resource "github_repository" "projects_factory" {
-  source      = "./modules/git_repository"
+  source      = "./modules/github_repository"
   name        = "TerraformCloud-ProjectsFactory"
   description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
   topics      = ["terraform-workspace", "terraform", "terraform-managed", "foundation", "factory"]

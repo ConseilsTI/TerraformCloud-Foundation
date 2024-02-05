@@ -38,7 +38,7 @@ locals {
         project = directory_key }
       ) if try(workspace.git_repository, null) != null
     ])
-    if try(project.workspaces, null) != null
+    if try(directory.workspaces, null) != null
   ])
 }
 
