@@ -13,10 +13,10 @@ module "projects_factory_repository" {
     #   status = try(each.value.github_repository.security_and_analysis.advanced_security.status, null)
     # }
     secret_scanning = {
-      status = try(each.value.github_repository.security_and_analysis.secret_scanning.status, "enabled")
+      status = "enabled"
     }
     secret_scanning_push_protection = {
-      status = try(each.value.github_repository.security_and_analysis.secret_scanning_push_protection.status, "enabled")
+      status = "enabled"
     }
   }
   vulnerability_alerts = true
