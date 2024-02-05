@@ -323,34 +323,7 @@ variable "branch_protections" {
     blocks_creations     = optional(bool, false)
     lock_branch          = optional(bool, false)
   }))
-  default = [
-    {
-      pattern                         = "main"
-      enforce_admins                  = true
-      require_signed_commits          = optional(bool, false)
-      required_linear_history         = optional(bool, false)
-      require_conversation_resolution = optional(bool, false)
-      required_status_checks = optional(object({
-        strict   = optional(bool, false)
-        contexts = optional(list(string), [])
-      }), null)
-      required_pull_request_reviews = optional(object({
-        dismiss_stale_reviews           = optional(bool, false)
-        restrict_dismissals             = optional(bool, false)
-        dismissal_restrictions          = optional(list(string), [])
-        pull_request_bypassers          = optional(list(string), [])
-        require_code_owner_reviews      = optional(bool, false)
-        required_approving_review_count = optional(string, null)
-        require_last_push_approval      = optional(bool, false)
-      }), null)
-      push_restrictions    = optional(list(string), [])
-      force_push_bypassers = optional(list(string), [])
-      allows_deletions     = optional(bool, false)
-      allows_force_pushes  = optional(bool, false)
-      blocks_creations     = optional(bool, false)
-      lock_branch          = optional(bool, false)
-    }
-  ]
+  default = []
 }
 
 # The following variables are used to create actions secret resources (github_actions_secret).
