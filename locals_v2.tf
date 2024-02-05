@@ -9,7 +9,7 @@ locals {
           }
           tfc_teams = {
             "contributor" = {
-              token       = true
+              token = true
               organization_access = {
                 manage_modules = true
               }
@@ -28,13 +28,13 @@ locals {
 }
 
 locals {
-  
+
   repositories = flatten([for directory_key, directory in local.directories :
     flatten([for workspace_key, workspace in directory.workspaces :
       merge(
         workspace.git_repository,
-        { name = workspace_key
-        description = workspace.description
+        { name        = workspace_key
+          description = workspace.description
         project = directory_key }
       ) if try(workspace.git_repository, null) != null
     ])
