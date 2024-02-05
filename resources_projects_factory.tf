@@ -1,31 +1,10 @@
 # The following code block is used to create GitHub repository resources.
 
 resource "github_repository" "projects_factory" {
-
-  name                   = "TerraformCloud-ProjectsFactory"
-  description            = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
-  visibility             = "public"
-  has_issues             = true
-  has_projects           = true
-  has_wiki               = true
-  delete_branch_on_merge = true
-  auto_init              = true
-
-  security_and_analysis {
-    # advanced_security {
-    #   status = "enabled"
-    # }
-    secret_scanning {
-      status = "enabled"
-    }
-    secret_scanning_push_protection {
-      status = "enabled"
-    }
-  }
-
-  topics               = ["terraform-workspace", "terraform", "terraform-managed", "foundation", "factory"]
-  vulnerability_alerts = true
-  allow_update_branch  = false
+  source      = "./modules/git_repository"
+  name        = "TerraformCloud-ProjectsFactory"
+  description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
+  topics      = ["terraform-workspace", "terraform", "terraform-managed", "foundation", "factory"]
 }
 
 resource "github_branch_protection" "projects_factory" {

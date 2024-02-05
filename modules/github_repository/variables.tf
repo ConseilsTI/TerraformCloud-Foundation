@@ -129,13 +129,13 @@ variable "merge_commit_message" {
 variable "delete_branch_on_merge" {
   description = "(Optional) Automatically delete head branch after a pull request is merged."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "auto_init" {
   description = "(Optional) Set to true to produce an initial commit in the repository."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "gitignore_template" {
@@ -208,7 +208,14 @@ variable "security_and_analysis" {
       status = string
     }), null)
   })
-  default = null
+  default = {
+    secret_scanning = {
+      status = enabled
+    }
+    secret_scanning_push_protection = {
+      status = enabled
+    }
+  }
 
   validation {
     condition     = var.security_and_analysis != null ? var.security_and_analysis.advanced_security != null ? var.security_and_analysis.advanced_security.status != null ? contains(["enabled", "disabled"], var.security_and_analysis.advanced_security.status) ? true : false : false : true : true
@@ -248,7 +255,7 @@ variable "template" {
 variable "vulnerability_alerts" {
   description = "(Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. (Note for importing: GitHub enables the alerts on public repos but disables them on private repos by default.) See GitHub Documentation for details. Note that vulnerability alerts have not been successfully tested on any GitHub Enterprise instance and may be unavailable in those settings."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "ignore_vulnerability_alerts_during_read" {
@@ -260,7 +267,7 @@ variable "ignore_vulnerability_alerts_during_read" {
 variable "allow_update_branch" {
   description = "(Optional) Set to true to always suggest updating pull request branches."
   type        = bool
-  default     = true
+  default     = false
 }
 
 # The following variable is used to configure branch protection for repository. (github_branch_protection).
@@ -316,7 +323,34 @@ variable "branch_protections" {
     blocks_creations     = optional(bool, false)
     lock_branch          = optional(bool, false)
   }))
-  default = []
+  default = [
+    {
+      pattern                         = "main"
+      enforce_admins                  = true
+      require_signed_commits          = optional(bool, false)
+      required_linear_history         = optional(bool, false)
+      require_conversation_resolution = optional(bool, false)
+      required_status_checks = optional(object({
+        strict   = optional(bool, false)
+        contexts = optional(list(string), [])
+      }), null)
+      required_pull_request_reviews = optional(object({
+        dismiss_stale_reviews           = optional(bool, false)
+        restrict_dismissals             = optional(bool, false)
+        dismissal_restrictions          = optional(list(string), [])
+        pull_request_bypassers          = optional(list(string), [])
+        require_code_owner_reviews      = optional(bool, false)
+        required_approving_review_count = optional(string, null)
+        require_last_push_approval      = optional(bool, false)
+      }), null)
+      push_restrictions    = optional(list(string), [])
+      force_push_bypassers = optional(list(string), [])
+      allows_deletions     = optional(bool, false)
+      allows_force_pushes  = optional(bool, false)
+      blocks_creations     = optional(bool, false)
+      lock_branch          = optional(bool, false)
+    }
+  ]
 }
 
 # The following variables are used to create actions secret resources (github_actions_secret).
