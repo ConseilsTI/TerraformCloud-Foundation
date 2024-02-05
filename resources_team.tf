@@ -40,5 +40,4 @@ module "github_teams" {
   create_default_maintainer = try(each.value.create_default_maintainer, false)
   repository                = try(each.value.repository, null)
   permission                = try(each.value.permission, null)
-  depends_on                = [module.module.repository]
 }
