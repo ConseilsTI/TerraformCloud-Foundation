@@ -101,30 +101,10 @@ module "repository" {
     }
   ]
 
-  allowed_actions = try(each.value.github_repository.allowed_actions, "selected")
-  enabled         = try(each.value.github_repository.enabled, true)
-  allowed_actions_config = {
-    github_owned_allowed = try(each.value.github_repository.allowed_actions_config.github_owned_allowed, true)
-    patterns_allowed     = try(each.value.github_repository.allowed_actions_config.patterns_allowed, ["terraform-docs/gh-actions@*", "super-linter/super-linter@*", "rymndhng/release-on-push-action@*", "hashicorp/*"])
-    verified_allowed     = try(each.value.github_repository.allowed_actions_config.verified_allowed, false)
-  }
-
   branches = [for branch in try(each.value.github_repository.branches, []) :
     {
       branch        = branch.branch
       source_branch = try(branch.source_branch, "main")
-    }
-  ]
-
-  files = [for file in try(each.value.github_repository.files, []) :
-    {
-      file                = file.file
-      content             = file.content
-      branch              = try(file.branch, null)
-      commit_author       = try(file.commit_author, null)
-      commit_email        = try(file.commit_email, null)
-      commit_message      = try(file.commit_message, null)
-      overwrite_on_create = try(file.overwrite_on_create, false)
     }
   ]
 

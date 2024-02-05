@@ -334,40 +334,6 @@ variable "actions_secrets" {
   default = []
 }
 
-# The following variables are used to create actions repository permissions resources (`github_actions_repository_permissions`).
-
-variable "allowed_actions" {
-  description = "(Optional) The permissions policy that controls the actions that are allowed to run. Can be one of: all, local_only, or selected."
-  type        = string
-  default     = "all"
-
-  validation {
-    condition     = var.allowed_actions != null ? contains(["all", "local_only", "selected"], var.allowed_actions) ? true : false : true
-    error_message = "Valid values are `all`, `local_only` or `selected`."
-  }
-}
-
-variable "enabled" {
-  description = "(Optional) Should GitHub actions be enabled on this repository?"
-  type        = bool
-  default     = true
-}
-
-variable "allowed_actions_config" {
-  description = <<EOT
-  (Optional) The allowed_actions_config block supports the following:
-    github_owned_allowed : (Required) Whether GitHub-owned actions are allowed in the repository.
-    patterns_allowed     : (Optional) Specifies a list of string-matching patterns to allow specific action(s). Wildcards, tags, and SHAs are allowed. For example, monalisa/octocat@, monalisa/octocat@v2, monalisa/."
-    verified_allowed     : (Optional) Whether actions in GitHub Marketplace from verified creators are allowed. Set to `true` to allow all GitHub Marketplace actions by verified creators.
-  EOT
-  type = object({
-    github_owned_allowed = bool
-    patterns_allowed     = optional(list(string), null)
-    verified_allowed     = optional(bool, false)
-  })
-  default = null
-}
-
 # The following variables are used to create and manage branches within your repository (`github_branch`).
 
 variable "branches" {
@@ -379,31 +345,6 @@ variable "branches" {
   type = list(object({
     branch        = string
     source_branch = optional(string, "main")
-  }))
-  default = []
-}
-
-# The following variables are used to create and manage files within a GitHub repository (`github_repository_file`).
-
-variable "files" {
-  description = <<EOT
-  (Optional) The files block supports the following:
-    file                : (Required) The path of the file to manage.
-    content             : (Required) The file content.
-    branch              : (Optional) Git branch (defaults to the repository's default branch). The branch must already exist, it will not be created if it does not already exist.
-    commit_author       : (Optional) Committer author name to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This maybe useful when a branch protection rule requires signed commits.
-    commit_email        : (Optional) Committer email address to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This may be useful when a branch protection rule requires signed commits.
-    commit_message      : (Optional) Commit message when adding or updating the managed file.
-    overwrite_on_create : (Optional) Enable overwriting existing files
-  EOT
-  type = list(object({
-    file                = string
-    content             = string
-    branch              = optional(string, null)
-    commit_author       = optional(string, null)
-    commit_email        = optional(string, null)
-    commit_message      = optional(string, null)
-    overwrite_on_create = optional(bool, false)
   }))
   default = []
 }
