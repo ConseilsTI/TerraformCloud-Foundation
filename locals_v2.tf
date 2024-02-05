@@ -22,6 +22,23 @@ locals {
             topics = ["factory"]
           }
         }
+        "test2" = {
+          description = "this is a test."
+          tfc_workspace = {
+            vcs_repo = true
+          }
+          tfc_teams = {
+            "contributor" = {
+              token = true
+              organization_access = {
+                manage_modules = true
+              }
+              workspace_permission = {
+                runs = "apply"
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -35,7 +52,7 @@ locals {
         workspace.git_repository,
         { name        = workspace_key
           description = workspace.description
-        project = directory_key }
+        }
       ) if try(workspace.git_repository, null) != null
     ])
     if try(directory.workspaces, null) != null
