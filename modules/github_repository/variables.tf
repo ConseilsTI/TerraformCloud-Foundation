@@ -129,13 +129,13 @@ variable "merge_commit_message" {
 variable "delete_branch_on_merge" {
   description = "(Optional) Automatically delete head branch after a pull request is merged."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "auto_init" {
   description = "(Optional) Set to true to produce an initial commit in the repository."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "gitignore_template" {
@@ -248,7 +248,7 @@ variable "template" {
 variable "vulnerability_alerts" {
   description = "(Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. (Note for importing: GitHub enables the alerts on public repos but disables them on private repos by default.) See GitHub Documentation for details. Note that vulnerability alerts have not been successfully tested on any GitHub Enterprise instance and may be unavailable in those settings."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "ignore_vulnerability_alerts_during_read" {
@@ -260,7 +260,7 @@ variable "ignore_vulnerability_alerts_during_read" {
 variable "allow_update_branch" {
   description = "(Optional) Set to true to always suggest updating pull request branches."
   type        = bool
-  default     = false
+  default     = true
 }
 
 # The following variable is used to configure branch protection for repository. (github_branch_protection).

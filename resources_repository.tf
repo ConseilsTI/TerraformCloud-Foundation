@@ -1,50 +1,50 @@
 module "repository" {
   source = "./modules/github_repository"
 
-  for_each = nonsensitive({ for workspace in local.workspaces : workspace.name => workspace })
+  for_each = nonsensitive({ for repository in local.repositories : repository.name => repository })
 
   name                        = each.value.name
   description                 = try(each.value.description, null)
-  homepage_url                = try(each.value.github_repository.homepage_url, null)
-  visibility                  = try(each.value.github_repository.visibility, "public")
-  has_issues                  = try(each.value.github_repository.has_issues, true)
-  has_discussions             = try(each.value.github_repository.has_discussions, false)
-  has_projects                = try(each.value.github_repository.has_projects, true)
-  has_wiki                    = try(each.value.github_repository.has_wiki, true)
-  is_template                 = try(each.value.github_repository.is_template, false)
-  allow_merge_commit          = try(each.value.github_repository.allow_merge_commit, true)
-  allow_squash_merge          = try(each.value.github_repository.allow_squash_merge, true)
-  allow_rebase_merge          = try(each.value.github_repository.allow_rebase_merge, true)
-  allow_auto_merge            = try(each.value.github_repository.allow_auto_merge, false)
-  squash_merge_commit_title   = try(each.value.github_repository.squash_merge_commit_title, "COMMIT_OR_PR_TITLE")
-  squash_merge_commit_message = try(each.value.github_repository.squash_merge_commit_message, "COMMIT_MESSAGES")
-  merge_commit_title          = try(each.value.github_repository.merge_commit_title, "MERGE_MESSAGE")
-  merge_commit_message        = try(each.value.github_repository.merge_commit_message, "PR_TITLE")
-  delete_branch_on_merge      = try(each.value.github_repository.delete_branch_on_merge, true)
-  auto_init                   = try(each.value.github_repository.auto_init, true)
-  gitignore_template          = try(each.value.github_repository.gitignore_template, null)
-  license_template            = try(each.value.github_repository.license_template, null)
-  archived                    = try(each.value.github_repository.archived, false)
-  archive_on_destroy          = try(each.value.github_repository.archive_on_destroy, false)
-  pages                       = try(each.value.github_repository.pages, null)
+  homepage_url                = try(each.value.homepage_url, null)
+  visibility                  = try(each.value.visibility, "public")
+  has_issues                  = try(each.value.has_issues, true)
+  has_discussions             = try(each.value.has_discussions, false)
+  has_projects                = try(each.value.has_projects, true)
+  has_wiki                    = try(each.value.has_wiki, true)
+  is_template                 = try(each.value.is_template, false)
+  allow_merge_commit          = try(each.value.allow_merge_commit, true)
+  allow_squash_merge          = try(each.value.allow_squash_merge, true)
+  allow_rebase_merge          = try(each.value.allow_rebase_merge, true)
+  allow_auto_merge            = try(each.value.allow_auto_merge, false)
+  squash_merge_commit_title   = try(each.value.squash_merge_commit_title, "COMMIT_OR_PR_TITLE")
+  squash_merge_commit_message = try(each.value.squash_merge_commit_message, "COMMIT_MESSAGES")
+  merge_commit_title          = try(each.value.merge_commit_title, "MERGE_MESSAGE")
+  merge_commit_message        = try(each.value.merge_commit_message, "PR_TITLE")
+  delete_branch_on_merge      = try(each.value.delete_branch_on_merge, true)
+  auto_init                   = try(each.value.auto_init, true)
+  gitignore_template          = try(each.value.gitignore_template, null)
+  license_template            = try(each.value.license_template, null)
+  archived                    = try(each.value.archived, false)
+  archive_on_destroy          = try(each.value.archive_on_destroy, false)
+  pages                       = try(each.value.pages, null)
   security_and_analysis = {
     # advanced_security = {
-    #   status = try(each.value.github_repository.security_and_analysis.advanced_security.status, null)
+    #   status = try(each.value.security_and_analysis.advanced_security.status, null)
     # }
     secret_scanning = {
-      status = try(each.value.github_repository.security_and_analysis.secret_scanning.status, "enabled")
+      status = try(each.value.security_and_analysis.secret_scanning.status, "enabled")
     }
     secret_scanning_push_protection = {
-      status = try(each.value.github_repository.security_and_analysis.secret_scanning_push_protection.status, "enabled")
+      status = try(each.value.security_and_analysis.secret_scanning_push_protection.status, "enabled")
     }
   }
-  topics                                  = try(each.value.github_repository.topics, [])
-  template                                = try(each.value.github_repository.template, null)
-  vulnerability_alerts                    = try(each.value.github_repository.vulnerability_alerts, true)
-  ignore_vulnerability_alerts_during_read = try(each.value.github_repository.ignore_vulnerability_alerts_during_read, false)
-  allow_update_branch                     = try(each.value.github_repository.allow_update_branch, false)
+  topics                                  = try(each.value.topics, [])
+  template                                = try(each.value.template, null)
+  vulnerability_alerts                    = try(each.value.vulnerability_alerts, true)
+  ignore_vulnerability_alerts_during_read = try(each.value.ignore_vulnerability_alerts_during_read, false)
+  allow_update_branch                     = try(each.value.allow_update_branch, false)
 
-  branch_protections = [for branch_protection in try(each.value.github_repository.branch_protections, [
+  branch_protections = [for branch_protection in try(each.value.branch_protections, [
     {
       pattern                         = "main"
       enforce_admins                  = true
@@ -94,14 +94,14 @@ module "repository" {
     }
   ]
 
-  actions_secrets = [for secret in try(each.value.github_repository.actions_secrets, []) :
+  actions_secrets = [for secret in try(each.value.actions_secrets, []) :
     {
       secret_name     = secret.secret_name
       plaintext_value = secret.secret_name == "TF_API_TOKEN" ? try(module.teams[secret.plaintext_value].token, null) : secret.plaintext_value
     }
   ]
 
-  branches = [for branch in try(each.value.github_repository.branches, []) :
+  branches = [for branch in try(each.value.branches, []) :
     {
       branch        = branch.branch
       source_branch = try(branch.source_branch, "main")
