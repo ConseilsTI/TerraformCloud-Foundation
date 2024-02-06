@@ -188,25 +188,22 @@ locals {
     #     }
     #   }
     # }
+
     "Terraform Cloud" = {
       workspaces = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
-          github_teams = {
-            "contributor" = {
-              description = "This group grant write access to the ModulesRegistry repository."
-              permission  = "push"
-            }
+          tfc_workspace = {
+            vcs_repo = true
           }
-          notifications = {
+          tfc_notifications = {
             "Microsoft Teams" = {
               destination_type = "microsoft-teams"
               triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
           }
-          tag_names = ["managed_by_terraform"]
-          teams = {
+          tfc_teams = {
             "manage-modules" = {
               sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
               token       = true
@@ -218,82 +215,125 @@ locals {
               }
             }
           }
-          trigger_patterns = ["*.tf"]
-          variables = {
-            "TFE_TOKEN" = {
-              value     = "terraformcloud-modulesregistry-manage-modules"
-              category  = "env"
-              sensitive = true
-            }
-            "GITHUB_APP_ID" = {
-              value     = data.hcp_vault_secrets_secret.this["github_app_id"].secret_value
-              category  = "env"
-              sensitive = true
-            }
-            "GITHUB_APP_INSTALLATION_ID" = {
-              value     = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
-              category  = "env"
-              sensitive = true
-            }
-            "GITHUB_APP_PEM_FILE" = {
-              value     = data.hcp_vault_secrets_secret.this["github_app_pem_file"].secret_value
-              category  = "env"
-              sensitive = true
-            }
-            "GITHUB_OWNER" = {
-              value     = "ConseilsTI"
-              category  = "env"
-              sensitive = true
-            }
+          git_repository = {
+            topics = ["factory"]
           }
-          vcs_repo = {
-            identifier     = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
-            oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-          }
-        }
-        "TerraformCloud-Policies" = {
-          description = "Repository to provision and manage Terraform Cloud policies using Terraform code (IaC)."
-          github_teams = {
+          git_teams = {
             "contributor" = {
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
-          }
-          notifications = {
-            "Microsoft Teams" = {
-              destination_type = "microsoft-teams"
-              triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
-              url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
-            }
-          }
-          tag_names = ["managed_by_terraform"]
-          teams = {
-            "manage-policies" = {
-              sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
-              token       = true
-              organization_access = {
-                manage_policies = true
-              }
-              workspace_permission = {
-                runs = "apply"
-              }
-            }
-          }
-          trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
-          variables = {
-            "TFE_TOKEN" = {
-              value     = "terraformcloud-policies-manage-policies"
-              category  = "env"
-              sensitive = true
-            }
-          }
-          vcs_repo = {
-            identifier     = "${local.git_organization_name}/TerraformCloud-Policies"
-            oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
           }
         }
       }
     }
   }
 
+  #   "Terraform Cloud" = {
+  #     workspaces = {
+  #       "TerraformCloud-ModulesRegistry" = {
+  #         description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
+  #         github_teams = {
+  #           "contributor" = {
+  #             description = "This group grant write access to the ModulesRegistry repository."
+  #             permission  = "push"
+  #           }
+  #         }
+  #         notifications = {
+  #           "Microsoft Teams" = {
+  #             destination_type = "microsoft-teams"
+  #             triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
+  #             url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
+  #           }
+  #         }
+  #         tag_names = ["managed_by_terraform"]
+  #         teams = {
+  #           "manage-modules" = {
+  #             sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
+  #             token       = true
+  #             organization_access = {
+  #               manage_modules = true
+  #             }
+  #             workspace_permission = {
+  #               runs = "apply"
+  #             }
+  #           }
+  #         }
+  #         trigger_patterns = ["*.tf"]
+  #         variables = {
+  #           "TFE_TOKEN" = {
+  #             value     = "terraformcloud-modulesregistry-manage-modules"
+  #             category  = "env"
+  #             sensitive = true
+  #           }
+  #           "GITHUB_APP_ID" = {
+  #             value     = data.hcp_vault_secrets_secret.this["github_app_id"].secret_value
+  #             category  = "env"
+  #             sensitive = true
+  #           }
+  #           "GITHUB_APP_INSTALLATION_ID" = {
+  #             value     = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
+  #             category  = "env"
+  #             sensitive = true
+  #           }
+  #           "GITHUB_APP_PEM_FILE" = {
+  #             value     = data.hcp_vault_secrets_secret.this["github_app_pem_file"].secret_value
+  #             category  = "env"
+  #             sensitive = true
+  #           }
+  #           "GITHUB_OWNER" = {
+  #             value     = "ConseilsTI"
+  #             category  = "env"
+  #             sensitive = true
+  #           }
+  #         }
+  #         vcs_repo = {
+  #           identifier     = "${local.git_organization_name}/TerraformCloud-ModulesRegistry"
+  #           oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  #         }
+  #       }
+  #       "TerraformCloud-Policies" = {
+  #         description = "Repository to provision and manage Terraform Cloud policies using Terraform code (IaC)."
+  #         github_teams = {
+  #           "contributor" = {
+  #             description = "This group grant write access to the ModulesRegistry repository."
+  #             permission  = "push"
+  #           }
+  #         }
+  #         notifications = {
+  #           "Microsoft Teams" = {
+  #             destination_type = "microsoft-teams"
+  #             triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
+  #             url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
+  #           }
+  #         }
+  #         tag_names = ["managed_by_terraform"]
+  #         teams = {
+  #           "manage-policies" = {
+  #             sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
+  #             token       = true
+  #             organization_access = {
+  #               manage_policies = true
+  #             }
+  #             workspace_permission = {
+  #               runs = "apply"
+  #             }
+  #           }
+  #         }
+  #         trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
+  #         variables = {
+  #           "TFE_TOKEN" = {
+  #             value     = "terraformcloud-policies-manage-policies"
+  #             category  = "env"
+  #             sensitive = true
+  #           }
+  #         }
+  #         vcs_repo = {
+  #           identifier     = "${local.git_organization_name}/TerraformCloud-Policies"
+  #           oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  #         }
+  #       }
+  #     }
+  #   }
 }
+
