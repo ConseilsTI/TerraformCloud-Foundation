@@ -123,6 +123,12 @@ The following requirements are needed by this module:
 
 The following Modules are called:
 
+### <a name="module_notifications"></a> [notifications](#module\_notifications)
+
+Source: ./modules/tfe_notification
+
+Version:
+
 ### <a name="module_repository"></a> [repository](#module\_repository)
 
 Source: ./modules/github_repository
