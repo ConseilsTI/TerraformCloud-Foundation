@@ -55,8 +55,6 @@ resource "tfe_workspace_settings" "this" {
   execution_mode = var.execution_mode
 
   lifecycle {
-    ignore_changes = [source_url]
-
     precondition {
       condition     = var.agent_pool_id != null ? var.execution_mode == "agent" : true
       error_message = "`agent_pool_id` requires `execution_mode` to be set to `agent`."
