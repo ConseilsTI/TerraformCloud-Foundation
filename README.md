@@ -156,6 +156,10 @@ The following resources are used by this module:
 
 The following outputs are exported:
 
+### <a name="output_notifications"></a> [notifications](#output\_notifications)
+
+Description: n/a
+
 ### <a name="output_repositories"></a> [repositories](#output\_repositories)
 
 Description: n/a
