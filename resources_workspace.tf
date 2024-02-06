@@ -9,14 +9,14 @@ module "workspaces" {
   organization = data.tfe_organization.this.name
   project_id   = tfe_project.project[each.value.project].id
 
-  description                   = try(each.value.description, null)
-  agent_pool_id                 = try(each.value.agent_pool_id, null)
-  allow_destroy_plan            = try(each.value.allow_destroy_plan, null)
-  auto_apply                    = try(each.value.auto_apply, null)
-  execution_mode                = try(each.value.execution_mode, null)
-  assessments_enabled           = try(each.value.assessments_enabled, null)
-  file_triggers_enabled         = try(each.value.file_triggers_enabled, null)
-  global_remote_state           = try(each.value.global_remote_state, null)
+  description           = try(each.value.description, null)
+  agent_pool_id         = try(each.value.agent_pool_id, null)
+  allow_destroy_plan    = try(each.value.allow_destroy_plan, null)
+  auto_apply            = try(each.value.auto_apply, null)
+  execution_mode        = try(each.value.execution_mode, null)
+  assessments_enabled   = try(each.value.assessments_enabled, null)
+  file_triggers_enabled = try(each.value.file_triggers_enabled, null)
+  global_remote_state   = try(each.value.global_remote_state, null)
   #remote_state_consumer_ids     = try([for value in each.value.remote_state_consumer_ids : data.tfe_workspace.this[value].id], null)
   queue_all_runs                = try(each.value.queue_all_runs, null)
   source_name                   = try(each.value.source_name, null)
@@ -28,9 +28,9 @@ module "workspaces" {
   terraform_version             = try(each.value.terraform_version, "latest")
   trigger_prefixes              = try(each.value.trigger_prefixes, null)
   trigger_patterns              = try(each.value.trigger_patterns, null)
-  vcs_repo                      = each.value.vcs_repo ? {
+  vcs_repo = each.value.vcs_repo ? {
     identifier     = module.repository[each.value.name].full_name
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   } : null
-  working_directory             = try(each.value.working_directory, null)
+  working_directory = try(each.value.working_directory, null)
 }
