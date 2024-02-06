@@ -38,7 +38,7 @@ module "repository" {
       status = try(each.value.security_and_analysis.secret_scanning_push_protection.status, "enabled")
     }
   }
-  topics                                  = try(each.value.topics, [])
+  topics                                  = concat(["terraform-workspace", "terraform", "terraform-managed"],each.value.topics)
   template                                = try(each.value.template, null)
   vulnerability_alerts                    = try(each.value.vulnerability_alerts, true)
   ignore_vulnerability_alerts_during_read = try(each.value.ignore_vulnerability_alerts_during_read, false)

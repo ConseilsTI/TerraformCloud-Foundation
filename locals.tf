@@ -194,8 +194,9 @@ locals {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
           tfc_workspace = {
-            tag_names = ["foundation", "factory"]
-            vcs_repo  = true
+            tag_names        = ["foundation", "factory"]
+            trigger_patterns = ["*.tf"]
+            vcs_repo         = true
           }
           tfc_notifications = {
             "Microsoft Teams" = {
@@ -217,7 +218,7 @@ locals {
             }
           }
           git_repository = {
-            topics = ["factory"]
+            topics = ["foundation", "factory"]
           }
           git_teams = {
             "contributor" = {
