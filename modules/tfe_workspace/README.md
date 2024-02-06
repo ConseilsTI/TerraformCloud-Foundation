@@ -51,13 +51,13 @@ module "workspace" {
 
 The following requirements are needed by this module:
 
-- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (0.48.0)
+- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (~>0.51)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (0.48.0)
+- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (~>0.51)
 
 ## Modules
 
@@ -67,7 +67,8 @@ No modules.
 
 The following resources are used by this module:
 
-- [tfe_workspace.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/workspace) (resource)
+- [tfe_workspace.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) (resource)
+- [tfe_workspace_settings.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_settings) (resource)
 
 ## Required Inputs
 
@@ -81,7 +82,7 @@ Type: `string`
 
 ### <a name="input_organization"></a> [organization](#input\_organization)
 
-Description: (Required) Name of the organization.
+Description: (Optional) Name of the organization.
 
 Type: `string`
 
@@ -91,7 +92,7 @@ The following input variables are optional (have default values):
 
 ### <a name="input_agent_pool_id"></a> [agent\_pool\_id](#input\_agent\_pool\_id)
 
-Description: (Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value or if `operations` is provided.
+Description: (Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value.
 
 Type: `string`
 
@@ -121,6 +122,14 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_auto_apply_run_trigger"></a> [auto\_apply\_run\_trigger](#input\_auto\_apply\_run\_trigger)
+
+Description: (Optional) Whether to automatically apply changes for runs that were created by run triggers from another workspace.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_description"></a> [description](#input\_description)
 
 Description: (Optional) A description for the workspace.
@@ -131,11 +140,11 @@ Default: `null`
 
 ### <a name="input_execution_mode"></a> [execution\_mode](#input\_execution\_mode)
 
-Description: (Optional) Which execution mode to use. Using Terraform Cloud, valid values are `remote`, `local` or `agent`. When set to `local`, the workspace will be used for state storage only.
+Description: (Optional) Which execution mode to use. Using Terraform Cloud, valid values are `remote`, `local` or `agent`. When set to `local`, the workspace will be used for state storage only. Important: If you omit this attribute, the resource configures the workspace to use your organization's default execution mode (which in turn defaults to `remote`), removing any explicit value that might have previously been set for the workspace.
 
 Type: `string`
 
-Default: `"remote"`
+Default: `null`
 
 ### <a name="input_file_triggers_enabled"></a> [file\_triggers\_enabled](#input\_file\_triggers\_enabled)
 
@@ -227,7 +236,7 @@ Default: `[]`
 
 ### <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version)
 
-Description: (Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like ~> `1.0.0`); if you specify a constraint, the workspace will always use the newest release that meets that constraint.
+Description: (Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like `~> 1.0.0`); if you specify a constraint, the workspace will always use the newest release that meets that constraint.
 
 Type: `string`
 
