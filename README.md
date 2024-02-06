@@ -121,7 +121,13 @@ The following requirements are needed by this module:
 
 ## Modules
 
-No modules.
+The following Modules are called:
+
+### <a name="module_repository"></a> [repository](#module\_repository)
+
+Source: ./modules/github_repository
+
+Version:
 
 ## Required Inputs
 
