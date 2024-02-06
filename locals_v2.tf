@@ -64,14 +64,14 @@ locals {
     flatten([for workspace_key, workspace in directory.workspaces :
       merge(
         workspace.tfc_workspace,
-        { name = workspace_key
-        description = workspace.description
-        project = directory_key }
+        { name        = workspace_key
+          description = workspace.description
+        project = directory }
       ) if try(workspace.tfc_workspace, null) != null
     ])
     if try(directory.workspaces, null) != null
   ])
-  
+
 }
 
 output "repositories" {
