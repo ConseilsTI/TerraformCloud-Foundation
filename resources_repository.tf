@@ -94,6 +94,7 @@ module "repository" {
     }
   ]
 
+  # TO BE VALIDATED IF REQUIRED
   actions_secrets = [for secret in try(each.value.actions_secrets, []) :
     {
       secret_name     = secret.secret_name
@@ -102,6 +103,7 @@ module "repository" {
     }
   ]
 
+  # TO BE VALIDATED IF REQUIRED
   branches = [for branch in try(each.value.branches, []) :
     {
       branch        = branch.branch
