@@ -66,7 +66,7 @@ locals {
         workspace.tfc_workspace,
         { name        = workspace_key
           description = workspace.description
-        project = directory }
+        project = directory_key }
       ) if try(workspace.tfc_workspace, null) != null
     ])
     if try(directory.workspaces, null) != null
