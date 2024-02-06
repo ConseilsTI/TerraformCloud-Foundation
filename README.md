@@ -154,6 +154,10 @@ The following outputs are exported:
 
 Description: n/a
 
+### <a name="output_workspaces"></a> [workspaces](#output\_workspaces)
+
+Description: n/a
+
 <!-- markdownlint-enable -->
 
 <!-- END_TF_DOCS -->
