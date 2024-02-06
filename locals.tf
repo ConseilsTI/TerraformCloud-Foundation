@@ -227,36 +227,35 @@ locals {
             }
           }
         }
-      }
-
-      "TerraformCloud-Projects" = {
-        description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
-        tfc_workspace = {
-          tag_names        = ["foundation", "factory"]
-          trigger_patterns = ["*.tf"]
-          vcs_repo         = true
-        }
-        tfc_notifications = {
-          "Microsoft Teams" = {
-            destination_type = "microsoft-teams"
-            triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
-            url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
+        "TerraformCloud-Projects" = {
+          description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
+          tfc_workspace = {
+            tag_names        = ["foundation", "factory"]
+            trigger_patterns = ["*.tf"]
+            vcs_repo         = true
           }
-        }
-        tfc_teams = {
-          "contributor" = {
-            workspace_permission = {
-              runs = "apply"
+          tfc_notifications = {
+            "Microsoft Teams" = {
+              destination_type = "microsoft-teams"
+              triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
+              url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
           }
-        }
-        git_repository = {
-          topics = ["foundation", "factory"]
-        }
-        git_teams = {
-          "contributor" = {
-            description = "This group grant write access to the ModulesRegistry repository."
-            permission  = "push"
+          tfc_teams = {
+            "contributor" = {
+              workspace_permission = {
+                runs = "apply"
+              }
+            }
+          }
+          git_repository = {
+            topics = ["foundation", "factory"]
+          }
+          git_teams = {
+            "contributor" = {
+              description = "This group grant write access to the ModulesRegistry repository."
+              permission  = "push"
+            }
           }
         }
       }
