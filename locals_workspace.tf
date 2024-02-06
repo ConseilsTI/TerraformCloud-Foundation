@@ -1,5 +1,4 @@
 locals {
-
   # The following locals use logic to determine the project associate with each workspace.
   workspaces = flatten([for project_key, project in local.projects :
     flatten([for workspace_key, workspace in project.workspaces :
@@ -9,10 +8,8 @@ locals {
           description = workspace.description
         project = project_key }
       ) if try(workspace.tfc_workspace, null) != null
-    ])
-    if try(project.workspaces, null) != null
+    ]) if try(project.workspaces, null) != null
   ])
-
   # The following locals use logic to determine the remote_consomer_ids.
   # remote_state_consumer_ids = flatten([for project_key, project in local.projects :
   #   flatten([for workspace_key, workspace in project.workspaces :
@@ -21,7 +18,6 @@ locals {
   #   ])
   #   if try(project.workspaces, null) != null
   # ])
-
 }
 
 output "workspaces" {

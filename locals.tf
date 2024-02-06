@@ -194,6 +194,7 @@ locals {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
           tfc_workspace = {
+            agent_pool       = "foundation"
             tag_names        = ["foundation", "factory"]
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
