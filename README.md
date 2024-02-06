@@ -129,6 +129,12 @@ Source: ./modules/github_repository
 
 Version:
 
+### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
+
+Source: ./modules/tfe_workspace
+
+Version:
+
 ## Required Inputs
 
 No required inputs.
