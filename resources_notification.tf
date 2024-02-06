@@ -1,4 +1,4 @@
-# The following code block is used to create workspace resources in project.
+# The following code block is used to create notification resources in workspace.
 
 module "notifications" {
   source = "./modules/tfe_notification"

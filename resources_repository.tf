@@ -1,3 +1,5 @@
+# The following code block is used to create repository resources in GitHub.
+
 module "repository" {
   source = "./modules/github_repository"
 
