@@ -121,43 +121,7 @@ The following requirements are needed by this module:
 
 ## Modules
 
-The following Modules are called:
-
-### <a name="module_agent"></a> [agent](#module\_agent)
-
-Source: ./modules/tfe_agent
-
-Version:
-
-### <a name="module_github_teams"></a> [github\_teams](#module\_github\_teams)
-
-Source: ./modules/github_team
-
-Version:
-
-### <a name="module_notifications"></a> [notifications](#module\_notifications)
-
-Source: ./modules/tfe_notification
-
-Version:
-
-### <a name="module_repository"></a> [repository](#module\_repository)
-
-Source: ./modules/github_repository
-
-Version:
-
-### <a name="module_teams"></a> [teams](#module\_teams)
-
-Source: ./modules/tfe_team
-
-Version:
-
-### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
-
-Source: ./modules/tfe_workspace
-
-Version:
+No modules.
 
 ## Required Inputs
 
@@ -172,27 +136,15 @@ No optional inputs.
 The following resources are used by this module:
 
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
-- [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) (resource)
-- [tfe_variable.variable_set](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
-- [tfe_variable.variable_set_tfe_token](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
-- [tfe_variable.workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
-- [tfe_variable.workspace_tfe_token](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
-- [tfe_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set) (resource)
-- [tfe_workspace_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set) (resource)
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/vault_secrets_secret) (data source)
 - [tfe_oauth_client.client](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/oauth_client) (data source)
 - [tfe_organization.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/organization) (data source)
-- [tfe_workspace.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/workspace) (data source)
 
 ## Outputs
 
 The following outputs are exported:
 
 ### <a name="output_repositories"></a> [repositories](#output\_repositories)
-
-Description: n/a
-
-### <a name="output_v2_workspaces"></a> [v2\_workspaces](#output\_v2\_workspaces)
 
 Description: n/a
 
