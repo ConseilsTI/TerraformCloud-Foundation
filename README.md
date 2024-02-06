@@ -192,6 +192,10 @@ The following outputs are exported:
 
 Description: n/a
 
+### <a name="output_v2_workspaces"></a> [v2\_workspaces](#output\_v2\_workspaces)
+
+Description: n/a
+
 <!-- markdownlint-enable -->
 
 <!-- END_TF_DOCS -->
