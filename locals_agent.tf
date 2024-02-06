@@ -4,7 +4,7 @@ locals {
   agent_pools = flatten([for project_key, project in local.projects :
     flatten([for workspace_key, workspace in project.workspaces :
       #flatten([for tfc_workspace_key, tfc_workspace in workspace.tfc_workspace :
-        try(workspace.tfc_workspace.agent_pool)
+      try(workspace.tfc_workspace.agent_pool, null)
       #]) if try(workspace.tfc_workspace, null) != null
     ]) if try(project.workspaces, null) != null
   ])
