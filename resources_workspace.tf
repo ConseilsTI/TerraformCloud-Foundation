@@ -24,11 +24,11 @@ module "workspaces" {
   speculative_enabled           = try(each.value.speculative_enabled, null)
   structured_run_output_enabled = try(each.value.structured_run_output_enabled, null)
   ssh_key_id                    = try(each.value.ssh_key_id, null)
-  tag_names                     = concact(["terraform-managed"], each.value.tag_names)
+  tag_names                     = concat(["terraform-managed"], each.value.tag_names)
   terraform_version             = try(each.value.terraform_version, "latest")
   trigger_prefixes              = try(each.value.trigger_prefixes, null)
   trigger_patterns              = try(each.value.trigger_patterns, null)
-  vcs_repo                      = vcs_repo ? {
+  vcs_repo                      = each.value.vcs_repo ? {
     identifier     = module.repository[each.value.name].full_name
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   } : null
