@@ -85,11 +85,11 @@ locals {
     #   }
     #   workspaces  = [""]
     # }
-    "name" = {
+    "global" = {
       description = "test"
       global      = true
       variables = {
-        variable_name = {
+        global_variable_name = {
           value     = "test"
           category  = "env"
           sensitive = false
@@ -209,12 +209,12 @@ locals {
           project_access = "admin"
         }
       }
-      tfc_variable_set = {
+      tfc_variable_sets = {
         "project" = {
           description = "test"
           global      = false
           variables = {
-            variable_name = {
+            project_variable_name = {
               value     = "test"
               category  = "env"
               sensitive = false
@@ -259,11 +259,11 @@ locals {
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
           }
-          variable_set = {
+          tfc_variable_set = {
             "workspace" = {
               description = "test"
               global      = false
-              variables = {
+              workspace_variables = {
                 variable_name = {
                   value     = "test"
                   category  = "env"
