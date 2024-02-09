@@ -28,7 +28,7 @@ module "workspaces" {
   trigger_prefixes              = try(each.value.trigger_prefixes, null)
   trigger_patterns              = try(each.value.trigger_patterns, null)
   vcs_repo = each.value.vcs_repo ? {
-    identifier     = module.repository[each.value.name].full_name
+    identifier     = module.git_repository[each.value.name].full_name
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   } : null
   working_directory = try(each.value.working_directory, null)
