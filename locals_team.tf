@@ -68,11 +68,3 @@ locals {
   )
 
 }
-
-output "tfc_teams" {
-  value = local.tfc_teams
-}
-
-output "git_teams" {
-  value = local.git_teams
-}
