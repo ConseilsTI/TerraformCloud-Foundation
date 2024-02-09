@@ -234,9 +234,10 @@ locals {
             }
           }
           tfc_workspace = {
-            tag_names        = ["foundation", "factory"]
-            trigger_patterns = ["*.tf"]
-            vcs_repo         = true
+            remote_state_consumer_ids = ["azure-tf-enterprise"]
+            tag_names                 = ["foundation", "factory"]
+            trigger_patterns          = ["*.tf"]
+            vcs_repo                  = true
           }
           tfc_variables = {
             "TFE_TOKEN" = {

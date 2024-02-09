@@ -18,3 +18,11 @@ data "hcp_vault_secrets_secret" "this" {
   app_name    = each.value.project
   secret_name = each.key
 }
+
+# The following blick is used to get information about workspace
+data "tfe_workspace" "this" {
+  for_each = nonsensitive(toset(local.tfc_remote_state_consumer_ids))
+
+  name         = each.key
+  organization = data.tfe_organization.this.name
+}
