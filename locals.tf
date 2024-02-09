@@ -1,15 +1,18 @@
 locals {
-  # This local is used to define the organization name.
+  # This local is used to define the Terraform Cloud organization name.
   tfc_organization_name = "ConseilsTI"
 
-  # This local is used to define Oauth_client name.
+  # This local is used to define Terraform Cloud OAuth client name.
   tfc_oauth_client_name = "GitHub.com (ConseilsTI)"
 
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
   hcp_vault_secrets = [
-    # `hcp_vault_secrets` is a list of object the following attributes:
-    #   app_name = The name of the application.
-    #   secret   = The name of the secret.
+    # `hcp_vault_secrets` is a list of object.
+    #  Here is an example of an object:
+    #  {
+    #    app_name = ""
+    #    secret   = ""
+    #  }
     {
       app_name = "GitHub"
       secret   = "GITHUB_APP_ID"
@@ -30,11 +33,12 @@ locals {
 
   # This local is used to define teams at the organization level.
   tfc_organization_teams = [
-    # `tfc_organization_teams` is a map of object where the key is the name of the team.
+    # `tfc_organization_teams` is a list of object.
     # Each object must contain an `organization_access` argument with the team's organization access.
-    # Refer to "./modules/team/README.md" for more details on the permissions type.
+    # Refer to "./modules/tfe_team/README.md" for more details on the permissions type.
     # Here is an example of an object:
-    # "team_name" = {
+    # {
+    #   name    = ""
     #   members = []
     #   organization_access = {
     #     read_projects           = true or false
@@ -57,8 +61,6 @@ locals {
     # }
     {
       name        = "admins"
-      sso_team_id = "a2f4919a-4c3c-436a-a010-fde47b98d0fd"
-      token       = true
       organization_access = {
         manage_projects         = true
         manage_workspaces       = true
@@ -70,6 +72,8 @@ locals {
         manage_modules          = true
         manage_providers        = true
       }
+      sso_team_id = "a2f4919a-4c3c-436a-a010-fde47b98d0fd"
+      token       = true
     },
   ]
 
