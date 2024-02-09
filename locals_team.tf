@@ -29,7 +29,7 @@ locals {
         merge(
           team,
           {
-            name      = lower("${workspace_key} - ${team_key}")
+            name      = lower("${workspace_key}-${team_key}")
             workspace = workspace_key
           }
         )
