@@ -9,7 +9,7 @@ locals {
         {
           name        = component_key
           description = component.description
-          project = project_key
+          project     = project_key
         }
       ) if try(component.tfc_workspace, null) != null
     ]) if try(project.components, null) != null
