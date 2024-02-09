@@ -3,7 +3,7 @@
 module "notifications" {
   source = "./modules/tfe_notification"
 
-  for_each = { for notification in local.notifications : "${notification.workspace} ${notification.name}" => notification }
+  for_each = { for notification in local.tfc_notifications : "${notification.workspace} ${notification.name}" => notification }
 
   name             = each.value.name
   destination_type = each.value.destination_type

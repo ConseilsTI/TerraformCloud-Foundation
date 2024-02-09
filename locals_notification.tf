@@ -1,6 +1,6 @@
 locals {
   # The following locals use logic to determine the workspace associate with each notification configuration.
-  notifications = flatten([for project_key, project in local.projects :
+  tfc_notifications = flatten([for project_key, project in local.projects :
     flatten([for workspace_key, workspace in project.workspaces :
       flatten([for notification_key, notification in workspace.tfc_notifications :
         merge(

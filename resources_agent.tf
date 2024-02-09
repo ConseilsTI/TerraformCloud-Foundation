@@ -2,7 +2,7 @@
 
 module "agent" {
   source            = "./modules/tfe_agent"
-  for_each          = toset(local.agent_pools)
+  for_each          = toset(local.tfc_agent_pools)
   name              = each.key
   organization      = data.tfe_organization.this.name
   token_description = ["Token"]
