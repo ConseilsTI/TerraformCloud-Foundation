@@ -168,18 +168,6 @@ The following resources are used by this module:
 
 The following outputs are exported:
 
-### <a name="output_agent_pools"></a> [agent\_pools](#output\_agent\_pools)
-
-Description: n/a
-
-### <a name="output_notifications"></a> [notifications](#output\_notifications)
-
-Description: n/a
-
-### <a name="output_repositories"></a> [repositories](#output\_repositories)
-
-Description: n/a
-
 ### <a name="output_tfc_teams"></a> [tfc\_teams](#output\_tfc\_teams)
 
 Description: n/a
