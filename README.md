@@ -172,11 +172,7 @@ The following resources are used by this module:
 
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_workspaces"></a> [workspaces](#output\_workspaces)
-
-Description: n/a
+No outputs.
 
 <!-- markdownlint-enable -->
 
