@@ -129,6 +129,12 @@ Source: ./modules/tfe_agent
 
 Version:
 
+### <a name="module_github_teams"></a> [github\_teams](#module\_github\_teams)
+
+Source: ./modules/github_team
+
+Version:
+
 ### <a name="module_notifications"></a> [notifications](#module\_notifications)
 
 Source: ./modules/tfe_notification
