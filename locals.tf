@@ -265,11 +265,14 @@ locals {
         }
         "TerraformCloud-Policies" = {
           description = "Repository to provision and manage Terraform Cloud policies using Terraform code (IaC)."
-          tfc_workspace = {
-            agent_pool       = "foundation"
-            tag_names        = ["foundation", "factory"]
-            trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
-            vcs_repo         = true
+          git_repository = {
+            topics = ["foundation", "factory"]
+          }
+          git_teams = {
+            "contributor" = {
+              description = "This group grant write access to the ModulesRegistry repository."
+              permission  = "push"
+            }
           }
           tfc_notifications = {
             "Microsoft Teams" = {
@@ -290,13 +293,17 @@ locals {
               }
             }
           }
-          git_repository = {
-            topics = ["foundation", "factory"]
+          tfc_workspace = {
+            agent_pool       = "foundation"
+            tag_names        = ["foundation", "factory"]
+            trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
+            vcs_repo         = true
           }
-          git_teams = {
-            "contributor" = {
-              description = "This group grant write access to the ModulesRegistry repository."
-              permission  = "push"
+          tfc_variables = {
+            "TFE_TOKEN" = {
+              value     = "terraformcloud-policies-manage-policies"
+              category  = "env"
+              sensitive = true
             }
           }
         }
