@@ -16,7 +16,7 @@ data "tfe_organization" "this" {
 data "hcp_vault_secrets_secret" "this" {
   for_each    = { for secret in local.hcp_vault_secrets : lower("${secret.project}-${secret.secret}") => secret }
   app_name    = each.value.project
-  secret_name = each.secret
+  secret_name = each.value.secret
 }
 
 # The following blick is used to get information about workspace
