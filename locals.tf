@@ -192,11 +192,7 @@ locals {
     "Terraform Cloud" = {
       tfc_teams = {
         "test" = {
-          custom_workspace_access = {
-            runs           = "read"
-            state_versions = "none"
-            variables      = "none"
-          }
+          project_access = "admin"
         }
       }
       workspaces = {
