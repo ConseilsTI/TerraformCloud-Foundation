@@ -1,6 +1,6 @@
 # The following code block is used to create workspace resources in project.
 
-module "workspaces" {
+module "tfe_workspaces" {
   source = "./modules/tfe_workspace"
 
   for_each = nonsensitive({ for workspace in local.workspaces : workspace.name => workspace })

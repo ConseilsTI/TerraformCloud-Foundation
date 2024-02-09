@@ -39,14 +39,14 @@ locals {
   ])
 
   # This is to concat all variable sets.
-  variable_sets = concat(
+  tfc_variable_sets = concat(
     local.tfc_organization_level_variable_sets,
     local.tfc_project_level_variable_sets,
     local.tfc_workspace_level_variable_sets
   )
 
   # The following locals use logic to determine the project associated to a variable sets.
-  project_variable_sets = flatten([for variable_set in local.variable_sets :
+  tfc_project_variable_sets = flatten([for variable_set in local.tfc_variable_sets :
     flatten([for project in flatten(variable_set.projects) :
       merge(
         variable_set,
@@ -59,7 +59,7 @@ locals {
   ])
 
   # The following locals use logic to determine the workspace associated to a variable sets.
-  workspace_variable_sets = flatten([for variable_set in local.variable_sets :
+  tfc_workspace_variable_sets = flatten([for variable_set in local.tfc_variable_sets :
     flatten([for workspace in flatten(variable_set.workspaces) :
       merge(
         variable_set,
