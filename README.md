@@ -171,6 +171,7 @@ No optional inputs.
 
 The following resources are used by this module:
 
+- [github_actions_secret.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) (resource)
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
 - [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) (resource)
 - [tfe_variable.variable_set](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
@@ -184,11 +185,7 @@ The following resources are used by this module:
 
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_git_actions_secrets"></a> [git\_actions\_secrets](#output\_git\_actions\_secrets)
-
-Description: n/a
+No outputs.
 
 <!-- markdownlint-enable -->
 
