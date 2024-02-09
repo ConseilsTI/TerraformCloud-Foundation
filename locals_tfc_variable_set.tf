@@ -34,7 +34,7 @@ locals {
             workspaces = [component_key]
           }
         )
-      ]) if try(component.variable_sets, null) != null
+      ]) if try(component.tfc_variable_sets, null) != null
     ]) if try(project.components, null) != null
   ])
 
