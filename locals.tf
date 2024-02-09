@@ -348,7 +348,7 @@ locals {
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
           }
-          
+
           tfc_variables = {
             "TFE_TOKEN" = {
               value     = "admins"
