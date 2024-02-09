@@ -14,7 +14,7 @@ data "tfe_organization" "this" {
 # The following block is used to retrieve secrets and their latest version values for a given application.
 
 data "hcp_vault_secrets_secret" "this" {
-  for_each    = { for secret in local.hcp_vault_secrets : "${secret.project}-${secret.secret}" => secret }
+  for_each    = { for secret in local.hcp_vault_secrets : lower("${secret.project}-${secret.secret}") => secret }
   app_name    = each.value.project
   secret_name = each.secret
 }

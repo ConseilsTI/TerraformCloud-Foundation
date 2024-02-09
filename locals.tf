@@ -255,22 +255,22 @@ locals {
               sensitive = true
             }
             "GITHUB_APP_ID" = {
-              value     = data.hcp_vault_secrets_secret.this["github_app_id"].secret_value
+              value     = data.hcp_vault_secrets_secret.this["github-github_app_id"].secret_value
               category  = "env"
               sensitive = true
             }
             "GITHUB_APP_INSTALLATION_ID" = {
-              value     = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
+              value     = data.hcp_vault_secrets_secret.this["github-github_app_installation_id"].secret_value
               category  = "env"
               sensitive = true
             }
             "GITHUB_APP_PEM_FILE" = {
-              value     = data.hcp_vault_secrets_secret.this["github_app_pem_file"].secret_value
+              value     = data.hcp_vault_secrets_secret.this["github-github_app_pem_file"].secret_value
               category  = "env"
               sensitive = true
             }
             "GITHUB_OWNER" = {
-              value     = data.hcp_vault_secrets_secret.this["github_owner"].secret_value
+              value     = data.hcp_vault_secrets_secret.this["github-github_owner"].secret_value
               category  = "env"
               sensitive = true
             }
