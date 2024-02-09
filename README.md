@@ -153,7 +153,7 @@ Source: ./modules/tfe_team
 
 Version:
 
-### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
+### <a name="module_tfe_workspaces"></a> [tfe\_workspaces](#module\_tfe\_workspaces)
 
 Source: ./modules/tfe_workspace
 
