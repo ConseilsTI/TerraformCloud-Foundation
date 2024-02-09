@@ -205,6 +205,12 @@ locals {
       components = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
+          git_actions_secrets = [
+            {
+              secret_name     = "TF_API_TOKEN"
+              plaintext_value = "terraformcloud-modulesregistry-manage-modules"
+            }
+          ]
           git_repository = {
             topics = ["foundation", "factory"]
           }
