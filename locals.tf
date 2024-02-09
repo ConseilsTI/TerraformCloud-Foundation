@@ -108,68 +108,69 @@ locals {
     # Here is an example of an object:
     # "project_name" = {
     #   components = {
-    #    "component_key" = {  # This will be use for the Terraform Cloud workspace name and GitHub repository name
-    #      description = "" # This will be use for the Terraform Cloud workspace name and GitHub repository name
-    #      git_repository = {
-    #        topics = [""]
-    #      }
-    #      git_teams = {
-    #        "team_name" = {
-    #          description = ""
-    #          permission  = ""
-    #        }
-    #      }
-    #      tfc_notifications = {
-    #        "notification_name" = {
-    #          destination_type = "generic", "email", "email", or "microsoft-teams"
-    #          triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
-    #          url              = ""
-    #        }
-    #      }
-    #      tfc_teams = {
-    #        "team_name" = {
-    #          workspace_permission = {
-    #            runs              = "read", "plan", or "apply"
-    #            variables         = "none", "read", or "write"
-    #            state_versions    = "none", "read", "read-outputs", or "write"
-    #            sentinel_mocks    = "none" or "read"
-    #            workspace_locking = true or false
-    #            run_tasks         = true or false
-    #          }
-    #          members = []
-    #          sso_team_id            = ""
-    #          token                  = true or false
-    #          visibility             = "secret" or "organization"
-    #        }
-    #      }
-    #      tfc_workspace = {
-    #        agent_pool       = ""
-    #        execution_mode   = "null", "remote", "local", "agent"
-    #        tag_names        = [""]
-    #        trigger_patterns = [""]
-    #        vcs_repo         = true or false
-    #      }
-    #      tfc_variable_sets = {
-    #        "variable_set_name" = {
-    #          description = ""
-    #          global      = false *Cannot be set to true.*
-    #          variables = {
-    #            "variable_name" = {
-    #              value     = ""
-    #              category  = "terraform" or "env"
-    #              sensitive = true or false
-    #            }
-    #          }
-    #        }
-    #      }
-    #      tfc_variables = {
-    #        "variable_name" = {
-    #          value     = ""
-    #          category  = "terraform" or "env"
-    #          sensitive = true or false
-    #        }
-    #      }
-    #    }
+    #     "component_key" = {  # This will be use for the Terraform Cloud workspace name and GitHub repository name
+    #       description = "" # This will be use for the Terraform Cloud workspace name and GitHub repository name
+    #       git_repository = {
+    #         topics = [""]
+    #       }
+    #       git_teams = {
+    #         "team_name" = {
+    #           description = ""
+    #           permission  = ""
+    #         }
+    #       }
+    #       tfc_notifications = {
+    #         "notification_name" = {
+    #           destination_type = "generic", "email", "email", or "microsoft-teams"
+    #           triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
+    #           url              = ""
+    #         }
+    #       }
+    #       tfc_teams = {
+    #         "team_name" = {
+    #           workspace_permission = {
+    #             runs              = "read", "plan", or "apply"
+    #             variables         = "none", "read", or "write"
+    #             state_versions    = "none", "read", "read-outputs", or "write"
+    #             sentinel_mocks    = "none" or "read"
+    #             workspace_locking = true or false
+    #             run_tasks         = true or false
+    #           }
+    #           members = []
+    #           sso_team_id            = ""
+    #           token                  = true or false
+    #           visibility             = "secret" or "organization"
+    #         }
+    #       }
+    #       tfc_variable_sets = {
+    #         "variable_set_name" = {
+    #           description = ""
+    #           global      = false *Cannot be set to true.*
+    #           variables = {
+    #             "variable_name" = {
+    #               value     = ""
+    #               category  = "terraform" or "env"
+    #               sensitive = true or false
+    #             }
+    #           }
+    #         }
+    #       }
+    #       tfc_variables = {
+    #         "variable_name" = {
+    #           value     = ""
+    #           category  = "terraform" or "env"
+    #           sensitive = true or false
+    #         }
+    #       }
+    #       tfc_workspace = {
+    #         agent_pool       = ""
+    #         execution_mode   = "null", "remote", "local", "agent"
+    #         tag_names        = [""]
+    #         trigger_patterns = [""]
+    #         vcs_repo         = true or false
+    #       }
+    #     }
+    #   }
     #   tfc_teams = {
     #     "team_name" = {
     #       project_access = "admin", "maintain", "write", "read", "custom"
@@ -326,26 +327,6 @@ locals {
         }
         "TerraformCloud-Projects" = {
           description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
-          tfc_workspace = {
-            agent_pool       = "foundation"
-            tag_names        = ["foundation", "factory"]
-            trigger_patterns = ["*.tf"]
-            vcs_repo         = true
-          }
-          tfc_notifications = {
-            "Microsoft Teams" = {
-              destination_type = "microsoft-teams"
-              triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
-              url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
-            }
-          }
-          tfc_teams = {
-            "contributor" = {
-              workspace_permission = {
-                runs = "apply"
-              }
-            }
-          }
           git_repository = {
             topics = ["foundation", "factory"]
           }
@@ -355,6 +336,28 @@ locals {
               permission  = "push"
             }
           }
+          tfc_notifications = {
+            "Microsoft Teams" = {
+              destination_type = "microsoft-teams"
+              triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
+              url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
+            }
+          }
+          tfc_workspace = {
+            tag_names        = ["foundation", "factory"]
+            trigger_patterns = ["*.tf"]
+            vcs_repo         = true
+          }
+          
+          tfc_variables = {
+            "TFE_TOKEN" = {
+              value     = "admins"
+              category  = "env"
+              sensitive = true
+            }
+          }
+
+
         }
       }
     }
