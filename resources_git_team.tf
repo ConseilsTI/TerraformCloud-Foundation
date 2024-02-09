@@ -1,6 +1,6 @@
 # The following resource block is used to create GitHub team resources.
 
-module "github_teams" {
+module "git_teams" {
 
   source = "./modules/git_team"
 

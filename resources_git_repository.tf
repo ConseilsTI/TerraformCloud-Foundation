@@ -1,6 +1,6 @@
 # The following code block is used to create repository resources in GitHub.
 
-module "repository" {
+module "git_repository" {
   source = "./modules/git_repository"
 
   for_each = nonsensitive({ for repository in local.git_repositories : repository.name => repository })

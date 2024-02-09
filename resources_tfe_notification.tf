@@ -1,6 +1,6 @@
 # The following code block is used to create notification resources in workspace.
 
-module "notifications" {
+module "tfe_notifications" {
   source = "./modules/tfe_notification"
 
   for_each = nonsensitive({ for notification in local.tfc_notifications : "${notification.workspace} ${notification.name}" => notification })

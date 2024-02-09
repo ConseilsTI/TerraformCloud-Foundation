@@ -1,6 +1,6 @@
 # The following resource block is used to create Terraform Cloud team resources.
 
-module "teams" {
+module "tfe_teams" {
   source = "./modules/tfe_team"
 
   for_each = nonsensitive({ for team in local.tfc_teams : team.name => team })

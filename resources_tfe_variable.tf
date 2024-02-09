@@ -25,7 +25,7 @@
 # }
 
 # resource "tfe_variable" "workspace" {
-#   for_each = nonsensitive({ for variable in local.workspace_variables : "${variable.workspace} ${variable.key}" => variable if variable.key != "TFE_TOKEN" })
+#   for_each = nonsensitive({ for variable in local.tfc_workspace_variables : "${variable.workspace} ${variable.key}" => variable if variable.key != "TFE_TOKEN" })
 
 #   key          = each.value.key
 #   value        = each.value.value
@@ -36,14 +36,14 @@
 #   workspace_id = module.workspaces[each.value.workspace].id
 # }
 
-# resource "tfe_variable" "workspace_tfe_token" {
-#   for_each = nonsensitive({ for variable in local.workspace_variables : "${variable.workspace} ${variable.key}" => variable if variable.key == "TFE_TOKEN" })
+resource "tfe_variable" "workspace" {
+  for_each = nonsensitive({ for variable in local.tfc_workspace_variables : "${variable.workspace} ${variable.key}" => variable })
 
-#   key          = each.value.key
-#   value        = try(module.teams[each.value.value].token, each.value.value)
-#   category     = each.value.category
-#   description  = try(each.value.description, null)
-#   hcl          = try(each.value.hcl, null)
-#   sensitive    = try(each.value.sensitive, null)
-#   workspace_id = module.workspaces[each.value.workspace].id
-# }
+  key          = each.value.key
+  value        = variable.key == "TFE_TOKEN" ? try(module.tfe_teams[each.value.value].token, each.value.value) : each.value.value
+  category     = each.value.category
+  description  = try(each.value.description, null)
+  hcl          = try(each.value.hcl, null)
+  sensitive    = try(each.value.sensitive, null)
+  workspace_id = module.workspaces[each.value.workspace].id
+}
