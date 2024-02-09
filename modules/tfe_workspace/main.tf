@@ -15,14 +15,12 @@ resource "tfe_workspace" "this" {
   source_name                   = var.source_name
   source_url                    = var.source_url
   speculative_enabled           = var.speculative_enabled
-  structured_run_output_enabled = var.structured_run_output_enabled
   ssh_key_id                    = var.ssh_key_id
+  structured_run_output_enabled = var.structured_run_output_enabled
   tag_names                     = var.tag_names
   terraform_version             = var.terraform_version
   trigger_patterns              = var.trigger_patterns
   trigger_prefixes              = var.trigger_prefixes
-  # agent_pool_id                 = var.agent_pool_id
-  # execution_mode                = var.execution_mode
 
   dynamic "vcs_repo" {
     for_each = var.vcs_repo != null ? [true] : []
@@ -46,6 +44,7 @@ resource "tfe_workspace" "this" {
       error_message = "`source_url` requires `source_name` to also be set."
     }
   }
+
 }
 
 resource "tfe_workspace_settings" "this" {
