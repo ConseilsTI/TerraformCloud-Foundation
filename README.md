@@ -174,6 +174,10 @@ The following resources are used by this module:
 
 The following outputs are exported:
 
+### <a name="output_git_teams"></a> [git\_teams](#output\_git\_teams)
+
+Description: n/a
+
 ### <a name="output_tfc_teams"></a> [tfc\_teams](#output\_tfc\_teams)
 
 Description: n/a
