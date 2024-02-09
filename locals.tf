@@ -3,13 +3,13 @@ locals {
   tfc_organization_name = "ConseilsTI"
 
   # This local is used to define Oauth_client name.
-  oauth_client_name = "GitHub.com (ConseilsTI)"
+  tfc_oauth_client_name = "GitHub.com (ConseilsTI)"
 
   # This local is used to define GitHub organization name.
   git_organization_name = "ConseilsTI"
 
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
-  secrets = {
+  hcp_vault_secrets = {
     github_app_id = {
       project = "GitHub"
     }
@@ -25,7 +25,7 @@ locals {
   }
 
   # This local is used to define teams at the organization level.
-  organization_teams = {
+  tfc_organization_teams = {
     # `organization_teams` is a map of object where the key is the name of the team.
     # Each object must contain an `organization_access` argument with the team's organization access.
     # Refer to "./modules/team/README.md" for more details on the permissions type.
@@ -69,7 +69,7 @@ locals {
   }
 
   # This local is used to define variable_set at the organization level.
-  organization_variable_sets = {
+  tfc_organization_variable_sets = {
     # `organization_variable_sets` is a map of object where the key is the name of the variable_set.
     # Here is an example of an object:
     # "name" = {
@@ -85,6 +85,17 @@ locals {
     #   }
     #   workspaces  = [""]
     # }
+    "name" = {
+      description = "test"
+      global      = true
+      variables = {
+        variable_name = {
+          value     = "test"
+          category  = "env"
+          sensitive = false
+        }
+      }
+    }
   }
 
   # This local is used to define all resrouces required to deploy IaC in Terraform Cloud. 
@@ -196,6 +207,19 @@ locals {
       tfc_teams = {
         "test" = {
           project_access = "admin"
+        }
+      }
+      tfc_variable_set = {
+        "name" = {
+          description = "test"
+          global      = false
+          variables = {
+            variable_name = {
+              value     = "test"
+              category  = "env"
+              sensitive = false
+            }
+          }
         }
       }
       workspaces = {

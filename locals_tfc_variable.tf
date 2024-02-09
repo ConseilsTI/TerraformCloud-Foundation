@@ -1,7 +1,7 @@
 locals {
 
   # The following locals use logic to determine the variable associated to a variable sets.
-  # variable_sets_variables = flatten([for variable_set in local.variable_sets :
+  # tfc_variable_sets_variables = flatten([for variable_set in local.variable_sets :
   #   flatten([for variable_key, variable in variable_set.variables :
   #     merge(
   #       variable,

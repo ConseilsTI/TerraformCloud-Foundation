@@ -1,7 +1,7 @@
 locals {
 
   # The following locals use logic to determine the teams at organization level.
-  tfc_organization_level_teams = flatten([for team_key, team in local.organization_teams :
+  tfc_organization_level_teams = flatten([for team_key, team in local.tfc_organization_teams :
     merge(
       team,
       {
