@@ -259,7 +259,7 @@ locals {
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
           }
-          tfc_variable_set = {
+          tfc_variable_sets = {
             "workspace" = {
               description = "test"
               global      = false
