@@ -123,9 +123,33 @@ The following requirements are needed by this module:
 
 The following Modules are called:
 
+### <a name="module_agent"></a> [agent](#module\_agent)
+
+Source: ./modules/tfe_agent
+
+Version:
+
+### <a name="module_github_teams"></a> [github\_teams](#module\_github\_teams)
+
+Source: ./modules/git_team
+
+Version:
+
+### <a name="module_notifications"></a> [notifications](#module\_notifications)
+
+Source: ./modules/tfe_notification
+
+Version:
+
 ### <a name="module_repository"></a> [repository](#module\_repository)
 
 Source: ./modules/git_repository
+
+Version:
+
+### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
+
+Source: ./modules/tfe_workspace
 
 Version:
 
