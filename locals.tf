@@ -210,7 +210,7 @@ locals {
         }
       }
       tfc_variable_set = {
-        "name" = {
+        "project" = {
           description = "test"
           global      = false
           variables = {
@@ -258,6 +258,19 @@ locals {
             tag_names        = ["foundation", "factory"]
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
+          }
+          variable_set = {
+            "workspace" = {
+              description = "test"
+              global      = false
+              variables = {
+                variable_name = {
+                  value     = "test"
+                  category  = "env"
+                  sensitive = false
+                }
+              }
+            }
           }
           tfc_variables = {
             "TFE_TOKEN" = {

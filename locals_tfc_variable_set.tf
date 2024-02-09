@@ -34,7 +34,7 @@ locals {
             workspaces = [component_key]
           }
         )
-      ]) if try(workspace.variable_sets, null) != null
+      ]) if try(component.variable_sets, null) != null
     ]) if try(project.components, null) != null
   ])
 

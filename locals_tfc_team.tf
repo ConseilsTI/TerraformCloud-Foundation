@@ -35,7 +35,7 @@ locals {
           }
         )
       ])
-      if try(workspace.tfc_teams, null) != null
+      if try(component.tfc_teams, null) != null
     ])
     if try(project.components, null) != null
   ])

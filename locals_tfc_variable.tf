@@ -25,7 +25,7 @@ locals {
             workspace = component_key
           }
         )
-      ]) if try(workspace.tfc_variables, null) != null
+      ]) if try(component.tfc_variables, null) != null
     ]) if try(project.components, null) != null
   ])
 
