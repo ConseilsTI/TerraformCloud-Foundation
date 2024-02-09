@@ -2,7 +2,7 @@
 
 locals {
 
-  git_actions_secrets = flatten([for project_key, project in local.projects :
+  git_actions_secrets = nonsensitive(flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
       flatten([for git_actions_secret in component.git_actions_secrets :
         merge(
@@ -14,7 +14,7 @@ locals {
         )
       ]) if try(component.git_actions_secrets, null) != null
     ]) if try(project.components, null) != null
-  ])
+  ]))
 
 }
 
