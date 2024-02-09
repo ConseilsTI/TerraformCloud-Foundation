@@ -47,6 +47,4 @@ locals {
     local.tfc_workspace_level_teams
   )
 
-
-
 }

@@ -99,8 +99,8 @@ module "repository" {
   actions_secrets = [for secret in try(each.value.actions_secrets, []) :
     {
       secret_name     = secret.secret_name
-      plaintext_value = secret.secret_name == "TF_API_TOKEN" ? try(module.teams[secret.plaintext_value].token, null) : secret.plaintext_value
-      # plaintext_value = secret.plaintext_value
+      plaintext_value = secret.plaintext_value
+      # plaintext_value = secret.secret_name == "TF_API_TOKEN" ? try(module.teams[secret.plaintext_value].token, null) : secret.plaintext_value
     }
   ]
 
