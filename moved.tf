@@ -87,3 +87,13 @@ moved {
   from = module.teams["terraformcloud-policies-manage-policies"].tfe_team.this
   to   = module.tfe_teams["terraformcloud-policies-manage-policies"].tfe_team.this
 }
+
+moved {
+  from = module.workspaces["TerraformCloud-ModulesRegistry"].tfe_workspace.this
+  to   = module.tfe_workspaces["TerraformCloud-ModulesRegistry"].tfe_workspace.this
+}
+
+moved {
+  from = module.workspaces["TerraformCloud-Policies"].tfe_workspace.this
+  to   = module.tfe_workspaces["TerraformCloud-Policies"].tfe_workspace.this
+}
