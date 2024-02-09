@@ -178,11 +178,7 @@ The following resources are used by this module:
 
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_git_teams"></a> [git\_teams](#output\_git\_teams)
-
-Description: n/a
+No outputs.
 
 <!-- markdownlint-enable -->
 
