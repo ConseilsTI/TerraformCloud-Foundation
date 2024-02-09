@@ -1,7 +1,7 @@
 locals {
 
   # The following locals use logic to determine the variable sets at organization level.
-  organization_level_variable_sets = flatten([for variable_set_key, variable_set in local.organization_variable_sets :
+  tfc_organization_level_variable_sets = flatten([for variable_set_key, variable_set in local.tfc_organization_variable_sets :
     merge(
       variable_set,
       {
@@ -11,8 +11,8 @@ locals {
   ])
 
   # The following locals use logic to determine the variable sets at project level.
-  project_level_variable_sets = flatten([for project_key, project in local.projects :
-    flatten([for variable_set_key, variable_set in project.variable_sets :
+  tfc_project_level_variable_sets = flatten([for project_key, project in local.projects :
+    flatten([for variable_set_key, variable_set in project.tfc_variable_sets :
       merge(
         variable_set,
         {
@@ -20,36 +20,33 @@ locals {
           projects = [project_key]
         }
       )
-    ])
-    if try(project.variable_sets, null) != null
+    ]) if try(project.tfc_variable_sets, null) != null
   ])
 
   # The following locals use logic to determine the variable sets at workspace level.
-  workspace_level_variable_sets = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
-      flatten([for variable_set_key, variable_set in workspace.variable_sets :
+  tfc_workspace_level_variable_sets = flatten([for project_key, project in local.projects :
+    flatten([for component_key, component in project.components :
+      flatten([for variable_set_key, variable_set in component.tfc_variable_sets :
         merge(
           variable_set,
           {
-            name       = "${workspace_key} - ${variable_set_key}"
-            workspaces = [workspace_key]
+            name       = "${component_key} - ${variable_set_key}"
+            workspaces = [component_key]
           }
         )
-      ])
-      if try(workspace.variable_sets, null) != null
-    ])
-    if try(project.workspaces, null) != null
+      ]) if try(component.tfc_variable_sets, null) != null
+    ]) if try(project.components, null) != null
   ])
 
   # This is to concat all variable sets.
-  variable_sets = concat(
-    local.organization_level_variable_sets,
-    local.project_level_variable_sets,
-    local.workspace_level_variable_sets
+  tfc_variable_sets = concat(
+    local.tfc_organization_level_variable_sets,
+    local.tfc_project_level_variable_sets,
+    local.tfc_workspace_level_variable_sets
   )
 
   # The following locals use logic to determine the project associated to a variable sets.
-  project_variable_sets = flatten([for variable_set in local.variable_sets :
+  tfc_project_variable_sets = flatten([for variable_set in local.tfc_variable_sets :
     flatten([for project in flatten(variable_set.projects) :
       merge(
         variable_set,
@@ -62,7 +59,7 @@ locals {
   ])
 
   # The following locals use logic to determine the workspace associated to a variable sets.
-  workspace_variable_sets = flatten([for variable_set in local.variable_sets :
+  tfc_workspace_variable_sets = flatten([for variable_set in local.tfc_variable_sets :
     flatten([for workspace in flatten(variable_set.workspaces) :
       merge(
         variable_set,

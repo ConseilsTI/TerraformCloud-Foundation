@@ -43,13 +43,13 @@ module "agent" {
 
 The following requirements are needed by this module:
 
-- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (0.48.0)
+- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (~>0.51)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (0.48.0)
+- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (~>0.51)
 
 ## Modules
 
@@ -59,8 +59,8 @@ No modules.
 
 The following resources are used by this module:
 
-- [tfe_agent_pool.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/agent_pool) (resource)
-- [tfe_agent_token.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/agent_token) (resource)
+- [tfe_agent_pool.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/agent_pool) (resource)
+- [tfe_agent_token.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/agent_token) (resource)
 
 ## Required Inputs
 

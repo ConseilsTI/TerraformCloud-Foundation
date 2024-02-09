@@ -3,27 +3,16 @@ variable "name" {
   type        = string
 }
 
-variable "organization" {
-  description = "(Required) Name of the organization."
-  type        = string
-}
-
-variable "description" {
-  description = "(Optional) A description for the workspace."
-  type        = string
-  default     = null
-}
-
-variable "agent_pool_id" {
-  description = "(Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value or if `operations` is provided."
-  type        = string
-  default     = null
-}
-
 variable "allow_destroy_plan" {
   description = "(Optional) Whether destroy plans can be queued on the workspace."
   type        = bool
   default     = true
+}
+
+variable "assessments_enabled" {
+  description = "(Optional) Whether to regularly run health assessments such as drift detection on the workspace."
+  type        = bool
+  default     = false
 }
 
 variable "auto_apply" {
@@ -32,21 +21,17 @@ variable "auto_apply" {
   default     = false
 }
 
-variable "execution_mode" {
-  description = "(Optional) Which execution mode to use. Using Terraform Cloud, valid values are `remote`, `local` or `agent`. When set to `local`, the workspace will be used for state storage only."
-  type        = string
-  default     = "remote"
 
-  validation {
-    condition     = var.execution_mode != null ? contains(["remote", "local", "agent"], var.execution_mode) ? true : false : true
-    error_message = "Valid values are `remote`, `local` or `agent`."
-  }
-}
-
-variable "assessments_enabled" {
-  description = "(Optional) Whether to regularly run health assessments such as drift detection on the workspace."
+variable "auto_apply_run_trigger" {
+  description = "(Optional) Whether to automatically apply changes for runs that were created by run triggers from another workspace."
   type        = bool
   default     = false
+}
+
+variable "description" {
+  description = "(Optional) A description for the workspace."
+  type        = string
+  default     = null
 }
 
 variable "file_triggers_enabled" {
@@ -61,10 +46,9 @@ variable "global_remote_state" {
   default     = false
 }
 
-variable "remote_state_consumer_ids" {
-  description = "(Optional) The set of workspace IDs set as explicit remote state consumers for the given workspace."
-  type        = set(string)
-  default     = []
+variable "organization" {
+  description = "(Optional) Name of the organization."
+  type        = string
 }
 
 variable "project_id" {
@@ -77,6 +61,12 @@ variable "queue_all_runs" {
   description = "(Optional) Whether the workspace should start automatically performing runs immediately after its creation. When set to `false`, runs triggered by a webhook (such as a commit in VCS) will not be queued until at least one run has been manually queued. Note: This default differs from the Terraform Cloud API default, which is `false`. The provider uses `true` as any workspace provisioned with `false` would need to then have a run manually queued out-of-band before accepting webhooks."
   type        = bool
   default     = true
+}
+
+variable "remote_state_consumer_ids" {
+  description = "(Optional) The set of workspace IDs set as explicit remote state consumers for the given workspace."
+  type        = set(string)
+  default     = []
 }
 
 variable "source_name" {
@@ -116,14 +106,8 @@ variable "tag_names" {
 }
 
 variable "terraform_version" {
-  description = "(Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like ~> `1.0.0`); if you specify a constraint, the workspace will always use the newest release that meets that constraint."
+  description = "(Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like `~> 1.0.0`); if you specify a constraint, the workspace will always use the newest release that meets that constraint."
   type        = string
-  default     = null
-}
-
-variable "trigger_prefixes" {
-  description = "(Optional) List of repository-root-relative paths which describe all locations to be tracked for changes."
-  type        = list(string)
   default     = null
 }
 
@@ -133,9 +117,9 @@ variable "trigger_patterns" {
   default     = null
 }
 
-variable "working_directory" {
-  description = "(Optional) A relative path that Terraform will execute within. Defaults to the root of your repository."
-  type        = string
+variable "trigger_prefixes" {
+  description = "(Optional) List of repository-root-relative paths which describe all locations to be tracked for changes."
+  type        = list(string)
   default     = null
 }
 
@@ -162,5 +146,28 @@ variable "vcs_repo" {
   validation {
     condition     = var.vcs_repo != null ? var.vcs_repo.oauth_token_id != null && var.vcs_repo.github_app_installation_id != null ? false : true : true
     error_message = "`oauth_token_id` conflicts with `github_app_installation_id`."
+  }
+}
+
+variable "working_directory" {
+  description = "(Optional) A relative path that Terraform will execute within. Defaults to the root of your repository."
+  type        = string
+  default     = null
+}
+
+variable "agent_pool_id" {
+  description = "(Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value."
+  type        = string
+  default     = null
+}
+
+variable "execution_mode" {
+  description = "(Optional) Which execution mode to use. Using Terraform Cloud, valid values are `remote`, `local` or `agent`. When set to `local`, the workspace will be used for state storage only. Important: If you omit this attribute, the resource configures the workspace to use your organization's default execution mode (which in turn defaults to `remote`), removing any explicit value that might have previously been set for the workspace."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.execution_mode != null ? contains(["null", "remote", "local", "agent"], var.execution_mode) ? true : false : true
+    error_message = "Valid values are `remote`, `local` or `agent`."
   }
 }

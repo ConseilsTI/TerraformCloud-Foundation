@@ -1,9 +1,9 @@
 # The following resource block is used to create Terraform Cloud team resources.
 
-module "teams" {
+module "tfe_teams" {
   source = "./modules/tfe_team"
 
-  for_each = nonsensitive({ for team in local.teams : team.name => team })
+  for_each = nonsensitive({ for team in local.tfc_teams : team.name => team })
 
   name                    = each.value.name
   organization            = data.tfe_organization.this.name
@@ -16,7 +16,7 @@ module "teams" {
   custom_project_access   = try(each.value.custom_project_access, null)
   custom_workspace_access = try(each.value.custom_workspace_access, null)
   workspace_name          = try(each.value.workspace, null)
-  workspace_id            = try(module.workspaces[each.value.workspace].id, null)
+  workspace_id            = try(module.tfe_workspaces[each.value.workspace].id, null)
   workspace_access        = try(each.value.workspace_access, null)
   workspace_permission    = try(each.value.workspace_permission, null)
   token                   = try(each.value.token, false)
@@ -25,19 +25,3 @@ module "teams" {
   members                 = try(each.value.members, null)
 }
 
-# The following resource block is used to create GitHub team resources.
-
-module "github_teams" {
-  source = "./modules/github_team"
-
-  for_each = nonsensitive({ for team in local.github_teams : team.name => team })
-
-  name                      = each.value.name
-  description               = try(each.value.description, null)
-  privacy                   = try(each.value.privacy, "closed")
-  parent_team_id            = try(each.value.parent_team_id, null)
-  ldap_dn                   = try(each.value.ldap_dn, null)
-  create_default_maintainer = try(each.value.create_default_maintainer, false)
-  repository                = try(each.value.repository, null)
-  permission                = try(each.value.permission, null)
-}
