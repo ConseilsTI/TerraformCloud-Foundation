@@ -5,9 +5,6 @@ locals {
   # This local is used to define Oauth_client name.
   tfc_oauth_client_name = "GitHub.com (ConseilsTI)"
 
-  # This local is used to define GitHub organization name.
-  git_organization_name = "ConseilsTI"
-
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
   hcp_vault_secrets = [
     # `hcp_vault_secrets` is a list of object the following attributes:
