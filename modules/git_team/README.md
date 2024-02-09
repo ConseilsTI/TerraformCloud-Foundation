@@ -41,12 +41,12 @@ GITHUB_APP_INSTALLATION_ID and GITHUB_APP_PEM_FILE environment variables to auth
 ## Usage example
 ```hcl
 module "team" {
-  source = "./modules/github_team"
+  source = "./modules/git_team"
 
-  name               = "Team Name"
-  destination_type   = "This is a description for the GitHub team."
-  repository         = "Repository Name"
-  permission         = "push"
+  name        = "Team Name"
+  description = "This is a description for the GitHub team."
+  permission  = "push"
+  repository  = "Repository Name"
 }
 ```
 

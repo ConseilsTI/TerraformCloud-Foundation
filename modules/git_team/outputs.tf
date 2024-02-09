@@ -1,8 +1,3 @@
-output "team" {
-  description = "GitHub team resource."
-  value       = github_team.this
-}
-
 output "id" {
   description = "The ID of the created team."
   value       = github_team.this.id
@@ -18,3 +13,7 @@ output "slug" {
   value       = github_team.this.slug
 }
 
+output "team" {
+  description = "GitHub team resource."
+  value       = github_team.this
+}
