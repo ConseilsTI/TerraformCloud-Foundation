@@ -123,27 +123,33 @@ The following requirements are needed by this module:
 
 The following Modules are called:
 
-### <a name="module_agent"></a> [agent](#module\_agent)
+### <a name="module_git_repository"></a> [git\_repository](#module\_git\_repository)
 
-Source: ./modules/tfe_agent
+Source: ./modules/git_repository
 
 Version:
 
-### <a name="module_github_teams"></a> [github\_teams](#module\_github\_teams)
+### <a name="module_git_teams"></a> [git\_teams](#module\_git\_teams)
 
 Source: ./modules/git_team
 
 Version:
 
-### <a name="module_notifications"></a> [notifications](#module\_notifications)
+### <a name="module_tfe_agent"></a> [tfe\_agent](#module\_tfe\_agent)
+
+Source: ./modules/tfe_agent
+
+Version:
+
+### <a name="module_tfe_notifications"></a> [tfe\_notifications](#module\_tfe\_notifications)
 
 Source: ./modules/tfe_notification
 
 Version:
 
-### <a name="module_repository"></a> [repository](#module\_repository)
+### <a name="module_tfe_teams"></a> [tfe\_teams](#module\_tfe\_teams)
 
-Source: ./modules/git_repository
+Source: ./modules/tfe_team
 
 Version:
 
@@ -166,6 +172,7 @@ No optional inputs.
 The following resources are used by this module:
 
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
+- [tfe_variable.workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) (resource)
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/vault_secrets_secret) (data source)
 - [tfe_oauth_client.client](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/oauth_client) (data source)
 - [tfe_organization.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/organization) (data source)
