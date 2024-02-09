@@ -310,6 +310,7 @@ locals {
           }
           tfc_workspace = {
             agent_pool       = "foundation"
+            execution_mode   = "agent"
             tag_names        = ["foundation", "factory"]
             trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
             vcs_repo         = true
