@@ -5,7 +5,7 @@ locals {
   workspaces = flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
       merge(
-        workspace.tfc_workspace,
+        component.tfc_workspace,
         {
           name        = component_key
           description = component.description
