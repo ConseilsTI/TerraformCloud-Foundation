@@ -68,3 +68,7 @@ locals {
   )
 
 }
+
+output "git_teams" {
+  value = local.git_teams
+}
