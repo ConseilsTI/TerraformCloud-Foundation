@@ -29,7 +29,7 @@ locals {
   ]
 
   # This local is used to define teams at the organization level.
-  tfc_organization_teams = {
+  tfc_organization_teams = [
     # `tfc_organization_teams` is a map of object where the key is the name of the team.
     # Each object must contain an `organization_access` argument with the team's organization access.
     # Refer to "./modules/team/README.md" for more details on the permissions type.
@@ -55,7 +55,8 @@ locals {
     #   token_force_regenerate = true or false
     #   visibility             = "secret" or "organization"
     # }
-    "admins" = {
+    {
+      name        = "admins"
       sso_team_id = "a2f4919a-4c3c-436a-a010-fde47b98d0fd"
       token       = true
       organization_access = {
@@ -70,7 +71,7 @@ locals {
         manage_providers        = true
       }
     },
-  }
+  ]
 
   # This local is used to define variable_set at the organization level.
   tfc_organization_variable_sets = {
