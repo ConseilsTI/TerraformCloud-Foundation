@@ -9,20 +9,24 @@ locals {
   git_organization_name = "ConseilsTI"
 
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
-  hcp_vault_secrets = {
-    github_app_id = {
+  hcp_vault_secrets = [
+    {
       project = "GitHub"
-    }
-    github_app_installation_id = {
+      secret  = "GITHUB_APP_ID"
+    },
+    {
       project = "GitHub"
-    }
-    github_app_pem_file = {
+      secret  = "GITHUB_APP_INSTALLATION_ID"
+    },
+    {
       project = "GitHub"
-    }
-    github_owner = {
+      secret  = "GITHUB_APP_PEM_FILE"
+    },
+    {
       project = "GitHub"
+      secret  = "GITHUB_OWNER"
     }
-  }
+  ]
 
   # This local is used to define teams at the organization level.
   tfc_organization_teams = {
