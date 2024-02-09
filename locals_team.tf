@@ -58,7 +58,7 @@ locals {
             repository = workspace_key
           }
         )
-      ]) if try(workspace.github_teams, null) != null
+      ]) if try(workspace.git_teams, null) != null
     ]) if try(project.workspaces, null) != null
   ])
 
@@ -67,8 +67,4 @@ locals {
     local.git_repository_level_teams,
   )
 
-}
-
-output "git_teams" {
-  value = local.git_teams
 }
