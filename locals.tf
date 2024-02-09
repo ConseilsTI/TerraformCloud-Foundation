@@ -190,6 +190,15 @@ locals {
     # }
 
     "Terraform Cloud" = {
+      tfc_teams = {
+        "test" = {
+          custom_workspace_access = {
+            runs           = "read"
+            state_versions = "none"
+            variables      = "none"
+          }
+        }
+      }
       workspaces = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."

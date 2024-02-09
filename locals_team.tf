@@ -10,18 +10,18 @@ locals {
     )
   ])
 
-  # # The following locals use logic to determine the project associate with each team.
-  # project_level_teams = flatten([for project_key, project in local.projects :
-  #   flatten([for team_key, team in project.teams :
-  #     merge(
-  #       team,
-  #       { name    = lower("${project_key}-${team_key}")
-  #         project = project_key
-  #       }
-  #     )
-  #   ])
-  #   if try(project.teams, null) != null
-  # ])
+  # The following locals use logic to determine the project associate with each team.
+  project_level_teams = flatten([for project_key, project in local.projects :
+    flatten([for team_key, team in project.tfc_teams :
+      merge(
+        team,
+        { name    = lower("${project_key}-${team_key}")
+          project = project_key
+        }
+      )
+    ])
+    if try(project.tfc_teams, null) != null
+  ])
 
   # # The following locals use logic to determine the workspace associate with each team.
   # workspace_level_teams = flatten([for project_key, project in local.projects :
@@ -40,7 +40,7 @@ locals {
   # ])
 
   # This is to concat organization teams with project teams and workspace teams.
-  teams = concat(
+  tfc_teams = concat(
     local.organization_level_teams,
     # local.project_level_teams,
     # local.workspace_level_teams
@@ -69,6 +69,6 @@ locals {
 
 }
 
-output "teams" {
-  value = local.teams
+output "tfc_teams" {
+  value = local.tfc_teams
 }
