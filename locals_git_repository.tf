@@ -3,15 +3,15 @@
 locals {
 
   git_repositories = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
+    flatten([for component_key, component in project.components :
       merge(
-        workspace.git_repository,
+        component.git_repository,
         {
-          name        = workspace_key
-          description = workspace.description
+          name        = component_key
+          description = component.description
         }
-      ) if try(workspace.git_repository, null) != null
-    ]) if try(project.workspaces, null) != null
+      ) if try(component.git_repository, null) != null
+    ]) if try(project.components, null) != null
   ])
 
 }

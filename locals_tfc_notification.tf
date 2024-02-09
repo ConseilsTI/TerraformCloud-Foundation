@@ -3,17 +3,17 @@
 locals {
 
   tfc_notifications = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
-      flatten([for notification_key, notification in workspace.tfc_notifications :
+    flatten([for component_key, component in project.components :
+      flatten([for notification_key, notification in component.tfc_notifications :
         merge(
           notification,
           {
             name      = lower(notification_key)
-            workspace = workspace_key
+            workspace = component_key
           }
         )
-      ]) if try(workspace.tfc_notifications, null) != null
-    ]) if try(project.workspaces, null) != null
+      ]) if try(component.tfc_notifications, null) != null
+    ]) if try(project.components, null) != null
   ])
 
 }

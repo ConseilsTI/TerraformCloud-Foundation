@@ -222,7 +222,7 @@ locals {
           }
         }
       }
-      workspaces = {
+      components = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
           git_repository = {

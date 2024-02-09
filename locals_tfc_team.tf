@@ -25,19 +25,19 @@ locals {
 
   # The following locals use logic to determine the workspace associate with each team.
   tfc_workspace_level_teams = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
-      flatten([for team_key, team in workspace.tfc_teams :
+    flatten([for component_key, component in project.components :
+      flatten([for team_key, team in component.tfc_teams :
         merge(
           team,
           {
-            name      = lower("${workspace_key}-${team_key}")
-            workspace = workspace_key
+            name      = lower("${component_key}-${team_key}")
+            workspace = component_key
           }
         )
       ])
       if try(workspace.tfc_teams, null) != null
     ])
-    if try(project.workspaces, null) != null
+    if try(project.components, null) != null
   ])
 
   # This is to concat organization teams with project teams and workspace teams.

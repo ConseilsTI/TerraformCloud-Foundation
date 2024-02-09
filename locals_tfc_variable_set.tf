@@ -25,17 +25,17 @@ locals {
 
   # The following locals use logic to determine the variable sets at workspace level.
   tfc_workspace_level_variable_sets = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
-      flatten([for variable_set_key, variable_set in workspace.variable_sets :
+    flatten([for component_key, component in project.components :
+      flatten([for variable_set_key, variable_set in component.variable_sets :
         merge(
           variable_set,
           {
-            name       = "${workspace_key} - ${variable_set_key}"
-            workspaces = [workspace_key]
+            name       = "${component_key} - ${variable_set_key}"
+            workspaces = [component_key]
           }
         )
       ]) if try(workspace.variable_sets, null) != null
-    ]) if try(project.workspaces, null) != null
+    ]) if try(project.components, null) != null
   ])
 
   # This is to concat all variable sets.

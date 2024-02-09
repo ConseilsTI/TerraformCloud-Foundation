@@ -3,17 +3,17 @@
 locals {
 
   git_teams = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
-      flatten([for team_key, team in workspace.git_teams :
+    flatten([for component_key, component in project.components :
+      flatten([for team_key, team in component.git_teams :
         merge(
           team,
           {
-            name       = lower("${workspace_key}-${team_key}")
-            repository = workspace_key
+            name       = lower("${component_key}-${team_key}")
+            repository = component_key
           }
         )
-      ]) if try(workspace.git_teams, null) != null
-    ]) if try(project.workspaces, null) != null
+      ]) if try(component.git_teams, null) != null
+    ]) if try(project.components, null) != null
   ])
 
 }
