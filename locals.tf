@@ -19,6 +19,9 @@ locals {
     github_app_pem_file = {
       project = "GitHub"
     }
+    github_owner = {
+      project = "GitHub"
+    }
   }
 
   # This local is used to define teams at the organization level.
@@ -198,11 +201,14 @@ locals {
       workspaces = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
-          tfc_workspace = {
-            agent_pool       = "foundation"
-            tag_names        = ["foundation", "factory"]
-            trigger_patterns = ["*.tf"]
-            vcs_repo         = true
+          git_repository = {
+            topics = ["foundation", "factory"]
+          }
+          git_teams = {
+            "contributor" = {
+              description = "This group grant write access to the ModulesRegistry repository."
+              permission  = "push"
+            }
           }
           tfc_notifications = {
             "Microsoft Teams" = {
@@ -223,13 +229,37 @@ locals {
               }
             }
           }
-          git_repository = {
-            topics = ["foundation", "factory"]
+          tfc_workspace = {
+            agent_pool       = "foundation"
+            tag_names        = ["foundation", "factory"]
+            trigger_patterns = ["*.tf"]
+            vcs_repo         = true
           }
-          git_teams = {
-            "contributor" = {
-              description = "This group grant write access to the ModulesRegistry repository."
-              permission  = "push"
+          tfc_variables = {
+            "TFE_TOKEN" = {
+              value     = "terraformcloud-modulesregistry-manage-modules"
+              category  = "env"
+              sensitive = true
+            }
+            "GITHUB_APP_ID" = {
+              value     = data.hcp_vault_secrets_secret.this["github_app_id"].secret_value
+              category  = "env"
+              sensitive = true
+            }
+            "GITHUB_APP_INSTALLATION_ID" = {
+              value     = data.hcp_vault_secrets_secret.this["github_app_installation_id"].secret_value
+              category  = "env"
+              sensitive = true
+            }
+            "GITHUB_APP_PEM_FILE" = {
+              value     = data.hcp_vault_secrets_secret.this["github_app_pem_file"].secret_value
+              category  = "env"
+              sensitive = true
+            }
+            "GITHUB_OWNER" = {
+              value     = data.hcp_vault_secrets_secret.this["github_owner"].secret_value
+              category  = "env"
+              sensitive = true
             }
           }
         }

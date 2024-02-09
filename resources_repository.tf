@@ -3,7 +3,7 @@
 module "repository" {
   source = "./modules/github_repository"
 
-  for_each = nonsensitive({ for repository in local.repositories : repository.name => repository })
+  for_each = nonsensitive({ for repository in local.git_repositories : repository.name => repository })
 
   name                        = each.value.name
   description                 = try(each.value.description, null)

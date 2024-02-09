@@ -1,6 +1,6 @@
 locals {
   # This local is use to determin each required GitHub repository.
-  repositories = flatten([for project_key, project in local.projects :
+  git_repositories = flatten([for project_key, project in local.projects :
     flatten([for workspace_key, workspace in project.workspaces :
       merge(
         workspace.git_repository,
