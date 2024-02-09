@@ -47,24 +47,6 @@ locals {
     local.tfc_workspace_level_teams
   )
 
-  # The following locals use logic to determine the repository associate with each team.
-  git_repository_level_teams = flatten([for project_key, project in local.projects :
-    flatten([for workspace_key, workspace in project.workspaces :
-      flatten([for team_key, team in workspace.git_teams :
-        merge(
-          team,
-          {
-            name       = lower("${workspace_key}-${team_key}")
-            repository = workspace_key
-          }
-        )
-      ]) if try(workspace.git_teams, null) != null
-    ]) if try(project.workspaces, null) != null
-  ])
 
-  # This is to concat GitHub organization teams with repository teams.
-  git_teams = concat(
-    local.git_repository_level_teams,
-  )
 
 }
