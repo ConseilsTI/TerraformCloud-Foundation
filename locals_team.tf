@@ -42,7 +42,7 @@ locals {
   # This is to concat organization teams with project teams and workspace teams.
   tfc_teams = concat(
     local.organization_level_teams,
-    # local.project_level_teams,
+    local.project_level_teams,
     # local.workspace_level_teams
   )
 
