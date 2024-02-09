@@ -45,5 +45,5 @@ resource "tfe_variable" "workspace" {
   description  = try(each.value.description, null)
   hcl          = try(each.value.hcl, null)
   sensitive    = try(each.value.sensitive, null)
-  workspace_id = module.workspaces[each.value.workspace].id
+  workspace_id = module.tfe_workspaces[each.value.workspace].id
 }

@@ -16,7 +16,7 @@ module "tfe_teams" {
   custom_project_access   = try(each.value.custom_project_access, null)
   custom_workspace_access = try(each.value.custom_workspace_access, null)
   workspace_name          = try(each.value.workspace, null)
-  workspace_id            = try(module.workspaces[each.value.workspace].id, null)
+  workspace_id            = try(module.tfe_workspaces[each.value.workspace].id, null)
   workspace_access        = try(each.value.workspace_access, null)
   workspace_permission    = try(each.value.workspace_permission, null)
   token                   = try(each.value.token, false)
