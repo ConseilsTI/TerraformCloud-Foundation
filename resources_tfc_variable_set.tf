@@ -27,5 +27,5 @@ resource "tfe_workspace_variable_set" "this" {
   for_each = nonsensitive({ for variable_set in local.tfc_workspace_variable_sets : "${variable_set.name} ${variable_set.workspace}" => variable_set })
 
   variable_set_id = tfe_variable_set.this[each.value.name].id
-  workspace_id    = try(module.workspaces[each.value.workspace].id, null)
+  workspace_id    = try(module.tfe_workspaces[each.value.workspace].id, null)
 }
