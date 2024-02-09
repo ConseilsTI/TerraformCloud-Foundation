@@ -131,7 +131,7 @@ Version:
 
 ### <a name="module_github_teams"></a> [github\_teams](#module\_github\_teams)
 
-Source: ./modules/github_team
+Source: ./modules/git_team
 
 Version:
 
