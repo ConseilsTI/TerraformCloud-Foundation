@@ -10,21 +10,24 @@ locals {
 
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
   hcp_vault_secrets = [
+    # `hcp_vault_secrets` is a list of object the following attributes:
+    #   app_name = The name of the application.
+    #   secret   = The name of the secret.
     {
-      project = "GitHub"
-      secret  = "GITHUB_APP_ID"
+      app_name = "GitHub"
+      secret   = "GITHUB_APP_ID"
     },
     {
-      project = "GitHub"
-      secret  = "GITHUB_APP_INSTALLATION_ID"
+      app_name = "GitHub"
+      secret   = "GITHUB_APP_INSTALLATION_ID"
     },
     {
-      project = "GitHub"
-      secret  = "GITHUB_APP_PEM_FILE"
+      app_name = "GitHub"
+      secret   = "GITHUB_APP_PEM_FILE"
     },
     {
-      project = "GitHub"
-      secret  = "GITHUB_OWNER"
+      app_name = "GitHub"
+      secret   = "GITHUB_OWNER"
     }
   ]
 
