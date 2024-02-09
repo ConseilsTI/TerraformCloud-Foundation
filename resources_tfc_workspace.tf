@@ -9,7 +9,7 @@ module "tfe_workspaces" {
   organization          = data.tfe_organization.this.name
   project_id            = tfe_project.project[each.value.project].id
   description           = try(each.value.description, null)
-  agent_pool_id         = try(module.tfe_agent[each.value.agent_pool].id, null)
+  agent_pool_id         = try(module.tfe_agent[each.value.agent_pool].agent_pool_id, null)
   allow_destroy_plan    = try(each.value.allow_destroy_plan, null)
   auto_apply            = try(each.value.auto_apply, null)
   execution_mode        = try(each.value.execution_mode, null)
