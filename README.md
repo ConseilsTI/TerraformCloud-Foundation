@@ -184,7 +184,11 @@ The following resources are used by this module:
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_git_actions_secrets"></a> [git\_actions\_secrets](#output\_git\_actions\_secrets)
+
+Description: n/a
 
 <!-- markdownlint-enable -->
 
