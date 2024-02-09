@@ -135,6 +135,7 @@ locals {
     #      }
     #      tfc_workspace = {
     #        agent_pool       = ""
+    #        execution_mode   = "null", "remote", "local", "agent"
     #        tag_names        = [""]
     #        trigger_patterns = [""]
     #        vcs_repo         = true or false
