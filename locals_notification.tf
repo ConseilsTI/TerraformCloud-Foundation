@@ -5,17 +5,12 @@ locals {
       flatten([for notification_key, notification in workspace.tfc_notifications :
         merge(
           notification,
-          { name      = lower(notification_key)
+          {
+            name      = lower(notification_key)
             workspace = workspace_key
           }
         )
-      ])
-      if try(workspace.tfc_notifications, null) != null
-    ])
-    if try(project.workspaces, null) != null
+      ]) if try(workspace.tfc_notifications, null) != null
+    ]) if try(project.workspaces, null) != null
   ])
-}
-
-output "notifications" {
-  value = local.notifications
 }

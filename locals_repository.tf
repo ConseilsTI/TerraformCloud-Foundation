@@ -4,14 +4,11 @@ locals {
     flatten([for workspace_key, workspace in project.workspaces :
       merge(
         workspace.git_repository,
-        { name        = workspace_key
+        {
+          name        = workspace_key
           description = workspace.description
         }
       ) if try(workspace.git_repository, null) != null
     ]) if try(project.workspaces, null) != null
   ])
-}
-
-output "repositories" {
-  value = local.repositories
 }
