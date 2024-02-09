@@ -7,7 +7,7 @@ module "tfe_notifications" {
 
   name             = each.value.name
   destination_type = each.value.destination_type
-  workspace_id     = module.workspaces[each.value.workspace].id
+  workspace_id     = module.tfc_workspaces[each.value.workspace].id
   emails           = try(each.value.emails, null)
   enabled          = try(each.value.enabled, true)
   token            = try(each.value.token, null)
