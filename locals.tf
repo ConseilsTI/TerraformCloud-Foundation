@@ -240,9 +240,9 @@ locals {
             }
           }
           tfc_workspace = {
-            tag_names                 = ["foundation", "factory"]
-            trigger_patterns          = ["*.tf"]
-            vcs_repo                  = true
+            tag_names        = ["foundation", "factory"]
+            trigger_patterns = ["*.tf"]
+            vcs_repo         = true
           }
           tfc_variables = {
             "TFE_TOKEN" = {
