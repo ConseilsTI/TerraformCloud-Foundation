@@ -60,7 +60,7 @@ locals {
     #   visibility             = "secret" or "organization"
     # }
     {
-      name        = "admins"
+      name = "admins"
       organization_access = {
         manage_projects         = true
         manage_workspaces       = true
