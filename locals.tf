@@ -26,7 +26,7 @@ locals {
 
   # This local is used to define teams at the organization level.
   tfc_organization_teams = {
-    # `organization_teams` is a map of object where the key is the name of the team.
+    # `tfc_organization_teams` is a map of object where the key is the name of the team.
     # Each object must contain an `organization_access` argument with the team's organization access.
     # Refer to "./modules/team/README.md" for more details on the permissions type.
     # Here is an example of an object:
@@ -70,7 +70,7 @@ locals {
 
   # This local is used to define variable_set at the organization level.
   tfc_organization_variable_sets = {
-    # `organization_variable_sets` is a map of object where the key is the name of the variable_set.
+    # `tfc_organization_variable_sets` is a map of object where the key is the name of the variable_set.
     # Here is an example of an object:
     # "name" = {
     #   description = ""
@@ -85,17 +85,6 @@ locals {
     #   }
     #   workspaces  = [""]
     # }
-    "global" = {
-      description = "test"
-      global      = true
-      variables = {
-        global_variable_name = {
-          value     = "test"
-          category  = "env"
-          sensitive = false
-        }
-      }
-    }
   }
 
   # This local is used to define all resrouces required to deploy IaC in Terraform Cloud. 
@@ -105,13 +94,79 @@ locals {
     # Refer to "./modules/tfe_workspace/README.md" for more details on the workspace properties.
     # Refer to "./modules/tfe_team/README.md" for more details on the permissions type.
     # Refer to "./modules/tfe_notification/README.md" for more details on the notification configuration.
-    # Refer to "./modules/github_repository/README.md" for more details on the GitHub repository configuration.
-    # Refer to "./modules/github_team/README.md" for more details on the GitHub team configuration.
+    # Refer to "./modules/git_repository/README.md" for more details on the GitHub repository configuration.
+    # Refer to "./modules/git_team/README.md" for more details on the GitHub team configuration.
     # Here is an example of an object:
     # "project_name" = {
-    #   agent_pools = [""]
-    #   teams = {
+    #   components = {
+    #    "component_key" = {  # This will be use for the Terraform Cloud workspace name and GitHub repository name
+    #      description = "" # This will be use for the Terraform Cloud workspace name and GitHub repository name
+    #      git_repository = {
+    #        topics = [""]
+    #      }
+    #      git_teams = {
+    #        "team_name" = {
+    #          description = ""
+    #          permission  = ""
+    #        }
+    #      }
+    #      tfc_notifications = {
+    #        "notification_name" = {
+    #          destination_type = "generic", "email", "email", or "microsoft-teams"
+    #          triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
+    #          url              = ""
+    #        }
+    #      }
+    #      tfc_teams = {
+    #        "team_name" = {
+    #          workspace_permission = {
+    #            runs              = "read", "plan", or "apply"
+    #            variables         = "none", "read", or "write"
+    #            state_versions    = "none", "read", "read-outputs", or "write"
+    #            sentinel_mocks    = "none" or "read"
+    #            workspace_locking = true or false
+    #            run_tasks         = true or false
+    #          }
+    #          members = []
+    #          sso_team_id            = ""
+    #          token                  = true or false
+    #          visibility             = "secret" or "organization"
+    #        }
+    #      }
+    #      tfc_workspace = {
+    #        agent_pool       = ""
+    #        tag_names        = [""]
+    #        trigger_patterns = [""]
+    #        vcs_repo         = true or false
+    #      }
+    #      tfc_variable_sets = {
+    #        "variable_set_name" = {
+    #          description = ""
+    #          global      = false *Cannot be set to true.*
+    #          variables = {
+    #            "variable_name" = {
+    #              value     = ""
+    #              category  = "terraform" or "env"
+    #              sensitive = true or false
+    #            }
+    #          }
+    #        }
+    #      }
+    #      tfc_variables = {
+    #        "variable_name" = {
+    #          value     = ""
+    #          category  = "terraform" or "env"
+    #          sensitive = true or false
+    #        }
+    #      }
+    #    }
+    #   tfc_teams = {
     #     "team_name" = {
+    #       project_access = "admin", "maintain", "write", "read", "custom"
+    #       custom_project_access = {
+    #         settings = "read", "update", "delete"
+    #         teams    = "none", "read", "manage"
+    #       }
     #       custom_workspace_access = {
     #         runs           = "read", "plan", or "apply"
     #         sentinel_mocks = "none", or "read"
@@ -126,12 +181,10 @@ locals {
     #       members = []
     #       sso_team_id            = ""
     #       token                  = true or false
-    #       token_expired_at       = ""
-    #       token_force_regenerate = true or false
     #       visibility             = "secret" or "organization"
     #     }
     #   }
-    #   variable_set = {
+    #   tfc_variable_sets = {
     #     "name" = {
     #       description = ""
     #       global      = false *Cannot be set to true.*
@@ -145,83 +198,9 @@ locals {
     #       workspaces  = [""]
     #     }
     #   }
-    #   workspaces = {
-    #     "workspace_name" = {
-    #       description       = ""
-    #       github_repository = {
-    #         actions_secrets = [
-    #           {
-    #             secret_name     = ""
-    #             plaintext_value = ""
-    #           }
-    #         ]
-    #       }
-    #       github_teams = {
-    #         "team_name" = {
-    #           permission  = "pull", "triage", "push", "maintain", or "admin"
-    #         }
-    #       }
-    #       notifications = {
-    #         "notification_name" = {
-    #           destination_type = "generic", "email", "email", or "microsoft-teams"
-    #           triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
-    #           url              = "Url
-    #         }
-    #       }
-    #       tag_names = [""]
-    #       teams = {
-    #         "team_name" = {
-    #           workspace_permission = {
-    #             runs              = "read", "plan", or "apply"
-    #             variables         = "none", "read", or "write"
-    #             state_versions    = "none", "read", "read-outputs", or "write"
-    #             sentinel_mocks    = "none" or "read"
-    #             workspace_locking = true or false
-    #             run_tasks         = true or false
-    #           }
-    #           members = []
-    #           sso_team_id            = ""
-    #           token                  = true or false
-    #           token_expired_at       = ""
-    #           token_force_regenerate = true or false
-    #           visibility             = "secret" or "organization"
-    #         }
-    #       }
-    #       trigger_patterns = [""]
-    #       variables = {
-    #         "variable_name" = {
-    #           value     = ""
-    #           category  = "terraform" or "env"
-    #           sensitive = true or false
-    #         }
-    #       }
-    #       vcs_repo = {
-    #         identifier                 = "GitHub repository"
-    #         oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-    #       }
-    #     }
-    #   }
     # }
 
     "Terraform Cloud" = {
-      tfc_teams = {
-        "test" = {
-          project_access = "admin"
-        }
-      }
-      tfc_variable_sets = {
-        "project" = {
-          description = "test"
-          global      = false
-          variables = {
-            project_variable_name = {
-              value     = "test"
-              category  = "env"
-              sensitive = false
-            }
-          }
-        }
-      }
       components = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
@@ -263,7 +242,7 @@ locals {
             "workspace" = {
               description = "test"
               global      = false
-              workspace_variables = {
+              variables = {
                 variable_name = {
                   value     = "test"
                   category  = "env"
@@ -376,6 +355,24 @@ locals {
         #     }
         #   }
         # }
+      }
+      tfc_teams = {
+        "test" = {
+          project_access = "admin"
+        }
+      }
+      tfc_variable_sets = {
+        "project" = {
+          description = "test"
+          global      = false
+          variables = {
+            project_variable_name = {
+              value     = "test"
+              category  = "env"
+              sensitive = false
+            }
+          }
+        }
       }
     }
 
