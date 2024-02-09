@@ -37,10 +37,6 @@ GITHUB_APP_INSTALLATION_ID and GITHUB_APP_PEM_FILE environment variables to auth
 
 - Create and manage repositories within your GitHub organization or personal account.
 - Configure branch protection for repositories in your organization or personal account.
-- Create and manage GitHub Actions secrets within your GitHub repositories.
-- Enable and manage GitHub Actions permissions for your GitHub repository.
-- Create and manage branches within your repository.
-- create and manage files within a GitHub repository.
 
 ## Usage example
 ```hcl
@@ -61,17 +57,6 @@ module "repository" {
       }
     }
   ]
-  actions_secrets = [
-    {
-      secret_name     = "Secret Name"
-      plaintext_value = "Secret Value"
-    }
-  ]
-  allowed_actions = "selected"
-  allowed_actions_config = {
-    github_owned_allowed = true
-    patterns_allowed     = ["terraform-docs/gh-actions@*", "hashicorp/*"]
-  }
 }
 ```
 
