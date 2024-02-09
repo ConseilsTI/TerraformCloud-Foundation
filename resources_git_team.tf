@@ -14,5 +14,5 @@ module "github_teams" {
   permission                = try(each.value.permission, null)
   privacy                   = try(each.value.privacy, "closed")
   repository                = try(each.value.repository, null)
-  
+
 }
