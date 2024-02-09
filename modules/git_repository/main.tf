@@ -122,17 +122,3 @@ resource "github_branch_protection" "this" {
   blocks_creations     = each.value.blocks_creations
   lock_branch          = each.value.lock_branch
 }
-
-resource "github_actions_secret" "this" {
-  for_each        = { for secret in var.actions_secrets : secret.secret_name => secret }
-  repository      = github_repository.this.name
-  secret_name     = each.value.secret_name
-  plaintext_value = each.value.plaintext_value
-}
-
-resource "github_branch" "this" {
-  for_each      = { for branch in var.branches : branch.branch => branch }
-  repository    = github_repository.this.name
-  branch        = each.value.branch
-  source_branch = each.value.source_branch
-}
