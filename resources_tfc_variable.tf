@@ -40,7 +40,7 @@ resource "tfe_variable" "workspace" {
   for_each = nonsensitive({ for variable in local.tfc_workspace_variables : "${variable.workspace} ${variable.key}" => variable })
 
   key          = each.value.key
-  value        = variable.key == "TFE_TOKEN" ? try(module.tfe_teams[each.value.value].token, each.value.value) : each.value.value
+  value        = each.value.key == "TFE_TOKEN" ? try(module.tfe_teams[each.value.value].token, each.value.value) : each.value.value
   category     = each.value.category
   description  = try(each.value.description, null)
   hcl          = try(each.value.hcl, null)
