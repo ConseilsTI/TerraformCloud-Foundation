@@ -19,8 +19,7 @@ locals {
   # The following locals use logic to determine the remote_consomer_ids.
   tfc_remote_state_consumer_ids = flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
-      flatten(component.remote_state_consumer_ids) if try(component.remote_state_consumer_ids, null) != null
-    ])
-    if try(project.components, null) != null
+      flatten(component.tfc_workspace.remote_state_consumer_ids) if try(component.tfc_workspace.remote_state_consumer_ids, null) != null
+    ]) if try(project.components, null) != null
   ])
 }
