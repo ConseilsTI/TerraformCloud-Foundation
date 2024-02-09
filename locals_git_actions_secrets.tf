@@ -8,7 +8,7 @@ locals {
         merge(
           git_actions_secret,
           {
-            key       = lower("${component_key}-${git_actions_secret}")
+            key        = lower("${component_key}-${git_actions_secret}")
             repository = component_key
           }
         )
