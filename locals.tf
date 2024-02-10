@@ -113,12 +113,13 @@ locals {
     #       git_repository = {
     #         topics = [""]
     #       }
-    #       git_teams = {
-    #         "team_name" = {
+    #       git_teams = [
+    #         {
+    #           name        = ""
     #           description = ""
     #           permission  = ""
     #         }
-    #       }
+    #       ]
     #       tfc_notifications = {
     #         "notification_name" = {
     #           destination_type = "generic", "email", "email", or "microsoft-teams"
@@ -222,12 +223,13 @@ locals {
           git_repository = {
             topics = ["foundation", "factory"]
           }
-          git_teams = {
-            "contributor" = {
+          git_teams = [
+            {
+              name        = "TerraformCloud-ModulesRegistry-Contributor"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
-          }
+          ]
           tfc_notifications = {
             "Microsoft Teams" = {
               destination_type = "microsoft-teams"
@@ -285,12 +287,13 @@ locals {
           git_repository = {
             topics = ["foundation", "factory"]
           }
-          git_teams = {
-            "contributor" = {
+          git_teams = [
+            {
+              name        = "TerraformCloud-Policies-Contributor"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
-          }
+          ]
           tfc_notifications = {
             "Microsoft Teams" = {
               destination_type = "microsoft-teams"
@@ -328,12 +331,13 @@ locals {
           git_repository = {
             topics = ["foundation", "factory"]
           }
-          git_teams = {
-            "contributor" = {
+          git_teams = [
+            {
+              name        = "TerraformCloud-Projects-Contributor"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
-          }
+          ]
           tfc_notifications = {
             "Microsoft Teams" = {
               destination_type = "microsoft-teams"
