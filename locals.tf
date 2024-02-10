@@ -249,7 +249,7 @@ locals {
           ]
           tfc_teams = [
             {
-              name        = "terraformcloud-modulesregistry - manage-modules"
+              name        = "terraformcloud-modulesregistry-manage-modules"
               sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
               token       = true
               organization_access = {
@@ -315,7 +315,7 @@ locals {
           ]
           tfc_teams = [
             {
-              name        = "terraformcloud-policies - manage-policies"
+              name        = "terraformcloud-policies-manage-policies"
               sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
               token       = true
               organization_access = {
