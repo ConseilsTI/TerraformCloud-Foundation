@@ -4,7 +4,7 @@ locals {
 
   git_teams = flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
-      flatten([for team in component.git_teams : 
+      flatten([for team in component.git_teams :
         merge(
           team,
           {
