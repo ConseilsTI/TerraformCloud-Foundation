@@ -37,7 +37,7 @@ resource "tfe_team_token" "this" {
 
 resource "tfe_team_organization_members" "this" {
 
-  count = length(var.organization_membership_ids) > 0 || var.organization_membership_ids != null ? 1 : 0
+  count = length(var.organization_membership_ids) > 0 ? 1 : 0
 
   team_id                     = tfe_team.this.id
   organization_membership_ids = var.organization_membership_ids
