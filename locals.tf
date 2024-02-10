@@ -225,7 +225,7 @@ locals {
           }
           git_teams = [
             {
-              name        = "TerraformCloud-ModulesRegistry-Contributor"
+              name        = "terraformcloud-modulesregistry-contributor"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
@@ -289,7 +289,7 @@ locals {
           }
           git_teams = [
             {
-              name        = "TerraformCloud-Policies-Contributor"
+              name        = "terraformcloud-policies-contributor"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
@@ -333,7 +333,7 @@ locals {
           }
           git_teams = [
             {
-              name        = "TerraformCloud-Projects-Contributor"
+              name        = "terraformcloud-projects-contributor"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
