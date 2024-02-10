@@ -48,7 +48,7 @@ resource "tfe_team_project_access" "this" {
 
   count = var.project_name != null ? 1 : 0
 
-  access     = var.project_access
+  access = var.project_access
 
   dynamic "project_access" {
     for_each = var.custom_project_access != null ? [true] : []

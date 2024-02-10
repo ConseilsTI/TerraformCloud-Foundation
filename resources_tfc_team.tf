@@ -16,7 +16,7 @@ module "tfe_teams" {
   project_name                = try(each.value.project, null)
   sso_team_id                 = try(each.value.sso_team_id, null)
   token                       = try(each.value.token, false)
-  token_expired_at            = try(each.value.token_expired_at, null)  
+  token_expired_at            = try(each.value.token_expired_at, null)
   token_force_regenerate      = try(each.value.token_force_regenerate, null)
   visibility                  = try(each.value.visibility, "organization")
   workspace_access            = try(each.value.workspace_access, null)

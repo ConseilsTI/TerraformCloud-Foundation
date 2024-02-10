@@ -60,5 +60,5 @@ resource "tfe_workspace_settings" "this" {
       error_message = "`agent_pool_id` requires `execution_mode` to be set to `agent`."
     }
   }
-  
+
 }
