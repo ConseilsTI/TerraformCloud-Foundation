@@ -48,6 +48,7 @@ resource "tfe_workspace" "this" {
 }
 
 resource "tfe_workspace_settings" "this" {
+
   count          = var.execution_mode != null ? 1 : 0
   workspace_id   = tfe_workspace.this.id
   agent_pool_id  = var.agent_pool_id
@@ -59,4 +60,5 @@ resource "tfe_workspace_settings" "this" {
       error_message = "`agent_pool_id` requires `execution_mode` to be set to `agent`."
     }
   }
+  
 }
