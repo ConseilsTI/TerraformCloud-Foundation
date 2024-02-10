@@ -85,13 +85,14 @@ locals {
     #   description = ""
     #   global      = true or false *Cannot be set to true if `workspaces` or ``projects` are defined.*
     #   projects    = [""]
-    #   variables = {
-    #     variable_name = {
+    #   variables = [
+    #     {
+    #       key       = ""
     #       value     = ""
     #       category  = "terraform" or "env"
     #       sensitive = true or false
     #     }
-    #   }
+    #   ]
     #   workspaces  = [""]
     # }
   ]
@@ -148,28 +149,31 @@ locals {
     #           sso_team_id            = ""
     #           token                  = true or false
     #           visibility             = "secret" or "organization"
-    #         ]
-    #       }
-    #       tfc_variable_sets = {
-    #         "variable_set_name" = {
+    #         }
+    #       ]
+    #       tfc_variable_sets = [
+    #         {
+    #           name        = ""
     #           description = ""
     #           global      = false *Cannot be set to true.*
-    #           variables = {
-    #             "variable_name" = {
+    #           variables = [
+    #             {
+    #               key       = ""
     #               value     = ""
     #               category  = "terraform" or "env"
     #               sensitive = true or false
     #             }
-    #           }
+    #           ]
     #         }
-    #       }
-    #       tfc_variables = {
-    #         "variable_name" = {
+    #       ]
+    #       tfc_variables = [
+    #         {
+    #           key       = ""
     #           value     = ""
     #           category  = "terraform" or "env"
     #           sensitive = true or false
     #         }
-    #       }
+    #       ]
     #       tfc_workspace = {
     #         agent_pool       = ""
     #         execution_mode   = "null", "remote", "local", "agent"
@@ -203,12 +207,14 @@ locals {
     #       visibility             = "secret" or "organization"
     #     }
     #   ]
-    #   tfc_variable_sets = {
-    #     "name" = {
+    #   tfc_variable_sets = [
+    #     {
+    #       name        = ""
     #       description = ""
     #       global      = false *Cannot be set to true.*
-    #       variables = {
-    #         variable_name = {
+    #       variables = [
+    #         {
+    #           key       = ""
     #           value     = ""
     #           category  = "terraform" or "env"
     #           sensitive = true or false
@@ -216,7 +222,7 @@ locals {
     #       }
     #       workspaces  = [""]
     #     }
-    #   }
+    #   ]
     # }
 
     "Terraform Cloud" = {
@@ -265,33 +271,38 @@ locals {
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
           }
-          tfc_variables = {
-            "TFE_TOKEN" = {
+          tfc_variables = [
+            {
+              key       = "TFE_TOKEN"
               value     = "terraformcloud-modulesregistry-manage-modules"
               category  = "env"
               sensitive = true
-            }
-            "GITHUB_APP_ID" = {
+            },
+            {
+              key       = "GITHUB_APP_ID"
               value     = data.hcp_vault_secrets_secret.this["github-github_app_id"].secret_value
               category  = "env"
               sensitive = true
-            }
-            "GITHUB_APP_INSTALLATION_ID" = {
+            },
+            {
+              key       = "GITHUB_APP_INSTALLATION_ID"
               value     = data.hcp_vault_secrets_secret.this["github-github_app_installation_id"].secret_value
               category  = "env"
               sensitive = true
-            }
-            "GITHUB_APP_PEM_FILE" = {
+            },
+            {
+              key       = "GITHUB_APP_PEM_FILE"
               value     = data.hcp_vault_secrets_secret.this["github-github_app_pem_file"].secret_value
               category  = "env"
               sensitive = true
-            }
-            "GITHUB_OWNER" = {
+            },
+            {
+              key       = "GITHUB_OWNER"
               value     = data.hcp_vault_secrets_secret.this["github-github_owner"].secret_value
               category  = "env"
               sensitive = true
             }
-          }
+          ]
         }
         "TerraformCloud-Policies" = {
           description = "Repository to provision and manage Terraform Cloud policies using Terraform code (IaC)."
@@ -331,13 +342,14 @@ locals {
             trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
             vcs_repo         = true
           }
-          tfc_variables = {
-            "TFE_TOKEN" = {
+          tfc_variables = [
+            {
+              key       = "TFE_TOKEN"
               value     = "terraformcloud-policies-manage-policies"
               category  = "env"
               sensitive = true
             }
-          }
+          ]
         }
         "TerraformCloud-Projects" = {
           description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
@@ -364,16 +376,14 @@ locals {
             trigger_patterns = ["*.tf"]
             vcs_repo         = true
           }
-
-          tfc_variables = {
-            "TFE_TOKEN" = {
+          tfc_variables = [
+            {
+              key       = "TFE_TOKEN"
               value     = "admins"
               category  = "env"
               sensitive = true
             }
-          }
-
-
+          ]
         }
       }
     }
