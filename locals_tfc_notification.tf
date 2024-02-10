@@ -8,7 +8,6 @@ locals {
         merge(
           notification,
           {
-            name      = lower(notification_key)
             workspace = component_key
           }
         )

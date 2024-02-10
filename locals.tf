@@ -120,13 +120,14 @@ locals {
     #           permission  = ""
     #         }
     #       ]
-    #       tfc_notifications = {
-    #         "notification_name" = {
+    #       tfc_notifications = [
+    #         {
+    #           name             = ""
     #           destination_type = "generic", "email", "email", or "microsoft-teams"
     #           triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
     #           url              = ""
     #         }
-    #       }
+    #       ]
     #       tfc_teams = {
     #         "team_name" = {
     #           workspace_permission = {
@@ -230,13 +231,14 @@ locals {
               permission  = "push"
             }
           ]
-          tfc_notifications = {
-            "Microsoft Teams" = {
+          tfc_notifications = [
+            {
+              name             = "microsoft teams"
               destination_type = "microsoft-teams"
               triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
-          }
+          ]
           tfc_teams = {
             "manage-modules" = {
               sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
@@ -294,13 +296,14 @@ locals {
               permission  = "push"
             }
           ]
-          tfc_notifications = {
-            "Microsoft Teams" = {
+          tfc_notifications = [
+            {
+              name             = "microsoft teams"
               destination_type = "microsoft-teams"
               triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
-          }
+          ]
           tfc_teams = {
             "manage-policies" = {
               sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
@@ -338,13 +341,14 @@ locals {
               permission  = "push"
             }
           ]
-          tfc_notifications = {
-            "Microsoft Teams" = {
+          tfc_notifications = [
+            {
+              name             = "microsoft teams"
               destination_type = "microsoft-teams"
               triggers         = ["run:created", "run:planning", "run:needs_attention", "run:applying", "run:completed", "run:errored", "assessment:check_failure", "assessment:drifted", "assessment:failed"]
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
-          }
+          ]
           tfc_workspace = {
             tag_names        = ["foundation", "factory"]
             trigger_patterns = ["*.tf"]
