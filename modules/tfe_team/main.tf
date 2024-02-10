@@ -1,9 +1,8 @@
 resource "tfe_team" "this" {
 
   name         = var.name
-  organization = var.organization
-  visibility   = var.visibility
   sso_team_id  = var.sso_team_id
+  organization = var.organization
 
   dynamic "organization_access" {
     for_each = var.organization_access != null ? [true] : []
@@ -21,37 +20,34 @@ resource "tfe_team" "this" {
       manage_providers        = var.organization_access.manage_providers
     }
   }
+
+  visibility = var.visibility
+
 }
 
 resource "tfe_team_token" "this" {
+
   count = var.token ? 1 : 0
 
   team_id          = tfe_team.this.id
-  force_regenerate = var.token_force_regenerate
   expired_at       = var.token_expired_at
+  force_regenerate = var.token_force_regenerate
 
-}
-
-data "tfe_organization_membership" "this" {
-  for_each     = var.members != null ? toset(var.members) : []
-  organization = var.organization
-  email        = each.key
 }
 
 resource "tfe_team_organization_members" "this" {
-  count   = var.members != null ? 1 : 0
-  team_id = tfe_team.this.id
-  organization_membership_ids = [
-    for member in var.members : data.tfe_organization_membership.this[member].id
-  ]
+
+  count = length(var.organization_membership_ids) > 0 || var.organization_membership_ids != null ? 1 : 0
+
+  team_id                     = tfe_team.this.id
+  organization_membership_ids = var.organization_membership_ids
+
 }
 
 resource "tfe_team_project_access" "this" {
 
   count = var.project_name != null ? 1 : 0
 
-  team_id    = tfe_team.this.id
-  project_id = var.project_id
   access     = var.project_access
 
   dynamic "project_access" {
@@ -62,18 +58,21 @@ resource "tfe_team_project_access" "this" {
     }
   }
 
+  project_id = var.project_id
+  team_id    = tfe_team.this.id
+
   dynamic "workspace_access" {
     for_each = var.custom_workspace_access != null ? [true] : []
     content {
+      create         = var.custom_workspace_access.create
+      delete         = var.custom_workspace_access.delete
+      locking        = var.custom_workspace_access.locking
+      move           = var.custom_workspace_access.move
       runs           = var.custom_workspace_access.runs
+      run_tasks      = var.custom_workspace_access.run_tasks
       sentinel_mocks = var.custom_workspace_access.sentinel_mocks
       state_versions = var.custom_workspace_access.state_versions
       variables      = var.custom_workspace_access.variables
-      create         = var.custom_workspace_access.create
-      locking        = var.custom_workspace_access.locking
-      delete         = var.custom_workspace_access.delete
-      move           = var.custom_workspace_access.move
-      run_tasks      = var.custom_workspace_access.run_tasks
     }
   }
 
@@ -83,21 +82,22 @@ resource "tfe_team_access" "this" {
 
   count = var.workspace_name != null ? 1 : 0
 
-  team_id      = tfe_team.this.id
-  access       = var.workspace_access
-  workspace_id = var.workspace_id
+  access = var.workspace_access
 
   dynamic "permissions" {
     for_each = var.workspace_permission != null ? [true] : []
     content {
       runs              = var.workspace_permission.runs
-      variables         = var.workspace_permission.variables
-      state_versions    = var.workspace_permission.state_versions
-      sentinel_mocks    = var.workspace_permission.sentinel_mocks
-      workspace_locking = var.workspace_permission.workspace_locking
       run_tasks         = var.workspace_permission.run_tasks
+      sentinel_mocks    = var.workspace_permission.sentinel_mocks
+      state_versions    = var.workspace_permission.state_versions
+      variables         = var.workspace_permission.variables
+      workspace_locking = var.workspace_permission.workspace_locking
     }
   }
+
+  team_id      = tfe_team.this.id
+  workspace_id = var.workspace_id
 
   lifecycle {
     precondition {

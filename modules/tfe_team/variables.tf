@@ -5,137 +5,6 @@ variable "name" {
   type        = string
 }
 
-variable "organization" {
-  description = "(Required) Name of the organization. If omitted, organization must be defined in the provider config."
-  type        = string
-}
-
-variable "visibility" {
-  description = "(Optional) The visibility of the team (`secret` or `organization`)."
-  type        = string
-  default     = "organization"
-
-  validation {
-    condition     = var.visibility != null ? contains(["secret", "organization"], var.visibility) ? true : false : true
-    error_message = "Valid values are `secret` or `organization`."
-  }
-}
-
-variable "sso_team_id" {
-  description = "(Optional) Unique Identifier to control team membership via SAML."
-  type        = string
-  default     = null
-}
-
-variable "organization_access" {
-  description = <<EOT
-  (Optional) Settings for the team's organization access.
-    read_projects           : (Optional) Allow members to view all projects within the organization. Requires read_workspaces to be set to true.
-    manage_projects         : (Optional) Allow members to create and administrate all projects within the organization.
-    read_workspaces         : (Optional) Allow members to view all workspaces in this organization.
-    manage_workspaces       : (Optional) Allows members to create and administrate all workspaces within the organization.
-    manage_policies         : (Optional) Allows members to create, edit, and delete the organization's Sentinel policies.
-    manage_policy_overrides : (Optional) Allows members to override soft-mandatory policy checks.
-    manage_run_tasks        : (Optional) Allow members to create, edit, and delete the organization's run tasks.
-    manage_vcs_settings     : (Optional) Allows members to manage the organization's VCS Providers and SSH keys.
-    manage_membership       : (Optional) Allow members to add/remove users from the organization, and to add/remove users from visible teams.
-    manage_modules          : (Optional) Allow members to publish and delete modules in the organization's private registry.
-    manage_providers        : (Optional) Allow members to publish and delete providers in the organization's private registry.
-  EOT
-  type = object({
-    read_projects           = optional(bool, false)
-    manage_projects         = optional(bool, false)
-    read_workspaces         = optional(bool, false)
-    manage_workspaces       = optional(bool, false)
-    manage_policies         = optional(bool, false)
-    manage_policy_overrides = optional(bool, false)
-    manage_run_tasks        = optional(bool, false)
-    manage_vcs_settings     = optional(bool, false)
-    manage_membership       = optional(bool, false)
-    manage_modules          = optional(bool, false)
-    manage_providers        = optional(bool, false)
-  })
-  default = null
-
-  validation {
-    condition     = var.organization_access != null ? var.organization_access.read_projects != false && var.organization_access.manage_projects != false ? false : true : true
-    error_message = "Project access must be `read` or `manage`."
-  }
-
-  validation {
-    condition     = var.organization_access != null ? var.organization_access.read_workspaces != false && var.organization_access.manage_workspaces != false ? false : true : true
-    error_message = "Workspaces access must be `read` or `manage`."
-  }
-
-  validation {
-    condition     = var.organization_access != null ? var.organization_access.manage_projects == true && var.organization_access.manage_workspaces != true ? false : true : true
-    error_message = "`manage_projects` requires `manage_workspaces` to be set to `true`."
-  }
-}
-
-# The following variables are used to create token resources (`tfe_team_token`).
-
-variable "token" {
-  description = "(Optional) If set to `true`, a team token will be generated."
-  type        = bool
-  default     = false
-}
-
-variable "token_force_regenerate" {
-  description = "(Optional) If set to `true`, a new token will be generated even if a token already exists. This will invalidate the existing token!"
-  type        = bool
-  default     = false
-}
-
-variable "token_expired_at" {
-  description = "(Optional) The token's expiration date. The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z'). If no expiration date is supplied, the expiration date will default to null and never expire."
-  type        = string
-  default     = null
-
-  validation {
-    condition     = var.token_expired_at != null ? length(regexall("^((?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}))Z)$", var.token_expired_at)) > 0 ? true : false : true
-    error_message = "The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z')."
-  }
-}
-
-# The following variables are used to create team organization members resources (`tfe_team_organization_members`).
-
-variable "members" {
-  description = "(Optional) Email of the organization's members to be added."
-  type        = list(string)
-  default     = null
-
-  validation {
-    condition     = var.members != null ? can([for member in var.members : regex("^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})$", member)]) ? true : false : true
-    error_message = "Each member must be in a valid email address format (e.g., 'user@company.com')."
-  }
-}
-
-# The following variables are used to create team project access resources (`tfe_team_project_access`).
-
-variable "project_name" {
-  description = "(Optional) Name of the project to which the team will be added."
-  type        = string
-  default     = null
-}
-
-variable "project_id" {
-  description = "(Optional) ID of the project to which the team will be added."
-  type        = string
-  default     = null
-}
-
-variable "project_access" {
-  description = "(Optional) Type of fixed access to grant. Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
-  type        = string
-  default     = "read"
-
-  validation {
-    condition     = var.project_access != null ? contains(["admin", "maintain", "write", "read", "custom"], var.project_access) ? true : false : true
-    error_message = "Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
-  }
-}
-
 variable "custom_project_access" {
   description = <<EOT
   (Optional) Settings for the team's project access.
@@ -205,18 +74,124 @@ variable "custom_workspace_access" {
   }
 }
 
-# The following variables are used to create team workspace access resources (`tfe_team_access`).
+variable "organization" {
+  description = "(Required) Name of the organization. If omitted, organization must be defined in the provider config."
+  type        = string
+}
 
-variable "workspace_name" {
-  description = "(Optional) Name of the workspace to which the team will be added."
+variable "organization_access" {
+  description = <<EOT
+  (Optional) Settings for the team's organization access.
+    read_projects           : (Optional) Allow members to view all projects within the organization. Requires read_workspaces to be set to true.
+    manage_projects         : (Optional) Allow members to create and administrate all projects within the organization.
+    read_workspaces         : (Optional) Allow members to view all workspaces in this organization.
+    manage_workspaces       : (Optional) Allows members to create and administrate all workspaces within the organization.
+    manage_policies         : (Optional) Allows members to create, edit, and delete the organization's Sentinel policies.
+    manage_policy_overrides : (Optional) Allows members to override soft-mandatory policy checks.
+    manage_run_tasks        : (Optional) Allow members to create, edit, and delete the organization's run tasks.
+    manage_vcs_settings     : (Optional) Allows members to manage the organization's VCS Providers and SSH keys.
+    manage_membership       : (Optional) Allow members to add/remove users from the organization, and to add/remove users from visible teams.
+    manage_modules          : (Optional) Allow members to publish and delete modules in the organization's private registry.
+    manage_providers        : (Optional) Allow members to publish and delete providers in the organization's private registry.
+  EOT
+  type = object({
+    read_projects           = optional(bool, false)
+    manage_projects         = optional(bool, false)
+    read_workspaces         = optional(bool, false)
+    manage_workspaces       = optional(bool, false)
+    manage_policies         = optional(bool, false)
+    manage_policy_overrides = optional(bool, false)
+    manage_run_tasks        = optional(bool, false)
+    manage_vcs_settings     = optional(bool, false)
+    manage_membership       = optional(bool, false)
+    manage_modules          = optional(bool, false)
+    manage_providers        = optional(bool, false)
+  })
+  default = null
+
+  validation {
+    condition     = var.organization_access != null ? var.organization_access.read_projects != false && var.organization_access.manage_projects != false ? false : true : true
+    error_message = "Project access must be `read` or `manage`."
+  }
+
+  validation {
+    condition     = var.organization_access != null ? var.organization_access.read_workspaces != false && var.organization_access.manage_workspaces != false ? false : true : true
+    error_message = "Workspaces access must be `read` or `manage`."
+  }
+
+  validation {
+    condition     = var.organization_access != null ? var.organization_access.manage_projects == true && var.organization_access.manage_workspaces != true ? false : true : true
+    error_message = "`manage_projects` requires `manage_workspaces` to be set to `true`."
+  }
+}
+
+variable "organization_membership_ids" {
+  description = "(Required) IDs of organization memberships to be added."
+  type        = list(string)
+  default     = []
+}
+
+variable "project_access" {
+  description = "(Optional) Type of fixed access to grant. Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
+  type        = string
+  default     = "read"
+
+  validation {
+    condition     = var.project_access != null ? contains(["admin", "maintain", "write", "read", "custom"], var.project_access) ? true : false : true
+    error_message = "Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
+  }
+}
+
+variable "project_id" {
+  description = "(Optional) ID of the project to which the team will be added."
   type        = string
   default     = null
 }
 
-variable "workspace_id" {
-  description = "(Optional) ID of the workspace to which the team will be added."
+variable "project_name" {
+  description = "(Optional) Name of the project to which the team will be added."
   type        = string
   default     = null
+}
+
+variable "sso_team_id" {
+  description = "(Optional) Unique Identifier to control team membership via SAML."
+  type        = string
+  default     = null
+}
+
+variable "token" {
+  description = "(Optional) If set to `true`, a team token will be generated."
+  type        = bool
+  default     = false
+}
+
+variable "token_expired_at" {
+  description = "(Optional) The token's expiration date. The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z'). If no expiration date is supplied, the expiration date will default to null and never expire."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.token_expired_at != null ? length(regexall("^((?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}))Z)$", var.token_expired_at)) > 0 ? true : false : true
+    error_message = "The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z')."
+  }
+}
+
+variable "token_force_regenerate" {
+  description = "(Optional) If set to `true`, a new token will be generated even if a token already exists. This will invalidate the existing token!"
+  type        = bool
+  default     = false
+}
+
+variable "visibility" {
+  description = "(Optional) The visibility of the team (`secret` or `organization`)."
+  type        = string
+  default     = "organization"
+
+  validation {
+    condition     = var.visibility != null ? contains(["secret", "organization"], var.visibility) ? true : false : true
+    error_message = "Valid values are `secret` or `organization`."
+  }
 }
 
 variable "workspace_access" {
@@ -228,6 +203,18 @@ variable "workspace_access" {
     condition     = var.workspace_access != null ? contains(["admin", "read", "plan", "write"], var.workspace_access) ? true : false : true
     error_message = "Valid values are `admin`, `read`, `plan`, or `write`."
   }
+}
+
+variable "workspace_id" {
+  description = "(Optional) ID of the workspace to which the team will be added."
+  type        = string
+  default     = null
+}
+
+variable "workspace_name" {
+  description = "(Optional) Name of the workspace to which the team will be added."
+  type        = string
+  default     = null
 }
 
 variable "workspace_permission" {
