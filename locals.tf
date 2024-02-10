@@ -39,7 +39,6 @@ locals {
     # Here is an example of an object:
     # {
     #   name    = ""
-    #   members = []
     #   organization_access = {
     #     read_projects           = true or false
     #     manage_projects         = true or false
@@ -136,7 +135,6 @@ locals {
     #             workspace_locking = true or false
     #             run_tasks         = true or false
     #           }
-    #           members = []
     #           sso_team_id            = ""
     #           token                  = true or false
     #           visibility             = "secret" or "organization"
@@ -189,7 +187,6 @@ locals {
     #         move           = true or false
     #         run_tasks      = true or false
     #       }
-    #       members = []
     #       sso_team_id            = ""
     #       token                  = true or false
     #       visibility             = "secret" or "organization"
