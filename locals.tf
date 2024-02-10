@@ -110,6 +110,12 @@ locals {
     #   components = {
     #     "component_key" = {  # This will be use for the Terraform Cloud workspace name and GitHub repository name
     #       description = "" # This will be use for the Terraform Cloud workspace name and GitHub repository name
+    #       git_actions_secrets = [
+    #         {
+    #           secret_name     = ""
+    #           plaintext_value = ""
+    #         }
+    #       ]
     #       git_repository = {
     #         topics = [""]
     #       }
@@ -128,8 +134,9 @@ locals {
     #           url              = ""
     #         }
     #       ]
-    #       tfc_teams = {
-    #         "team_name" = {
+    #       tfc_teams = [
+    #         {
+    #           name = team_name
     #           workspace_permission = {
     #             runs              = "read", "plan", or "apply"
     #             variables         = "none", "read", or "write"
@@ -141,7 +148,7 @@ locals {
     #           sso_team_id            = ""
     #           token                  = true or false
     #           visibility             = "secret" or "organization"
-    #         }
+    #         ]
     #       }
     #       tfc_variable_sets = {
     #         "variable_set_name" = {
@@ -172,8 +179,9 @@ locals {
     #       }
     #     }
     #   }
-    #   tfc_teams = {
-    #     "team_name" = {
+    #   tfc_teams = [
+    #     {
+    #       name           = ""
     #       project_access = "admin", "maintain", "write", "read", "custom"
     #       custom_project_access = {
     #         settings = "read", "update", "delete"
@@ -194,7 +202,7 @@ locals {
     #       token                  = true or false
     #       visibility             = "secret" or "organization"
     #     }
-    #   }
+    #   ]
     #   tfc_variable_sets = {
     #     "name" = {
     #       description = ""
@@ -239,8 +247,9 @@ locals {
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
           ]
-          tfc_teams = {
-            "manage-modules" = {
+          tfc_teams = [
+            {
+              name        = "terraformcloud-modulesregistry - manage-modules"
               sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
               token       = true
               organization_access = {
@@ -250,7 +259,7 @@ locals {
                 runs = "apply"
               }
             }
-          }
+          ]
           tfc_workspace = {
             tag_names        = ["foundation", "factory"]
             trigger_patterns = ["*.tf"]
@@ -304,8 +313,9 @@ locals {
               url              = "https://conseilsti.webhook.office.com/webhookb2/b1967add-a0bb-4f55-9508-280cefef4403@0f9829d3-a628-4f2b-a3ac-58e0740d27ae/IncomingWebhook/bd56b2570de84870b0529487428b9ccb/4c88f00c-bcb7-4867-823f-ce6d94fb1c06"
             }
           ]
-          tfc_teams = {
-            "manage-policies" = {
+          tfc_teams = [
+            {
+              name        = "terraformcloud-policies - manage-policies"
               sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
               token       = true
               organization_access = {
@@ -315,7 +325,7 @@ locals {
                 runs = "apply"
               }
             }
-          }
+          ]
           tfc_workspace = {
             tag_names        = ["foundation", "factory"]
             trigger_patterns = ["*.tf", "*.hcl", "*.sentinel"]
