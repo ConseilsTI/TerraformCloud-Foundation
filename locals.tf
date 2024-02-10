@@ -77,10 +77,11 @@ locals {
   ]
 
   # This local is used to define variable_set at the organization level.
-  tfc_organization_variable_sets = {
-    # `tfc_organization_variable_sets` is a map of object where the key is the name of the variable_set.
+  tfc_organization_variable_sets = [
+    # `tfc_organization_variable_sets` is a list of object where the key is the name of the variable_set.
     # Here is an example of an object:
-    # "name" = {
+    # {
+    #   name        = "" 
     #   description = ""
     #   global      = true or false *Cannot be set to true if `workspaces` or ``projects` are defined.*
     #   projects    = [""]
@@ -93,7 +94,7 @@ locals {
     #   }
     #   workspaces  = [""]
     # }
-  }
+  ]
 
   # This local is used to define all resrouces required to deploy IaC in Terraform Cloud. 
   projects = {
