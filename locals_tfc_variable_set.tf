@@ -2,7 +2,7 @@ locals {
 
   # The following locals use logic to determine the variable sets at project level.
   tfc_project_level_variable_sets = flatten([for project_key, project in local.projects :
-    flatten([for variable_set_key, variable_set in project.tfc_variable_sets :
+    flatten([for variable_set in project.tfc_variable_sets :
       merge(
         variable_set,
         {
@@ -15,7 +15,7 @@ locals {
   # The following locals use logic to determine the variable sets at workspace level.
   tfc_workspace_level_variable_sets = flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
-      flatten([for variable_set_key, variable_set in component.tfc_variable_sets :
+      flatten([for variable_set in component.tfc_variable_sets :
         merge(
           variable_set,
           {
