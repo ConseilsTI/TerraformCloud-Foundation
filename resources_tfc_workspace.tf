@@ -33,5 +33,4 @@ module "tfe_workspaces" {
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   } : null
   working_directory = try(each.value.working_directory, null)
-
 }

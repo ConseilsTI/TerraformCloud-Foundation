@@ -23,6 +23,4 @@ module "tfe_teams" {
   workspace_id                = try(module.tfe_workspaces[each.value.workspace].id, null)
   workspace_name              = try(each.value.workspace, null)
   workspace_permission        = try(each.value.workspace_permission, null)
-  
 }
-
