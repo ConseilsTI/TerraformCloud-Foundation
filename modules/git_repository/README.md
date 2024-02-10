@@ -81,8 +81,6 @@ No modules.
 
 The following resources are used by this module:
 
-- [github_actions_secret.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/actions_secret) (resource)
-- [github_branch.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/branch) (resource)
 - [github_branch_protection.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/branch_protection) (resource)
 - [github_repository.this](https://registry.terraform.io/providers/integrations/github/5.44.0/docs/resources/repository) (resource)
 
@@ -99,23 +97,6 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_actions_secrets"></a> [actions\_secrets](#input\_actions\_secrets)
-
-Description:   (Optional) The actions\_secrets block supports the following:  
-    secret\_name     : (Required) Name of the secret.  
-    plaintext\_value : (Required) Plaintext value of the secret to be encrypted.
-
-Type:
-
-```hcl
-list(object({
-    secret_name     = string
-    plaintext_value = string
-  }))
-```
-
-Default: `[]`
 
 ### <a name="input_allow_auto_merge"></a> [allow\_auto\_merge](#input\_allow\_auto\_merge)
 
@@ -234,23 +215,6 @@ list(object({
     allows_force_pushes  = optional(bool, false)
     blocks_creations     = optional(bool, false)
     lock_branch          = optional(bool, false)
-  }))
-```
-
-Default: `[]`
-
-### <a name="input_branches"></a> [branches](#input\_branches)
-
-Description:   (Optional) The branches block supports the following:  
-    branch        : (Required) The repository branch to create.  
-    source\_branch : (Optional) The branch name to start from.
-
-Type:
-
-```hcl
-list(object({
-    branch        = string
-    source_branch = optional(string, "main")
   }))
 ```
 
@@ -475,41 +439,9 @@ Default: `false`
 
 The following outputs are exported:
 
-### <a name="output_actions_secret"></a> [actions\_secret](#output\_actions\_secret)
-
-Description: GitHub Actions secrets within your GitHub repository.
-
-### <a name="output_actions_secret_created_at"></a> [actions\_secret\_created\_at](#output\_actions\_secret\_created\_at)
-
-Description: Date of actions\_secret creation.
-
-### <a name="output_actions_secret_updated_at"></a> [actions\_secret\_updated\_at](#output\_actions\_secret\_updated\_at)
-
-Description: Date of actions\_secret update.
-
 ### <a name="output_branch_protection"></a> [branch\_protection](#output\_branch\_protection)
 
 Description: GitHub branch protection within your GitHub repository.
-
-### <a name="output_branches"></a> [branches](#output\_branches)
-
-Description: Branches within your repository.
-
-### <a name="output_branches_etag"></a> [branches\_etag](#output\_branches\_etag)
-
-Description: An etag representing the Branch object.
-
-### <a name="output_branches_ref"></a> [branches\_ref](#output\_branches\_ref)
-
-Description: A string representing a branch reference, in the form of refs/heads/<branch>.
-
-### <a name="output_branches_sha"></a> [branches\_sha](#output\_branches\_sha)
-
-Description: A string storing the reference's HEAD commit's SHA1.
-
-### <a name="output_branches_source_sha"></a> [branches\_source\_sha](#output\_branches\_source\_sha)
-
-Description: A string storing the commit this branch was started from. Not populated when imported.
 
 ### <a name="output_full_name"></a> [full\_name](#output\_full\_name)
 
