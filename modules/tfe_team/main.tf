@@ -1,6 +1,6 @@
 resource "tfe_team" "this" {
 
-  name         = var.name
+  name         = lower(var.name)
   sso_team_id  = var.sso_team_id
   organization = var.organization
 
