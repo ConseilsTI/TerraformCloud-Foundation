@@ -4,11 +4,10 @@ locals {
 
   tfc_notifications = flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
-      flatten([for notification_key, notification in component.tfc_notifications :
+      flatten([for notification in component.tfc_notifications :
         merge(
           notification,
           {
-            name      = lower(notification_key)
             workspace = component_key
           }
         )

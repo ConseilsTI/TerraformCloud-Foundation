@@ -1,4 +1,5 @@
 resource "tfe_notification_configuration" "this" {
+
   name             = var.name
   destination_type = var.destination_type
   workspace_id     = var.workspace_id

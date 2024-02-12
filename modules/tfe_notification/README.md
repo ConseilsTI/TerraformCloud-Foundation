@@ -29,14 +29,12 @@ to authenticate.
 ## Usage example
 ```hcl
 module "team" {
-  source = "./modules/tfe_notification"
-
+  source           = "./modules/tfe_notification"
   name             = "Notification Name"
   destination_type = "microsoft-teams"
   triggers         = ["run:created", "run:planning", "run:errored"]
   url              = "https://example.com"
   workspace_id     = "Workspace_Id"
-
 }
 ```
 
@@ -45,13 +43,13 @@ module "team" {
 
 The following requirements are needed by this module:
 
-- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (0.48.0)
+- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (~>0.51)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (0.48.0)
+- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (~>0.51)
 
 ## Modules
 
@@ -61,7 +59,7 @@ No modules.
 
 The following resources are used by this module:
 
-- [tfe_notification_configuration.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/notification_configuration) (resource)
+- [tfe_notification_configuration.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/notification_configuration) (resource)
 
 ## Required Inputs
 

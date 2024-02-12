@@ -2,11 +2,10 @@ locals {
 
   # The following locals use logic to determine the variable associated to a variable sets.
   tfc_variable_sets_variables = flatten([for variable_set in local.tfc_variable_sets :
-    flatten([for variable_key, variable in variable_set.variables :
+    flatten([for variable in variable_set.variables :
       merge(
         variable,
         {
-          key          = variable_key
           variable_set = variable_set.name
         }
       )
@@ -20,7 +19,6 @@ locals {
         merge(
           variable,
           {
-            key       = variable_key
             workspace = component_key
           }
         )

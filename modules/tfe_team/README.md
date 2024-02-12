@@ -33,11 +33,11 @@ to authenticate.
 ## Usage example
 ```hcl
 module "team" {
-  source = "./modules/team"
+  source = "./modules/tfe_team"
 
   name           = "Team Name"
+  sso_team_id    = "Microsoft Entra Group Id"
   organization   = "Organization Name"
-  members        = ["user@company.com"]
   project_id     = "Project_Id"
   project_access = "write"
   token          = true
@@ -49,13 +49,13 @@ module "team" {
 
 The following requirements are needed by this module:
 
-- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (0.48.0)
+- <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (~>0.51)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (0.48.0)
+- <a name="provider_tfe"></a> [tfe](#provider\_tfe) (~>0.51)
 
 ## Modules
 
@@ -65,12 +65,11 @@ No modules.
 
 The following resources are used by this module:
 
-- [tfe_team.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team) (resource)
-- [tfe_team_access.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_access) (resource)
-- [tfe_team_organization_members.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_organization_members) (resource)
-- [tfe_team_project_access.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_project_access) (resource)
-- [tfe_team_token.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_token) (resource)
-- [tfe_organization_membership.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/data-sources/organization_membership) (data source)
+- [tfe_team.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team) (resource)
+- [tfe_team_access.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_access) (resource)
+- [tfe_team_organization_members.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_organization_members) (resource)
+- [tfe_team_project_access.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_project_access) (resource)
+- [tfe_team_token.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_token) (resource)
 
 ## Required Inputs
 
@@ -139,14 +138,6 @@ object({
 
 Default: `null`
 
-### <a name="input_members"></a> [members](#input\_members)
-
-Description: (Optional) Email of the organization's members to be added.
-
-Type: `list(string)`
-
-Default: `null`
-
 ### <a name="input_organization_access"></a> [organization\_access](#input\_organization\_access)
 
 Description:   (Optional) Settings for the team's organization access.  
@@ -181,6 +172,14 @@ object({
 ```
 
 Default: `null`
+
+### <a name="input_organization_membership_ids"></a> [organization\_membership\_ids](#input\_organization\_membership\_ids)
+
+Description: (Required) IDs of organization memberships to be added.
+
+Type: `list(string)`
+
+Default: `[]`
 
 ### <a name="input_project_access"></a> [project\_access](#input\_project\_access)
 

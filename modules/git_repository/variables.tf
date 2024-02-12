@@ -318,33 +318,3 @@ variable "branch_protections" {
   }))
   default = []
 }
-
-# The following variables are used to create actions secret resources (github_actions_secret).
-
-variable "actions_secrets" {
-  description = <<EOT
-  (Optional) The actions_secrets block supports the following:
-    secret_name     : (Required) Name of the secret.
-    plaintext_value : (Required) Plaintext value of the secret to be encrypted.
-  EOT
-  type = list(object({
-    secret_name     = string
-    plaintext_value = string
-  }))
-  default = []
-}
-
-# The following variables are used to create and manage branches within your repository (github_branch).
-
-variable "branches" {
-  description = <<EOT
-  (Optional) The branches block supports the following:
-    branch        : (Required) The repository branch to create.
-    source_branch : (Optional) The branch name to start from.
-  EOT
-  type = list(object({
-    branch        = string
-    source_branch = optional(string, "main")
-  }))
-  default = []
-}

@@ -3,6 +3,12 @@ variable "name" {
   type        = string
 }
 
+variable "agent_pool_id" {
+  description = "(Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value."
+  type        = string
+  default     = null
+}
+
 variable "allow_destroy_plan" {
   description = "(Optional) Whether destroy plans can be queued on the workspace."
   type        = bool
@@ -32,6 +38,17 @@ variable "description" {
   description = "(Optional) A description for the workspace."
   type        = string
   default     = null
+}
+
+variable "execution_mode" {
+  description = "(Optional) Which execution mode to use. Using Terraform Cloud, valid values are `remote`, `local` or `agent`. When set to `local`, the workspace will be used for state storage only. Important: If you omit this attribute, the resource configures the workspace to use your organization's default execution mode (which in turn defaults to `remote`), removing any explicit value that might have previously been set for the workspace."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.execution_mode != null ? contains(["null", "remote", "local", "agent"], var.execution_mode) ? true : false : true
+    error_message = "Valid values are `remote`, `local` or `agent`."
+  }
 }
 
 variable "file_triggers_enabled" {
@@ -153,21 +170,4 @@ variable "working_directory" {
   description = "(Optional) A relative path that Terraform will execute within. Defaults to the root of your repository."
   type        = string
   default     = null
-}
-
-variable "agent_pool_id" {
-  description = "(Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value."
-  type        = string
-  default     = null
-}
-
-variable "execution_mode" {
-  description = "(Optional) Which execution mode to use. Using Terraform Cloud, valid values are `remote`, `local` or `agent`. When set to `local`, the workspace will be used for state storage only. Important: If you omit this attribute, the resource configures the workspace to use your organization's default execution mode (which in turn defaults to `remote`), removing any explicit value that might have previously been set for the workspace."
-  type        = string
-  default     = null
-
-  validation {
-    condition     = var.execution_mode != null ? contains(["null", "remote", "local", "agent"], var.execution_mode) ? true : false : true
-    error_message = "Valid values are `remote`, `local` or `agent`."
-  }
 }
