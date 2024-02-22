@@ -32,9 +32,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
       - name: Lint Code Base
         uses: super-linter/super-linter@v6
         env:
