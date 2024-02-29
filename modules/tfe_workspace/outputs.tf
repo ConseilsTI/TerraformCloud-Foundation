@@ -20,10 +20,10 @@ output "workspace" {
 
 output "workspace_run_tasks" {
   description = "The workspace run tasks."
-  value = tfe_workspace_run_task.this
+  value       = tfe_workspace_run_task.this
 }
 
 output "workspace_run_tasks_id" {
   description = "The workspace run tasks id."
-  value = { for value in tfe_workspace_run_task.this : value.task_id => value.id }
+  value       = { for value in tfe_workspace_run_task.this : value.task_id => value.id }
 }
