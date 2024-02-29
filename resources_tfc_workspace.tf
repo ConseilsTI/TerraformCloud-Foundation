@@ -3,7 +3,7 @@
 module "tfe_workspaces" {
   source = "./modules/tfe_workspace"
 
-  for_each = nonsensitive({ for workspace in local.workspaces : workspace.name => workspace })
+  for_each = nonsensitive({ for workspace in local.tfc_workspaces : workspace.name => workspace })
 
   name                          = each.value.name
   agent_pool_id                 = try(module.tfe_agent[each.value.agent_pool].agent_pool_id, null)

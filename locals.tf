@@ -78,7 +78,7 @@ locals {
 
   # This local is used to define variable_set at the organization level.
   tfc_organization_variable_sets = [
-    # `tfc_organization_variable_sets` is a list of object where the key is the name of the variable_set.
+    # `tfc_organization_variable_sets` is a list of object.
     # Here is an example of an object:
     # {
     #   name        = "" 
@@ -94,6 +94,17 @@ locals {
     #     }
     #   ]
     #   workspaces  = [""]
+    # }
+  ]
+
+  # This local is used to define run tasks that will be applied on every workspace.
+  tfc_default_run_tasks = [
+    # `tfc_default_run_tasks` is a list of object.
+    # Here is an example of an object:
+    # {
+    #   enforcement_level = "advisory" or "mandatory"
+    #   name              = ""
+    #   stage             = "pre_plan", "post_plan", or "pre_apply"
     # }
   ]
 
