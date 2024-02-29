@@ -107,13 +107,13 @@ variable "run_tasks" {
   default = []
 
   validation {
-    condition     = var.run_tasks == null || lenght(var.run_tasks) == 0 ? true : alltrue([
+    condition = var.run_tasks == null || lenght(var.run_tasks) == 0 ? true : alltrue([
       for value in var.run_tasks : contains(["advisory", "mandatory"], value.enforcement_level)
     ])
     error_message = "Valid values for `enforcement_level` are \"advisory\" and \"mandatory\"."
   }
   validation {
-    condition     = var.run_tasks == null || lenght(var.run_tasks) == 0 ? true : alltrue([
+    condition = var.run_tasks == null || lenght(var.run_tasks) == 0 ? true : alltrue([
       for value in var.run_tasks : contains(["pre_plan", "post_plan", "pre_apply"], value.stage)
     ])
     error_message = "Valid values for `stage` are \"pre_plan\", \"post_plan\", and \"pre_apply\"."
