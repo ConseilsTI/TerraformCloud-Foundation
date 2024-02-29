@@ -2,7 +2,7 @@ locals {
 
   # The following locals use logic to determine determine the required run tasks.
   tfc_workspace_run_tasks = flatten([for workspace in local.tfc_workspaces :
-    flatten([for run_task in workspace.run_tasks : 
+    flatten([for run_task in workspace.run_tasks :
       run_tasks.name
     ]) if try(workspace.run_tasks, null) != null
   ])
