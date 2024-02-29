@@ -24,6 +24,7 @@ to authenticate.
 ## Features
 
 - Create and manage Terraform Cloud workspace
+- Associates, updates and removes Workspace Run tasks
 
 ## Usage example
 ```hcl
@@ -59,6 +60,7 @@ No modules.
 The following resources are used by this module:
 
 - [tfe_workspace.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) (resource)
+- [tfe_workspace_run_task.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run_task) (resource)
 - [tfe_workspace_settings.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_settings) (resource)
 
 ## Required Inputs
@@ -174,6 +176,25 @@ Default: `true`
 Description: (Optional) The set of workspace IDs set as explicit remote state consumers for the given workspace.
 
 Type: `set(string)`
+
+Default: `[]`
+
+### <a name="input_run_tasks"></a> [run\_tasks](#input\_run\_tasks)
+
+Description:   (Optional) A list of run tasks to be executed on the workspace.  
+    task\_id           : (Required) The id of the Run task to associate to the workspace.  
+    enforcement\_level : (Optional) The enforcement level of the task. Valid values are `advisory` and `mandatory`.  
+    stage             : (Optional) The stage to run the task in. Valid values are `pre_plan`, `post_plan`, and `pre_apply`.
+
+Type:
+
+```hcl
+list(object({
+    task_id           = string
+    enforcement_level = optional(string, "advisory")
+    stage             = optional(string, "post_plan")
+  }))
+```
 
 Default: `[]`
 
@@ -301,4 +322,12 @@ Description: The number of resources managed by the workspace.
 ### <a name="output_workspace"></a> [workspace](#output\_workspace)
 
 Description: Terraform Cloud workspace resource.
+
+### <a name="output_workspace_run_tasks"></a> [workspace\_run\_tasks](#output\_workspace\_run\_tasks)
+
+Description: The workspace run tasks.
+
+### <a name="output_workspace_run_tasks_id"></a> [workspace\_run\_tasks\_id](#output\_workspace\_run\_tasks\_id)
+
+Description: The workspace run tasks id.
 <!-- END_TF_DOCS -->

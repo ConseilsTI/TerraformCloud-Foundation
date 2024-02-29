@@ -62,3 +62,11 @@ resource "tfe_workspace_settings" "this" {
   }
 
 }
+
+resource "tfe_workspace_run_task" "this" {
+  for_each          = var.run_tasks != null ? { for value in var.run_tasks : value.task_id => value } : {}
+  enforcement_level = each.value.enforcement_level
+  task_id           = each.value.task_id
+  workspace_id      = tfe_workspace.this.id
+  stage             = each.value.stage
+}
