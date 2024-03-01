@@ -47,7 +47,7 @@ variable "execution_mode" {
 
   validation {
     condition     = var.execution_mode != null ? contains(["null", "remote", "local", "agent"], var.execution_mode) ? true : false : true
-    error_message = "Valid values are `remote`, `local` or `agent`."
+    error_message = "Valid values are \"remote\", \"local\" or \"agent\"."
   }
 }
 
@@ -90,6 +90,34 @@ variable "source_name" {
   description = "(Optional) A friendly name for the application or client creating this workspace. If set, this will be displayed on the workspace as 'Created via '. Requires `source_url` to also be set."
   type        = string
   default     = null
+}
+
+variable "run_tasks" {
+  description = <<EOT
+  (Optional) A list of run tasks to be executed on the workspace.
+    task_id           : (Required) The id of the Run task to associate to the workspace.
+    enforcement_level : (Optional) The enforcement level of the task. Valid values are `advisory` and `mandatory`.
+    stage             : (Optional) The stage to run the task in. Valid values are `pre_plan`, `post_plan`, and `pre_apply`.
+  EOT
+  type = list(object({
+    task_id           = string
+    enforcement_level = optional(string, "advisory")
+    stage             = optional(string, "post_plan")
+  }))
+  default = []
+
+  validation {
+    condition = var.run_tasks == null || length(var.run_tasks) == 0 ? true : alltrue([
+      for value in var.run_tasks : contains(["advisory", "mandatory"], value.enforcement_level)
+    ])
+    error_message = "Valid values for `enforcement_level` are \"advisory\" and \"mandatory\"."
+  }
+  validation {
+    condition = var.run_tasks == null || length(var.run_tasks) == 0 ? true : alltrue([
+      for value in var.run_tasks : contains(["pre_plan", "post_plan", "pre_apply"], value.stage)
+    ])
+    error_message = "Valid values for `stage` are \"pre_plan\", \"post_plan\", and \"pre_apply\"."
+  }
 }
 
 variable "source_url" {

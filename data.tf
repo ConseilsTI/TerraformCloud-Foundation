@@ -19,7 +19,16 @@ data "hcp_vault_secrets_secret" "this" {
   secret_name = each.value.secret
 }
 
+# The following block is use to get information about run tasks in the organization.
+
+data "tfe_organization_run_task" "this" {
+  for_each     = nonsensitive(toset(local.tfc_run_tasks))
+  name         = each.key
+  organization = data.tfe_organization.this.name
+}
+
 # The following blick is used to get information about workspace
+
 data "tfe_workspace" "this" {
   for_each = nonsensitive(toset(local.tfc_remote_state_consumer_ids))
 

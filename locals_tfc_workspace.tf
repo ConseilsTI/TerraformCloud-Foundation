@@ -2,7 +2,7 @@ locals {
 
   # The following locals use logic to determine the project associate with each workspace.
 
-  workspaces = flatten([for project_key, project in local.projects :
+  tfc_workspaces = flatten([for project_key, project in local.projects :
     flatten([for component_key, component in project.components :
       merge(
         component.tfc_workspace,
