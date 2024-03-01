@@ -23,7 +23,7 @@ module "tfe_workspaces" {
     {
       enforcement_level = try(value.enforcement_level, "advisory")
       stage             = try(value.stage, "post_plan")
-      task_id           = data.data.tfe_organization_run_task.this[value.name].id
+      task_id           = data.tfe_organization_run_task.this[value.name].id
     }
   ])
   source_name                   = try(each.value.source_name, null)
