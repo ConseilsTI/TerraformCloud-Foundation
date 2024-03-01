@@ -39,6 +39,7 @@ locals {
     # Here is an example of an object:
     # {
     #   name    = ""
+    #   members = ["user@exemple.com"] # Can't be used when sso_team_id is configured.
     #   organization_access = {
     #     read_projects           = true or false
     #     manage_projects         = true or false
@@ -59,8 +60,7 @@ locals {
     #   visibility             = "secret" or "organization"
     # }
     {
-      name    = "admins"
-      members = ["benoit.blais@conseilsti.ca"]
+      name = "admins"
       organization_access = {
         manage_projects         = true
         manage_workspaces       = true
