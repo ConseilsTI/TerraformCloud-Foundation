@@ -35,4 +35,10 @@ locals {
     local.tfc_workspace_teams
   )
 
+  # The following locals use logic to determine the required members. 
+  tfc_teams_members = flatten([for team in local.tfc_teams :
+    flatten([for member in team.members :
+      member
+    ]) if try(team.members, null) != null
+  ])
 }

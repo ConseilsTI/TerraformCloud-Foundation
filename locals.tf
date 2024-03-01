@@ -60,6 +60,7 @@ locals {
     # }
     {
       name = "admins"
+      members = ["benoit.blais@conseilsti.ca"]
       organization_access = {
         manage_projects         = true
         manage_workspaces       = true
@@ -188,6 +189,13 @@ locals {
     #       tfc_workspace = {
     #         agent_pool       = ""
     #         execution_mode   = "null", "remote", "local", "agent"
+    #         run_tasks        = [
+    #           {
+    #             enforcement_level = "advisory" or "mandatory"
+    #             name              = ""
+    #             stage             = "pre_plan", "post_plan", or "pre_apply"
+    #           }
+    #         ]
     #         tag_names        = [""]
     #         trigger_patterns = [""]
     #         vcs_repo         = true or false
