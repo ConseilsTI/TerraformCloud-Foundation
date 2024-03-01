@@ -72,6 +72,7 @@ GITHUB\_APP\_PEM\_FILE, and GITHUB\_OWNER environment variables to authenticate.
   * variable sets
   * variables
   * notifications
+  * run tasks
 * Manages configuration and life-cycle of GitHub resources:
   * repositories
   * branches protection
