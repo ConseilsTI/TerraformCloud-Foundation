@@ -27,11 +27,19 @@ data "tfe_organization_run_task" "this" {
   organization = data.tfe_organization.this.name
 }
 
-# The following blick is used to get information about workspace
+# The following block is used to get information about workspace
 
 data "tfe_workspace" "this" {
   for_each = nonsensitive(toset(local.tfc_remote_state_consumer_ids))
 
   name         = each.key
+  organization = data.tfe_organization.this.name
+}
+
+# The following block is used to get information about organization's member.
+
+data "tfe_organization_membership" "this" {
+  for_each     = nonsensitive(toset(local.tfc_teams_members))
+  email        = each.key
   organization = data.tfe_organization.this.name
 }

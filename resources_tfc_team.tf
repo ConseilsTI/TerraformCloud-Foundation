@@ -10,7 +10,7 @@ module "tfe_teams" {
   custom_workspace_access     = try(each.value.custom_workspace_access, null)
   organization                = data.tfe_organization.this.name
   organization_access         = try(each.value.organization_access, null)
-  organization_membership_ids = try(each.value.members, [])
+  organization_membership_ids = [for value in try(each.value.members, []) : data.tfe_organization_membership.this[value].id]
   project_access              = try(each.value.project_access, null)
   project_id                  = try(tfe_project.project[each.value.project].id, null)
   project_name                = try(each.value.project, null)

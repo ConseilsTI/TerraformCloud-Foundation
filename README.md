@@ -72,6 +72,7 @@ GITHUB\_APP\_PEM\_FILE, and GITHUB\_OWNER environment variables to authenticate.
   * variable sets
   * variables
   * notifications
+  * run tasks
 * Manages configuration and life-cycle of GitHub resources:
   * repositories
   * branches protection
@@ -181,6 +182,7 @@ The following resources are used by this module:
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/vault_secrets_secret) (data source)
 - [tfe_oauth_client.client](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/oauth_client) (data source)
 - [tfe_organization.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/organization) (data source)
+- [tfe_organization_membership.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/organization_membership) (data source)
 - [tfe_organization_run_task.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/organization_run_task) (data source)
 - [tfe_workspace.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/workspace) (data source)
 

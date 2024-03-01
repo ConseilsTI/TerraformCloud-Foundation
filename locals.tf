@@ -39,6 +39,7 @@ locals {
     # Here is an example of an object:
     # {
     #   name    = ""
+    #   members = ["user@exemple.com"] # Can't be used when sso_team_id is configured.
     #   organization_access = {
     #     read_projects           = true or false
     #     manage_projects         = true or false
@@ -188,6 +189,13 @@ locals {
     #       tfc_workspace = {
     #         agent_pool       = ""
     #         execution_mode   = "null", "remote", "local", "agent"
+    #         run_tasks        = [
+    #           {
+    #             enforcement_level = "advisory" or "mandatory"
+    #             name              = ""
+    #             stage             = "pre_plan", "post_plan", or "pre_apply"
+    #           }
+    #         ]
     #         tag_names        = [""]
     #         trigger_patterns = [""]
     #         vcs_repo         = true or false
