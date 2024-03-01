@@ -75,6 +75,14 @@ locals {
       sso_team_id = "a2f4919a-4c3c-436a-a010-fde47b98d0fd"
       token       = true
     },
+    # {
+    #   name = "prisma-cloud"
+    #   organization_access = {
+    #     manage_workspaces       = true
+    #     manage_run_tasks        = true
+    #   }
+    #   token       = true
+    # },
   ]
 
   # This local is used to define variable_set at the organization level.
@@ -106,6 +114,11 @@ locals {
     #   enforcement_level = "advisory" or "mandatory"
     #   name              = ""
     #   stage             = "pre_plan", "post_plan", or "pre_apply"
+    # }
+    # {
+    #   enforcement_level = "mandatory"
+    #   name              = "prisma-cloud"
+    #   stage             = "post_plan"
     # }
   ]
 
@@ -251,7 +264,7 @@ locals {
           git_actions_secrets = [
             {
               secret_name     = "TF_API_TOKEN"
-              plaintext_value = "terraformcloud-modulesregistry-manage-modules"
+              plaintext_value = "manage-modules"
             }
           ]
           git_repository = {
@@ -259,7 +272,7 @@ locals {
           }
           git_teams = [
             {
-              name        = "terraformcloud-modulesregistry-contributor"
+              name        = "TerraformCloud-ModulesRegistry-Contributors"
               description = "This group grant write access to the ModulesRegistry repository."
               permission  = "push"
             }
@@ -274,7 +287,7 @@ locals {
           ]
           tfc_teams = [
             {
-              name        = "terraformcloud-modulesregistry-manage-modules"
+              name        = "manage-modules"
               sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
               token       = true
               organization_access = {
@@ -330,8 +343,8 @@ locals {
           }
           git_teams = [
             {
-              name        = "terraformcloud-policies-contributor"
-              description = "This group grant write access to the ModulesRegistry repository."
+              name        = "TerraformCloud-Policies-Contributors"
+              description = "This group grant write access to the Policies repository."
               permission  = "push"
             }
           ]
@@ -345,7 +358,7 @@ locals {
           ]
           tfc_teams = [
             {
-              name        = "terraformcloud-policies-manage-policies"
+              name        = "manage-policies"
               sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
               token       = true
               organization_access = {
@@ -364,7 +377,7 @@ locals {
           tfc_variables = [
             {
               key       = "TFE_TOKEN"
-              value     = "terraformcloud-policies-manage-policies"
+              value     = "manage-policies"
               category  = "env"
               sensitive = true
             }
