@@ -59,7 +59,7 @@ locals {
     #   visibility             = "secret" or "organization"
     # }
     {
-      name = "admins"
+      name    = "admins"
       members = ["benoit.blais@conseilsti.ca"]
       organization_access = {
         manage_projects         = true
