@@ -306,7 +306,7 @@ locals {
           tfc_variables = [
             {
               key       = "TFE_TOKEN"
-              value     = "terraformcloud-modulesregistry-manage-modules"
+              value     = "manage-modules"
               category  = "env"
               sensitive = true
             },
