@@ -12,7 +12,7 @@ module "tfe_teams" {
   organization_access         = try(each.value.organization_access, null)
   organization_membership_ids = [for value in try(each.value.members, []) : data.tfe_organization_membership.this[value].id]
   project_access              = try(each.value.project_access, null)
-  project_id                  = try(tfe_project.this.id, null)
+  project_id                  = try(tfe_project.project[each.value.project].id, null)
   project_name                = try(each.value.project, null)
   sso_team_id                 = try(each.value.sso_team_id, null)
   token                       = try(each.value.token, false)

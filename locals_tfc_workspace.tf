@@ -3,23 +3,23 @@ locals {
   # The following locals use logic to determine the project associate with each workspace.
 
   tfc_workspaces = flatten([for project_key, project in local.projects :
-    flatten([for component_key, component in project.components :
+    flatten([for factory_key, factory in project.factories :
       merge(
-        component.tfc_workspace,
+        factory.tfc_workspace,
         {
-          name        = component_key
-          description = component.description
+          name        = factory_key
+          description = factory.description
           project     = project_key
         }
-      ) if try(component.tfc_workspace, null) != null
-    ]) if try(project.components, null) != null
+      ) if try(factory.tfc_workspace, null) != null
+    ]) if try(project.factories, null) != null
   ])
 
 
   # The following locals use logic to determine the remote_consomer_ids.
   tfc_remote_state_consumer_ids = flatten([for project_key, project in local.projects :
-    flatten([for component_key, component in project.components :
-      flatten(component.tfc_workspace.remote_state_consumer_ids) if try(component.tfc_workspace.remote_state_consumer_ids, null) != null
-    ]) if try(project.components, null) != null
+    flatten([for factory_key, factory in project.factories :
+      flatten(factory.tfc_workspace.remote_state_consumer_ids) if try(factory.tfc_workspace.remote_state_consumer_ids, null) != null
+    ]) if try(project.factories, null) != null
   ])
 }

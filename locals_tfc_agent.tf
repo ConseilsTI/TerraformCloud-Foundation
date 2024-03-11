@@ -3,9 +3,9 @@
 locals {
 
   tfc_agent_pools = flatten([for project_key, project in local.projects :
-    flatten([for component_key, component in project.components :
-      component.tfc_workspace.agent_pool if try(component.tfc_workspace.agent_pool, null) != null
-    ]) if try(project.components, null) != null
+    flatten([for factory_key, factory in project.factories :
+      factory.tfc_workspace.agent_pool if try(factory.tfc_workspace.agent_pool, null) != null
+    ]) if try(project.factories, null) != null
   ])
 
 }

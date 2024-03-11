@@ -16,7 +16,7 @@ module "tfe_workspaces" {
   file_triggers_enabled     = try(each.value.file_triggers_enabled, null)
   global_remote_state       = try(each.value.global_remote_state, null)
   organization              = data.tfe_organization.this.name
-  project_id                = tfe_project.this.id
+  project_id                = tfe_project.project[each.value.project].id
   queue_all_runs            = try(each.value.queue_all_runs, null)
   remote_state_consumer_ids = try([for value in each.value.remote_state_consumer_ids : data.tfe_workspace.this[value].id], null)
   run_tasks = flatten([for value in concat(local.tfc_default_run_tasks, try(each.value.run_tasks, [])) :

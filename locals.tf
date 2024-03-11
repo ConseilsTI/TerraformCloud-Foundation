@@ -5,9 +5,6 @@ locals {
   # This local is used to define Terraform Cloud OAuth client name.
   tfc_oauth_client_name = "GitHub.com (ConseilsTI)"
 
-  # This local is used to define the Terraform Cloud project where all the configuration will reside.
-  tfc_project = "Terraform Cloud"
-
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
   hcp_vault_secrets = [
     # `hcp_vault_secrets` is a list of object.
@@ -261,7 +258,7 @@ locals {
     # }
 
     "Terraform Cloud" = {
-      components = {
+      factories = {
         "TerraformCloud-ModulesRegistry" = {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
           git_actions_secrets = [
