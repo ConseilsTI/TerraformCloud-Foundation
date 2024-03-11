@@ -290,8 +290,8 @@ locals {
           ]
           tfc_teams = [
             {
-              name        = "manage-modules"
-              token       = true
+              name  = "manage-modules"
+              token = true
               organization_access = {
                 manage_modules = true
               }
