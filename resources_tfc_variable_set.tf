@@ -20,7 +20,7 @@ resource "tfe_project_variable_set" "this" {
   for_each = nonsensitive({ for variable_set in local.tfc_project_variable_sets : "${variable_set.name} ${variable_set.project}" => variable_set })
 
   variable_set_id = tfe_variable_set.this[each.value.name].id
-  project_id      = tfe_project.project[each.value.project].id
+  project_id      = tfe_project.this.id
 }
 
 resource "tfe_workspace_variable_set" "this" {

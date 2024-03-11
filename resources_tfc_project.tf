@@ -5,7 +5,7 @@ resource "tfe_project" "this" {
   organization = data.tfe_organization.this.name
 }
 
-# moved {
-#   from = 
-#   to   = 
-# }
+moved {
+  from = tfe_project.project["Terraform Cloud"]
+  to   = tfe_project.this
+}
