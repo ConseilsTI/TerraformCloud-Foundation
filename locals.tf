@@ -5,6 +5,9 @@ locals {
   # This local is used to define Terraform Cloud OAuth client name.
   tfc_oauth_client_name = "GitHub.com (ConseilsTI)"
 
+  # This local is used to define the Terraform Cloud project where all the configuration will reside.
+  tfc_project = "Terraform Cloud"
+
   # This local is used to define all required secrets that we have to read from Hashicorp Vault Secrets.
   hcp_vault_secrets = [
     # `hcp_vault_secrets` is a list of object.
@@ -288,7 +291,6 @@ locals {
           tfc_teams = [
             {
               name        = "manage-modules"
-              sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
               token       = true
               organization_access = {
                 manage_modules = true
@@ -296,6 +298,10 @@ locals {
               workspace_permission = {
                 runs = "apply"
               }
+            },
+            {
+              name        = "modules-registry-contributors"
+              sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
             }
           ]
           tfc_workspace = {
