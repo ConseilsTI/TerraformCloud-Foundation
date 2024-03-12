@@ -298,6 +298,9 @@ locals {
             },
             {
               name        = "modules-registry-contributors"
+              organization_access = {
+                read_workspaces = true
+              }
               sso_team_id = "a1f6c183-1350-4298-9266-b1ba00c66372"
             }
           ]
@@ -362,13 +365,19 @@ locals {
           tfc_teams = [
             {
               name        = "manage-policies"
-              sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
               token       = true
               organization_access = {
                 manage_policies = true
               }
               workspace_permission = {
                 runs = "apply"
+              }
+            },
+            {
+              name        = "policies-contributors"
+              sso_team_id = "045981aa-f630-44c4-88fe-a0b992a2a94e"
+              organization_access = {
+                read_workspaces = true
               }
             }
           ]
