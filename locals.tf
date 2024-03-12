@@ -302,7 +302,7 @@ locals {
               }
             },
             {
-              name        = "modules-registry-contributors"
+              name = "modules-registry-contributors"
               organization_access = {
                 read_workspaces = true
               }
@@ -369,8 +369,8 @@ locals {
           ]
           tfc_teams = [
             {
-              name        = "manage-policies"
-              token       = true
+              name  = "manage-policies"
+              token = true
               organization_access = {
                 manage_policies = true
               }
