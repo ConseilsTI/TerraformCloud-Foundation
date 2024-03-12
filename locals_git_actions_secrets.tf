@@ -3,17 +3,17 @@
 locals {
 
   git_actions_secrets = flatten([for project_key, project in local.projects :
-    flatten([for component_key, component in project.components :
-      flatten([for git_actions_secret in component.git_actions_secrets :
+    flatten([for factory_key, factory in project.factories :
+      flatten([for git_actions_secret in factory.git_actions_secrets :
         merge(
           git_actions_secret,
           {
-            key        = lower("${component_key}-${git_actions_secret.secret_name}")
-            repository = component_key
+            key        = lower("${factory_key}-${git_actions_secret.secret_name}")
+            repository = factory_key
           }
         )
-      ]) if try(component.git_actions_secrets, null) != null
-    ]) if try(project.components, null) != null
+      ]) if try(factory.git_actions_secrets, null) != null
+    ]) if try(project.factories, null) != null
   ])
 
 }

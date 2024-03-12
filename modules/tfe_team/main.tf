@@ -80,7 +80,7 @@ resource "tfe_team_project_access" "this" {
 
 resource "tfe_team_access" "this" {
 
-  count = var.workspace_name != null ? 1 : 0
+  count = var.workspace_access != null || var.workspace_permission != null ? 1 : 0
 
   access = var.workspace_access
 

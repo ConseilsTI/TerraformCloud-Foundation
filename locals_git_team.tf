@@ -3,16 +3,16 @@
 locals {
 
   git_teams = flatten([for project_key, project in local.projects :
-    flatten([for component_key, component in project.components :
-      flatten([for team in component.git_teams :
+    flatten([for factory_key, factory in project.factories :
+      flatten([for team in factory.git_teams :
         merge(
           team,
           {
-            repository = component_key
+            repository = factory_key
           }
         )
-      ]) if try(component.git_teams, null) != null
-    ]) if try(project.components, null) != null
+      ]) if try(factory.git_teams, null) != null
+    ]) if try(project.factories, null) != null
   ])
 
 }

@@ -14,16 +14,16 @@ locals {
 
   # The following locals use logic to determine the variable associated to a workspace.
   tfc_workspace_variables = flatten([for project_key, project in local.projects :
-    flatten([for component_key, component in project.components :
-      flatten([for variable_key, variable in component.tfc_variables :
+    flatten([for factory_key, factory in project.factories :
+      flatten([for variable_key, variable in factory.tfc_variables :
         merge(
           variable,
           {
-            workspace = component_key
+            workspace = factory_key
           }
         )
-      ]) if try(component.tfc_variables, null) != null
-    ]) if try(project.components, null) != null
+      ]) if try(factory.tfc_variables, null) != null
+    ]) if try(project.factories, null) != null
   ])
 
 }
