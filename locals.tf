@@ -272,8 +272,13 @@ locals {
           }
           git_teams = [
             {
+              name        = "TerraformCloud-ModulesRegistry-Owners"
+              description = "This group grant write access to all files it owns, the ModulesRegistry repository and all Terraform modules repositories."
+              permission  = "push"
+            },
+            {
               name        = "TerraformCloud-ModulesRegistry-Contributors"
-              description = "This group grant write access to the ModulesRegistry repository."
+              description = "This group grant write access to the ModulesRegistry repository and all Terraform modules repositories."
               permission  = "push"
             }
           ]
