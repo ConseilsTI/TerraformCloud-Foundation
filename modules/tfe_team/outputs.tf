@@ -21,12 +21,12 @@ output "team_project_access_id" {
 
 output "team_workspace_access" {
   description = "Terraform Cloud team workspace access resource."
-  value       = var.workspace_access != null || var.workspace_permission ? tfe_team_access.this[0] : null
+  value       = var.workspace_access != null || var.workspace_permission != null ? tfe_team_access.this[0] : null
 }
 
 output "team_workspace_access_id" {
   description = "The team access ID."
-  value       = var.workspace_access != null || var.workspace_permission ? tfe_team_access.this[0].id : null
+  value       = var.workspace_access != null || var.workspace_permission != null ? tfe_team_access.this[0].id : null
 }
 
 output "token" {
