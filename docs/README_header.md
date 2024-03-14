@@ -1,5 +1,11 @@
 # Terraform Cloud Foundation
 
+<!-- [START BADGES] -->
+[![Lint Code Base](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/linter.yml/badge.svg)](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/linter.yml)
+[![Terraform Format](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/terraform.yml/badge.svg)](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/terraform.yml)
+[![Terraform Docs](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/documentation.yml/badge.svg)](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/documentation.yml)
+<!-- [END BADGES] -->
+
 Code which manages configuration and life-cycle of all the Terraform Cloud
 foundation. It is designed to be used from a dedicated VCS-Driven Terraform
 Cloud workspace that would provision and manage the configuration using
