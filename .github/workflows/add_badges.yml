@@ -11,8 +11,7 @@ name: Add Badges
 on:  # yamllint disable-line rule:truthy
   workflow_run:
     workflows: [Terraform, Lint Code Base, Terraform Docs]
-    types:
-      - completed
+    types: [completed]
 
 permissions:
   contents: write
