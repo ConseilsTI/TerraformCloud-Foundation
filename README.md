@@ -192,11 +192,11 @@ The following outputs are exported:
 
 ### <a name="output_modules_registry_github_contributors_team"></a> [modules\_registry\_github\_contributors\_team](#output\_modules\_registry\_github\_contributors\_team)
 
-Description: The name of the GitHub team who can contribute to the private modules registry.
+Description: The id of the GitHub team who can contribute to the private modules registry.
 
 ### <a name="output_modules_registry_github_owners_team"></a> [modules\_registry\_github\_owners\_team](#output\_modules\_registry\_github\_owners\_team)
 
-Description: The name of the GitHub team who owns the private modules registry.
+Description: The id of the GitHub team who owns the private modules registry.
 
 <!-- markdownlint-enable -->
 
