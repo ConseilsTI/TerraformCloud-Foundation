@@ -1,6 +1,6 @@
 # This workflow runs on `pull_request`.
 #
-# `Add Badges`job uses
+# `Add Badges`job uses to add
 #
 # Documentation
 # - https://github.com/actions/checkout
@@ -11,8 +11,7 @@ name: Add Badges
 on:  # yamllint disable-line rule:truthy
   workflow_run:
     workflows: [Terraform, Lint Code Base, Terraform Docs]
-    types:
-      - completed
+    types: [completed]
 
 permissions:
   contents: write
@@ -36,5 +35,5 @@ jobs:
                 "badge": "https://img.shields.io/github/workflow/status/${{ env.repo_owner }}/${{ env.repo_name }}/Release/master?logo=github&style=flat-square",
                 "alt": "super-linter",
                 "link": "${{ env.repo_url }}/actions/workflows/linter.yml"
-              },
+              }
             ]
