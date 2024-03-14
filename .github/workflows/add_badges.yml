@@ -1,6 +1,6 @@
 # This workflow runs on `pull_request`.
 #
-# `Add Badges`job uses to
+# `Add Badges`job uses to add
 #
 # Documentation
 # - https://github.com/actions/checkout
