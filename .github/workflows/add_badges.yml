@@ -35,5 +35,5 @@ jobs:
                 "badge": "https://img.shields.io/github/workflow/status/${{ env.repo_owner }}/${{ env.repo_name }}/Release/master?logo=github&style=flat-square",
                 "alt": "super-linter",
                 "link": "${{ env.repo_url }}/actions/workflows/linter.yml"
-              },
+              }
             ]
