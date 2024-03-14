@@ -2,6 +2,7 @@
 # Terraform Cloud Foundation
 
 <!-- [START BADGES] -->
+[![Lint Code Base](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/linter.yml/badge.svg)](https://github.com/ConseilsTI/TerraformCloud-Foundation/actions/workflows/linter.yml)
 <!-- [END BADGES] -->
 
 Code which manages configuration and life-cycle of all the Terraform Cloud
