@@ -28,6 +28,14 @@ locals {
     {
       app_name = "GitHub"
       secret   = "GITHUB_OWNER"
+    },
+    {
+      app_name = "HashicorpCloud"
+      secret   = "HCP_CLIENT_ID"
+    },
+    {
+      app_name = "HashicorpCloud"
+      secret   = "HCP_CLIENT_SECRET"
     }
   ]
 
@@ -263,7 +271,7 @@ locals {
           description = "Repository to provision and manage Terraform Cloud modules registry using Terraform code (IaC)."
           git_actions_secrets = [
             {
-              secret_name     = "TF_API_TOKEN"
+              secret_name     = "TFC_API_TOKEN"
               plaintext_value = "manage-modules"
             }
           ]
@@ -342,6 +350,18 @@ locals {
             {
               key       = "GITHUB_OWNER"
               value     = data.hcp_vault_secrets_secret.this["github-github_owner"].secret_value
+              category  = "env"
+              sensitive = true
+            },
+            {
+              key       = "HCP_CLIENT_ID"
+              value     = data.hcp_vault_secrets_secret.this["hashicorpcloud-hcp_client_id"].secret_value
+              category  = "env"
+              sensitive = true
+            },
+            {
+              key       = "HCP_CLIENT_SECRET"
+              value     = data.hcp_vault_secrets_secret.this["hashicorpcloud-hcp_client_secret"].secret_value
               category  = "env"
               sensitive = true
             }
