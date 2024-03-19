@@ -22,8 +22,8 @@ instead of a user token.
 
 ### Hashicorp Vault Secrets Permissions
 
-To read secrets from Hashicorp Vault Secrets, provide a client ID and a key
-from a service principals with the secret `reader` role.
+To manage secrets in Hashicorp Vault Secrets, provide a client ID and a key
+from a service principals with the secret `contributor` role.
 
 ### GitHub Permissions
 
@@ -84,7 +84,9 @@ GITHUB\_APP\_PEM\_FILE, and GITHUB\_OWNER environment variables to authenticate.
   * branches protection
   * repositories secrets
   * teams
-* Read secrets from Hashicorp Vault Secrets
+* Manages configuration and life-cycle of Hashicorp Vault Secrets
+  * app
+  * secrets
 
 ## Prerequisite
 
@@ -179,6 +181,7 @@ No optional inputs.
 The following resources are used by this module:
 
 - [github_actions_secret.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) (resource)
+- [hcp_vault_secrets_app.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/vault_secrets_app) (resource)
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/vault_secrets_secret) (resource)
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
 - [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) (resource)
