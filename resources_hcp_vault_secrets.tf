@@ -9,7 +9,7 @@ resource "hcp_vault_secrets_app" "this" {
 
 resource "hcp_vault_secrets_secret" "this" {
   for_each     = nonsensitive({ for team in local.tfc_teams : team.name => team if try(team.token, false) == true })
-  app_name     = local.hcp_vault_secrets_app_name
+  app_name     = hcp_vault_secrets_app.this.app_name
   secret_name  = lower(replace(each.value.name, "/\\W|_|\\s/", "_"))
   secret_value = module.tfe_teams[each.value.name].token
 }
