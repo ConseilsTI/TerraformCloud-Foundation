@@ -21,7 +21,7 @@ instead of a user token.
 
 ### Hashicorp Vault Secrets Permissions
 
-To read and create secrets in Hashicorp Vault Secrets, provide a client ID and a key
+To manage secrets in Hashicorp Vault Secrets, provide a client ID and a key
 from a service principals with the secret `contributor` role.
 
 ### GitHub Permissions
@@ -83,7 +83,9 @@ GITHUB_APP_PEM_FILE, and GITHUB_OWNER environment variables to authenticate.
   * branches protection
   * repositories secrets
   * teams
-* Read and write secrets in Hashicorp Vault Secrets
+* Manages configuration and life-cycle of Hashicorp Vault Secrets
+  * app
+  * secrets
 
 ## Prerequisite
 

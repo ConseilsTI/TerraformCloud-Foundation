@@ -39,6 +39,9 @@ locals {
     }
   ]
 
+  # This local is used to defined the Hashicorp Vault Secrets app name where team token will be stored.
+  hcp_vault_secrets_app_name = "TerraformCloud"
+
   # This local is used to define teams at the organization level.
   tfc_organization_teams = [
     # `tfc_organization_teams` is a list of object.
