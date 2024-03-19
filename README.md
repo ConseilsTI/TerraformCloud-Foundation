@@ -200,6 +200,14 @@ The following resources are used by this module:
 
 The following outputs are exported:
 
+### <a name="output_hcp_vault_secrets_app_name"></a> [hcp\_vault\_secrets\_app\_name](#output\_hcp\_vault\_secrets\_app\_name)
+
+Description: The name of the Hashicorp Vault Secrets app where team token will be stored.
+
+### <a name="output_manage_modules_team_token"></a> [manage\_modules\_team\_token](#output\_manage\_modules\_team\_token)
+
+Description: The token of the team with `manage-modules` access.
+
 ### <a name="output_modules_registry_github_contributors_team"></a> [modules\_registry\_github\_contributors\_team](#output\_modules\_registry\_github\_contributors\_team)
 
 Description: The id of the GitHub team who can contribute to the private modules registry.
