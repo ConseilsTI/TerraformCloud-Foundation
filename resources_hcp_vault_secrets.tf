@@ -1,7 +1,8 @@
 # The following code block is used to create the Hashicorp Vault Secret app where team token will be stored.
 
 resource "hcp_vault_secrets_app" "this" {
-  app_name = local.hcp_vault_secrets_app_name
+  app_name    = local.hcp_vault_secrets_app_name
+  description = ""
 }
 
 # The following code blode is used to create secret in Hashicorp Vault.
