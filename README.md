@@ -22,7 +22,7 @@ instead of a user token.
 
 ### Hashicorp Vault Secrets Permissions
 
-To read and create secrets in Hashicorp Vault Secrets, provide a client ID and a key
+To manage secrets in Hashicorp Vault Secrets, provide a client ID and a key
 from a service principals with the secret `contributor` role.
 
 ### GitHub Permissions
@@ -84,7 +84,9 @@ GITHUB\_APP\_PEM\_FILE, and GITHUB\_OWNER environment variables to authenticate.
   * branches protection
   * repositories secrets
   * teams
-* Read and write secrets in Hashicorp Vault Secrets
+* Manages configuration and life-cycle of Hashicorp Vault Secrets
+  * app
+  * secrets
 
 ## Prerequisite
 
@@ -179,6 +181,7 @@ No optional inputs.
 The following resources are used by this module:
 
 - [github_actions_secret.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) (resource)
+- [hcp_vault_secrets_app.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/vault_secrets_app) (resource)
 - [hcp_vault_secrets_secret.this](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/vault_secrets_secret) (resource)
 - [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) (resource)
 - [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) (resource)
@@ -196,6 +199,10 @@ The following resources are used by this module:
 ## Outputs
 
 The following outputs are exported:
+
+### <a name="output_manage_modules_team_token"></a> [manage\_modules\_team\_token](#output\_manage\_modules\_team\_token)
+
+Description: The token of the team with `manage-modules` access.
 
 ### <a name="output_modules_registry_github_contributors_team"></a> [modules\_registry\_github\_contributors\_team](#output\_modules\_registry\_github\_contributors\_team)
 
