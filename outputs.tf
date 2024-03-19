@@ -5,7 +5,7 @@ output "hcp_vault_secrets_app_name" {
 
 output "manage_modules_team_token" {
   description = "The token of the team with `manage-modules` access."
-  value       = module.tfe_teams["manage-modules"].tfe_team_token.this[0]
+  value       = module.tfe_teams["manage-modules"].token
 }
 
 output "modules_registry_github_contributors_team" {
