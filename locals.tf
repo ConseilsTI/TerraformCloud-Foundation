@@ -309,7 +309,8 @@ locals {
                 manage_modules = true
               }
               workspace_permission = {
-                runs = "apply"
+                runs      = "apply"
+                variables = "write"
               }
             },
             {
