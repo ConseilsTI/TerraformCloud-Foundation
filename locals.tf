@@ -309,7 +309,8 @@ locals {
                 manage_modules = true
               }
               workspace_permission = {
-                runs = "apply"
+                runs      = "apply"
+                variables = "write"
               }
             },
             {
@@ -425,6 +426,12 @@ locals {
         }
         "TerraformCloud-Projects" = {
           description = "Repository to provision and manage Terraform Cloud projects using Terraform code (IaC)."
+          git_actions_secrets = [
+            {
+              secret_name     = "TFC_API_TOKEN"
+              plaintext_value = "admins"
+            }
+          ]
           git_repository = {
             topics = ["foundation", "factory"]
           }
